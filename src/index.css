@@ -1,13 +1,50 @@
-body {
+*, ::after, ::before{
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+:root {
+  --bg-color1: linear-gradient(550deg, #ff6e13, #ff6200);
+    --bg-color2: linear-gradient(to top, rgb(23, 37, 157), #13138a);
+    --bg-hover2:rgb(0, 0, 124);
+  --color1: rgb(255, 99, 43);
+  --color2: #001dd9;
+  --color4: #3a3a3a;
+  --color3: #000;
+  --bg-white: #fff;
+  --bg-body: #d4d2d2;
+}
+body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.nav-active {
+  position: relative;
+  text-decoration: none;
+  color: red; /* Change this to red */
+  font-weight: 500;
+}
+
+.nav-active::before {
+  content: "";
+  height: 2.5px;
+  width: 0;
+  background: #000;
+  border: none;
+  position: absolute;
+  border-radius: 17px;
+  bottom: 30%;
+  z-index: 999;
+}
+
