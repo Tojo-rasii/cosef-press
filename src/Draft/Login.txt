@@ -1,0 +1,164 @@
+import React, { useState } from 'react';
+
+const LoginForm = ({ close }) => {
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+    rememberMe: false,
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    const inputValue = type === 'checkbox' ? checked : value;
+
+    setFormData((prevData) => ({ ...prevData, [name]: inputValue }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Perform authentication logic here
+    // For simplicity, let's assume a hardcoded username and password
+    const hardcodedUsername = 'demo';
+    const hardcodedPassword = 'password';
+
+    if (formData.username === hardcodedUsername && formData.password === hardcodedPassword) {
+      // Authentication successful - you may want to redirect or set user authentication state here
+
+      // If remember me is checked, you may want to store user session information
+      if (formData.rememberMe) {
+        localStorage.setItem('userData', JSON.stringify({ username: formData.username }));
+      }
+
+      // Close the login form or redirect the user
+      close();
+    } else {
+      // Authentication failed - you may want to show an error message
+      alert('Invalid username or password');
+    }
+  };
+
+  return (
+    <div>
+      {/* Your existing code... */}
+      <form onSubmit={handleSubmit}>
+        {/* ... Your existing form inputs ... */}
+        <article>
+          <span>
+            <i className="bi-person"></i>
+          </span>
+          <span>
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={formData.username}
+              onChange={handleChange}
+            />
+          </span>
+        </article>
+        <article>
+          <span>
+            <i className="bi-lock"></i>
+          </span>
+          <span>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </span>
+        </article>
+        {/* Checkbox input for remembering user */}
+        <div className='d-flex flex-row gap-2'>
+          <span>
+            <input
+              type="checkbox"
+              name="rememberMe"
+              id="rememberMe"
+              checked={formData.rememberMe}
+              onChange={handleChange}
+            />
+          </span>
+          <span>
+            <label htmlFor="rememberMe">Remember me</label>
+          </span>
+        </div>
+        {/* ... Your existing code ... */}
+        <article>
+          <input type="submit" value="Se connecter" className='text-white' />
+        </article>
+        {/* FORGOT PASSWORD */}
+        <div className='mb-2'>
+          <span>
+            Mot de passe oublié ?
+          </span>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default LoginForm;
+
+
+//CONNECT WITH GOOGLE
+npm install react-google-login
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { GoogleLogin } from 'react-google-login';
+import Logo from '../Tools/images/logo.jpg';
+import illu from '../Tools/images/login.png';
+import sign from '../Tools/images/signup.png';
+import { NavLink } from 'react-router-dom';
+
+function Navbar() {
+  // ...
+
+  const responseGoogle = (response) => {
+    console.log(response);
+    // Handle the Google login response here
+    // You can send the response.accessToken to the server for further verification
+  };
+
+  return (
+    <>
+      {/* ... Your existing code ... */}
+      <form onSubmit={handleLogin}>
+        {/* ... Your existing form fields ... */}
+
+        {/* CHECKBOX REMEMBER ME */}
+        <div className='d-flex flex-row gap-2'>
+          <span>
+            <input
+              type='checkbox'
+              name='rememberMe'
+              id='rememberMe'
+              checked={rememberMe}
+              onChange={() => setRememberMe(!rememberMe)}
+            />
+          </span>
+          <span>
+            <label htmlFor='rememberMe'>Remember me</label>
+          </span>
+        </div>
+
+        {/* Google Sign-In */}
+        <GoogleLogin
+          clientId="YOUR_GOOGLE_CLIENT_ID"
+          buttonText="Sign in with Google"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={'single_host_origin'}
+        />
+
+        {/* ... Your existing submit button ... */}
+      </form>
+      {/* ... Your existing code ... */}
+    </>
+  );
+}
+
+export default Navbar;

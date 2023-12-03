@@ -10,7 +10,103 @@ function Navbar() {
     const [active, setActive] = useState(false);
     const [pop, setPop] = useState(false);
     const [isDarkMode, setIsDarkMode] = useState(false);
+    const [rememberMe, setRememberMe] = useState(false);
 
+    const [formData, setFormData] = useState({
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        acceptConditions: false,
+    });
+
+    // SET ERROR
+    const [error, setError] = useState('');
+
+    // FORM SIGNUP
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+
+        // For checkbox input, use `checked` property
+        const inputValue = type === 'checkbox' ? checked : value;
+
+        setFormData((prevData) => ({ ...prevData, [name]: inputValue }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // Check if passwords match
+        if (formData.password !== formData.confirmPassword) {
+            alert('Passwords do not match!');
+            return;
+        }
+
+        // Check if user accepted conditions
+        if (!formData.acceptConditions) {
+            alert('Please accept the conditions to sign up!');
+            return;
+        }
+
+        // Check if username or email already exists in local storage
+        const storedData = JSON.parse(localStorage.getItem('userData')) || [];
+        const existingUser = storedData.find(
+            (user) => user.username === formData.username || user.email === formData.email
+        );
+
+        if (existingUser) {
+            setError('Username or email already exists!');
+            return;
+        }
+
+        // Save data to local storage
+        localStorage.setItem('userData', JSON.stringify([...storedData, formData]));
+
+        // Display alert
+        window.alert('Inscription réussie!');
+
+        // Additional logic for sending data to server can be added here
+
+        // Clear form data
+        setFormData({
+            username: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+            acceptConditions: false,
+        });
+        setError('');
+    };
+
+    // LOGIN FORM SIGN IN
+    const handleLogin = (e) => {
+        e.preventDefault();
+
+        // Get stored user data from local storage
+        const storedData = JSON.parse(localStorage.getItem('userData')) || [];
+
+        // Find the user with the provided username
+        const loggedInUser = storedData.find((user) => user.username === formData.username);
+
+        // Check if the user exists and the password matches
+        if (loggedInUser && loggedInUser.password === formData.password) {
+            // Display alert or perform any other actions for successful login
+            window.alert('Login successful!');
+            window.location.href = '../Components/Actualite.js';
+
+            // Save login status in local storage if "Remember me" is checked
+            if (rememberMe) {
+                localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+            }
+
+            // Additional logic, such as redirecting the user to another page
+        } else {
+            // Display an error message for unsuccessful login
+            alert('Invalid username or password');
+        }
+    };
+
+    // DATE A JOUR
     useEffect(() => {
         const intervalId = setInterval(() => {
             setCurrentDate(new Date());
@@ -27,7 +123,7 @@ function Navbar() {
     const formattedDay = currentDate.toLocaleDateString('fr-FR', optionsDay);
     const formattedDate = currentDate.toLocaleDateString('fr-FR', options);
 
-
+    // LIST CLOSE
     useEffect(() => {
         const list = document.getElementById("list");
         const close = document.getElementById("close");
@@ -250,13 +346,16 @@ function Navbar() {
                                         <span></span>
                                     </article>
                                 </form>
-                                <form>
+                                <form onSubmit={handleLogin}>
                                     <article>
                                         <span>
                                             <i className="bi-person"></i>
                                         </span>
                                         <span>
-                                            <input type="text" />
+                                            <input type="text" name="username"
+                                                placeholder="Username"
+                                                value={formData.username}
+                                                onChange={handleChange} />
                                         </span>
                                     </article>
                                     <article>
@@ -264,17 +363,23 @@ function Navbar() {
                                             <i className="bi-lock"></i>
                                         </span>
                                         <span>
-                                            <input type="password" />
+                                            <input type="password" name="password"
+                                                placeholder="Password"
+                                                value={formData.password}
+                                                onChange={handleChange} />
                                         </span>
                                     </article>
 
                                     {/* CHECKBOX ACCEPT */}
                                     <div className='d-flex flex-row gap-2'>
                                         <span>
-                                            <input type="checkbox" name="" id="accept" />
+                                            <input type="checkbox" name="rememberMe"
+                                                id="rememberMe"
+                                                checked={rememberMe}
+                                                onChange={() => setRememberMe(!rememberMe)} />
                                         </span>
                                         <span>
-                                            <label for="accept">Remember me</label>
+                                            <label for="rememberMe">Remember me</label>
                                         </span>
                                     </div>
                                     <article>
@@ -345,13 +450,26 @@ function Navbar() {
                                         <span></span>
                                     </article>
                                 </form>
-                                <form>
+                                <form onSubmit={handleSubmit}>
                                     <article>
                                         <span>
                                             <i className="bi-person"></i>
                                         </span>
                                         <span>
-                                            <input type="text" />
+                                            <input type="text" name="username"
+                                                value={formData.username}
+                                                onChange={handleChange} required/>
+                                        </span>
+                                    </article>
+                                    <article>
+                                        <span>
+                                            <i className="bi-at"></i>
+                                        </span>
+                                        <span>
+                                            <input type="email" name="email"
+                                                placeholder="Email"
+                                                value={formData.email}
+                                                onChange={handleChange} required/>
                                         </span>
                                     </article>
                                     <article>
@@ -359,7 +477,9 @@ function Navbar() {
                                             <i className="bi-lock"></i>
                                         </span>
                                         <span>
-                                            <input type="password" />
+                                            <input type="password" name="password"
+                                                value={formData.password}
+                                                onChange={handleChange} required/>
                                         </span>
                                     </article>
                                     <article>
@@ -367,27 +487,27 @@ function Navbar() {
                                             <i className="bi-lock"></i>
                                         </span>
                                         <span>
-                                            <input type="password" />
-                                        </span>
-                                    </article>
-                                    <article>
-                                        <span>
-                                            <i className="bi-lock"></i>
-                                        </span>
-                                        <span>
-                                            <input type="password" />
+                                            <input type="password"
+                                                name="confirmPassword"
+                                                value={formData.confirmPassword}
+                                                onChange={handleChange} required/>
                                         </span>
                                     </article>
 
                                     {/* CHECKBOX ACCEPT */}
                                     <div className='d-flex flex-row gap-2'>
                                         <span>
-                                            <input type="checkbox" name="" id="check" />
+                                            <input type="checkbox" name="acceptConditions"
+                                                id="acceptConditions"
+                                                checked={formData.acceptConditions}
+                                                onChange={handleChange}/>
                                         </span>
                                         <span>
-                                            <label for="check">Accepte conditions</label>
+                                            <label for="acceptConditions">Accepte conditions</label>
                                         </span>
                                     </div>
+                                    {/* Display error message */}
+                                    {error && <div style={{ color: 'red' }}>{error}</div>}
                                     <article>
                                         <input type="submit" value="S'inscrire" className='text-white' />
                                     </article>
