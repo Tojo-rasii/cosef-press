@@ -1,8 +1,14 @@
 import React from 'react'
 import Image from '../Tools/images/anatalaha2.jpg'
 import Image2 from '../Tools/images/cosef.jpg'
+// VIDEO
+import Video from '../Tools/video/video1.mp4'
+import Video2 from '../Tools/video/video2.mp4'
+import { NavLink, Link, useNavigate } from 'react-router-dom';
+
 
 function Body_Actualite() {
+  
     const articles = [
         {
             type: "Politique",
@@ -44,22 +50,26 @@ function Body_Actualite() {
     const videos = [
         {
             type: "Politique",
-            title: "Title",
+            title: "Fampielezan-kevitra N:03",
             imageUrl: Image,
-            description: `Antalaha faha 17 Oktobra 2023
-          -----------
+            videoUrl: Video,
+            description: `Famintinana ny fampielezan-kevitra ny kandida N:3 notanterahin'ny ekipan'ny cosef sy staff Eric FERNAND
  `,
             publishDate: "19 - 02- 15",
+            minuterieVideo: "0:00"
         },
         {
             type: "Social",
             title: "Title",
             imageUrl: Image2,
+            videoUrl: Video2,
             description: `Antalaha faha 17 Oktobra 2023
           -----------
           Aéroport Antsirabato Antalaha
 `,
             publishDate: "19 - 02- 15",
+            minuterieVideo: "0:00"
+
         },
         {
             type: "Culturel",
@@ -70,8 +80,31 @@ function Body_Actualite() {
           Aéroport Antsirabato Antalaha
 `,
             publishDate: "19 - 02- 15",
+            minuterieVideo: "0:00"
+
         },
     ];
+
+    // CLICK ARTICLE
+    const navigate = useNavigate();
+
+    const redirectToArticle = (article) => {
+        const url = `/article?type=${article.type}&imageUrl=${encodeURIComponent(
+            article.imageUrl
+        )}&title=${encodeURIComponent(article.title)}&description=${encodeURIComponent(
+            article.description
+        )}&publishDate=${article.publishDate}`;
+
+        navigate(url);
+    };
+
+    // Créez une URL avec les informations de la vidéo
+    const redirectToVideo = (video) => {
+        const url = `/video?type=${video.type}&title=${video.title}&description=${encodeURIComponent(video.description)}&publishDate=${video.publishDate}&videoUrl=${video.videoUrl}&imageUrl=${video.imageUrl}`;
+
+        // Redirigez vers la nouvelle page
+        navigate(url);
+    };
     return (
         <div>
             <main className='ALaUne'>
@@ -80,14 +113,22 @@ function Body_Actualite() {
                 <div className='ArticlePhoto'>
                     <p className='text-uppercase fw-semibold fs-4 titleActu'>Actualite</p>
                     {articles.map((article, index) => (
-                        <section>
+                        // <Link to={`/article`} key={index}>
+                        <section
+                            key={index} className={article.type.toLowerCase()}
+                            onClick={() => redirectToArticle(article)}>
                             <article>
                                 <picture>
                                     <img src={article.imageUrl} alt="Antalaha" />
                                 </picture>
                             </article>
-                            <article>
-                                <span>{article.type}</span>
+                            <article className="voir-plus"
+                                data-type={article.type}
+                                data-imageurl={article.imageUrl}
+                                data-title={article.title}
+                                data-description={article.description}
+                                data-publishdate={article.publishDate}>
+                                <span id='type'>{article.type}</span>
                                 <span>{article.title}</span>
                                 <span>{article.description}</span>
                                 <span>
@@ -98,25 +139,30 @@ function Body_Actualite() {
                                 <span>Publier le {article.publishDate}</span>
                             </article>
                         </section>
+                        // </Link>
                     ))}
                 </div>
                 {/* contenue article SECTION */}
                 {/* section-video */}
                 <div className='ArticleVideo'>
-                    <p className='text-uppercase fw-semibold fs-4 titleVideo'>Actualite Video</p>
+                    <p className='text-uppercase fw-semibold fs-4 titleVideo'>WEB TV</p>
                     {videos.map((article, index) => (
 
-                        <section>
+                        <section key={index} className={article.type.toLowerCase()}
+                            onClick={() => redirectToVideo(article)}>
                             <article>
                                 <picture>
-                                    <video poster={article.imageUrl}></video>
-                                    <span className='position-absolute iconPlay'>
-                                        <i className='bi-play-circle-fill'><span>&nbsp;0:00</span></i>
-                                    </span>
+                                    <video poster={article.imageUrl}>
+                                        <source src={article.videoUrl} type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
                                 </picture>
+                                <span className='position-absolute iconPlay'>
+                                    <i className='bi-play-circle-fill'><span>&nbsp;{article.minuterieVideo}</span></i>
+                                </span>
                             </article>
                             <article>
-                                <span>{article.type}</span>
+                                <span id='type'>{article.type}</span>
                                 <span>{article.title}</span>
                                 <span className='d-none'>{article.description}</span>
                                 <span>Publier le {article.publishDate}</span>

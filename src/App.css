@@ -18,7 +18,7 @@
   flex-direction: row;
   justify-content: space-between;
   font-size: 0.9em;
-  padding: 0.7em;
+  padding: 0.6em;
 }
 
 /* SECTION DATE */
@@ -50,11 +50,12 @@
   display: flex;
   flex-direction: row;
   gap: 1.5em;
-  margin-top: 0.5em;
+  margin-top: 0.8em;
 }
 
 .Navbar nav:nth-child(1) section:nth-child(2) article p {
   transition: 0.1s;
+  color: #2b2b2b;
 }
 
 .Navbar nav:nth-child(1) section:nth-child(2) article p:hover {
@@ -64,7 +65,7 @@
 }
 
 /* SECTION CONTENUE */
-.Navbar nav:nth-child(1) section:nth-child(3) button {
+.Navbar nav:nth-child(1) section:nth-child(3) article {
   padding: 0.8em;
   padding-inline: 1.2em;
   background: var(--bg-color2);
@@ -74,13 +75,14 @@
   color: #fff;
   cursor: pointer;
   font-weight: 600;
+  font-size: 1em;
 }
 
-.Navbar nav:nth-child(1) section:nth-child(3) button:hover {
+.Navbar nav:nth-child(1) section:nth-child(3) article:hover {
   background: var(--bg-hover2);
 }
 
-.Navbar nav:nth-child(1) section:nth-child(3) button:active {
+.Navbar nav:nth-child(1) section:nth-child(3) article:active {
   outline: 2px solid var(--color1);
   /* color: var(--color1); */
 }
@@ -92,7 +94,7 @@
   justify-content: space-between;
   background: var(--bg-color1);
   height: 11.6vh;
-  padding: 0.2em;
+  padding: 0;
 }
 
 .Navbar nav:nth-child(2) section:nth-child(1) picture {
@@ -101,7 +103,7 @@
 }
 
 .Navbar nav:nth-child(2) section:nth-child(1) picture img {
-  width: 3em;
+  width: 3.4em;
   height: auto;
   border: 2px solid #fff;
   border-radius: 4px;
@@ -110,13 +112,15 @@
 }
 
 .Navbar nav:nth-child(2) section:nth-child(1) picture p {
-  margin-top: 1.2em;
-  font-size: 1.1em;
+  margin-top: 0.6em;
+  margin-left: 3.2em;
+  font-size: 1.5em;
   font-weight: 600;
   color: #fff;
   --webkit-stroke-color: #fff;
   cursor: pointer;
   transition: 0.2s;
+  position: absolute;
 }
 
 .Navbar nav:nth-child(2) section:nth-child(1) picture p:hover {
@@ -127,11 +131,11 @@
   display: flex;
   flex-direction: row;
   gap: 2.6em;
-  margin-top: 1.1em;
+  margin-top: 1.4em;
 }
-
-.Navbar nav:nth-child(2) section:nth-child(2) article p {
+.Navbar nav:nth-child(2) section:nth-child(2) article p{
   text-transform: uppercase;
+  font-size: 1em;
   font-weight: 500;
   color: #fff;
   cursor: pointer;
@@ -146,7 +150,7 @@
   display: flex;
   flex-direction: row;
   gap: 0.8em;
-  margin-top: 0.9em;
+  margin-top: 1.3em;
   margin-right: 1em;
 }
 
@@ -219,6 +223,7 @@
   outline: 1px solid #fff;
 }
 
+
 .Contenu-Login section article span {
   margin-top: 0.5em;
 }
@@ -238,7 +243,7 @@
   width: 100%;
   height: 0.2em;
   position: fixed;
-  margin-top: 8.6em;
+  margin-top: 8.7em;
   border: none;
   outline: none;
   opacity: 0.9;
@@ -401,6 +406,10 @@
     border-radius: 2em;
     margin-top: -0.2em;
     font-size: 0.9em;
+}
+#icon-showMdp{
+  position: absolute;
+  margin-left: -1.3em;
 }
 #Logo {
   width: 4em;
@@ -648,7 +657,7 @@
 }
 
 /* ALAUNE FIGURE */
-.FigureLaUne {
+#FigureLaUne {
   background: rgb(65, 65, 80);
   color: #fff;
   width: min-content;
@@ -660,17 +669,17 @@
   cursor: default;
 }
 
-.FigureLaUne picture img {
+#FigureLaUne picture img {
   width: 30vw;
   height: auto;
   outline: 2px solid #bababa;
 }
 
-.FigureLaUne figcaption {
+#FigureLaUne figcaption {
   width: 25vw;
 }
 
-.FigureLaUne figcaption span {
+#FigureLaUne figcaption span {
   background: red;
   color: #fff;
   width: max-content;
@@ -680,11 +689,11 @@
   font-size: 0.9em;
 }
 
-.FigureLaUne figcaption p:nth-child(3) {
+#FigureLaUne figcaption p:nth-child(3) {
   font-size: 0.9em;
 }
 
-.FigureLaUne figcaption p:nth-child(4) {
+#FigureLaUne figcaption p:nth-child(4) {
   font-size: 0.8em;
   float: left;
   text-transform: capitalize;
@@ -708,7 +717,12 @@
   flex-direction: row;
   gap: 2em;
   margin-bottom: 2em;
-  cursor: default;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.ArticlePhoto section:hover{
+  filter: brightness(96%);
 }
 
 .ArticlePhoto section {
@@ -738,7 +752,6 @@
 
 /* TYPE */
 .ArticlePhoto section article:nth-child(2) span:nth-child(1) {
-  background: red;
   color: #fff;
   width: max-content;
   border-radius: 5px;
@@ -751,13 +764,16 @@
 .ArticlePhoto section article:nth-child(2) span:nth-child(2) {
   font-weight: bold;
   font-size: 1.7em;
+  width: 95%;
+  height: min-content;
+  word-break: break-all;
 }
 
 /* DESC */
 .ArticlePhoto section article:nth-child(2) span:nth-child(3) {
-  font-size: 0.9em;
+  font-size: 1em;
   width: 93%;
-  height: 10vh;
+  height: max-content;
   overflow: hidden;
   word-break: keep-all;
 }
@@ -820,7 +836,10 @@
   flex-direction: row;
   gap: 2em;
   margin-bottom: 2em;
-  cursor: default;
+  cursor: pointer;
+}
+.ArticleVideo section:hover{
+  filter: brightness(96%);
 }
 
 .ArticleVideo section {
@@ -862,7 +881,7 @@
 /* TITLE */
 .ArticleVideo section article:nth-child(2) span:nth-child(2) {
   font-weight: bold;
-  font-size: 1.7em;
+  font-size: 1.5em;
   width: 93%;
 }
 
@@ -886,16 +905,18 @@
 .Search {
   padding-top: 9.7em;
   padding-left: 5em;
+  display: flex;
+  flex-direction: column;
 }
 
-.Search section p {
+.Search header p {
   font-size: 1.7em;
   color: #3b3a3a;
   font-weight: 600;
   text-transform: capitalize;
 }
 
-.Search section article {
+.Search header article {
   border: none;
   background: rgb(244, 244, 244);
   border-radius: 1em;
@@ -907,7 +928,7 @@
   margin-top: 1em;
 }
 
-.Search section article span input {
+.Search header article span input {
   border: none;
   background: rgb(244, 244, 244);
   padding: 0.7em;
@@ -921,9 +942,92 @@
   width: 30em;
 }
 
-.Search section article span i {
+.Search header article span i {
   font-size: 1.2em;
   padding: 0.9em;
+}
+
+.Search section {
+  background: #f6f6f6;
+  outline: 1px solid #eaeaea;
+  padding: 1.5em;
+  width: 87.5%;
+  height: 42vh;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  overflow: hidden;
+  margin-top: 2em;
+  cursor: pointer;
+}
+
+.Search section article:nth-child(1) picture img {
+  width: 15vw;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  outline: 4px solid #fff;
+}
+
+.Search section article:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+  margin-top: 0.3em;
+}
+
+/* TYPE */
+.Search section article:nth-child(2) span:nth-child(1) {
+  color: #fff;
+  width: max-content;
+  border-radius: 5px;
+  padding: 0.2em;
+  padding-inline: 0.8em;
+  font-size: 0.9em;
+}
+
+/* TITLE */
+.Search section article:nth-child(2) span:nth-child(2) {
+  font-weight: bold;
+  font-size: 1.7em;
+  width: 95%;
+  height: min-content;
+  word-break: break-all;
+}
+
+/* DESC */
+.Search section article:nth-child(2) span:nth-child(3) {
+  font-size: 1em;
+  width: 93%;
+  height: max-content;
+  overflow: hidden;
+  word-break: keep-all;
+}
+
+/* VOIRPLUS */
+.Search section article:nth-child(2) span:nth-child(4) {
+  display: flex;
+  flex-direction: row;
+  background: #dbdbdb;
+  width: max-content;
+  border-radius: 0.5em;
+  padding-left: 0.5em;
+  padding-right: 0.2em;
+  font-size: 0.9em;
+}
+
+.Search section article:nth-child(2) span:nth-child(4) i {
+  margin-left: -0.4em;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+/* PUBLISHDATE */
+.Search section article:nth-child(2) span:nth-child(5) {
+  margin-top: 1em;
+  margin-left: 20em;
+  font-size: 0.9em;
 }
 
 
@@ -1000,16 +1104,13 @@
   padding: 1em;
   border-radius: 8px;
   cursor: default;
-}
-.Apropos div main section:nth-last-of-type(2), .Apropos div main section:nth-last-of-type(3){
-  background: rgb(236, 236, 236);
-}
-.Apropos div main section:nth-last-of-type(1), .Apropos div main section:nth-last-of-type(4){
   background: rgb(247, 247, 247);
 }
-.Apropos div main section:nth-last-of-type(2) p:nth-child(1), .Apropos div main section:nth-last-of-type(3) p:nth-child(1){
-  color: orangered;
-  color: orangered;
+.Apropos div main section:hover{
+  background: rgb(236, 236, 236);
+}
+.Apropos div main section:hover p:nth-child(1){
+ color: orangered;
 }
 
 /* MOT DU QUESTEUR BODY MAIN*/
@@ -1038,4 +1139,139 @@
   width: 45%;
   height: auto;
   object-fit: cover;
+}
+
+
+/* BODY ARTICLE*/
+/* Main publication */
+.ClickArticle{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 2em;
+   padding-top: 10em;
+   padding-inline: 2em;
+}
+.ClickArticle div:nth-child(1){
+  padding: 1em;
+  padding-left: 5em;
+  border-radius: 4px;
+}
+/* HEADER */
+/* CLICK ARTICLE */
+#typeStyle{
+  background: var(--bg-color1);
+  color: #fff;
+  width: max-content;
+  border-radius: 5px;
+  padding: 0.2em;
+  padding-inline: 0.4em;
+  font-size: 0.9em;
+}
+#titleStyle{
+  margin-top: 0.3em;
+  margin-bottom: 0.5em;
+  word-break: break-all;
+  width: 86%;
+}
+/* MAIN _ IMAGE */
+.ClickArticle div section article picture img{
+  width: 30em;
+  height: auto;
+  padding: 0.2em;
+  background: #fff;
+  border-radius: 6px;
+}
+#publishDAte{
+  font-size: 0.9em;
+}
+/* FOOT DESC */
+.ClickArticle div section:nth-child(2) article{
+  width: 86%;
+  word-break:keep-all;
+}
+
+/* FOOTER BODY */
+/* FOOTER */
+/* PUBLICITE */
+#zonePublicite {}
+
+.Publicite {
+    background: orangered;
+    color: #fff;
+    overflow: hidden;
+}
+
+.Publicite div {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.Publicite div p{
+  margin-top: 1.1em;
+}
+/* FOOTER */
+footer {
+  width: 100%;
+  margin-bottom: -60em;
+  background: #fff;
+  padding: 0.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+footer div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-inline: 1em;
+}
+
+footer div section {
+  display: flex;
+  flex-direction: column;
+}
+
+footer div section p:nth-child(1) {
+  font-weight: bold;
+  text-transform: capitalize;
+  font-size: 1.2em;
+}
+footer div section p:nth-child(2),footer div section p:nth-child(3),footer div section p:nth-child(4) {
+  text-transform: capitalize;
+  font-size: 0.9em;
+}
+
+footer div section:nth-child(5) article {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+footer div section:nth-child(5) article p {
+  font-size: 1.3em;
+  cursor: pointer;
+  color: rgb(103, 103, 103);
+}
+
+footer div:nth-child(2) {
+  border-top: 1px solid silver;
+  padding-top: 1.2em;
+  text-transform: capitalize;
+  font-size: 0.9em;
+}
+
+footer div:nth-child(2) article {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+}
+footer div:nth-child(2) article p{
+  color: silver;
+  cursor: pointer;
+}
+footer div:nth-child(2) article p:hover{
+  color: var(--color1);
 }

@@ -1,6 +1,8 @@
 import React from 'react'
 import Image from '../Tools/images/anatalaha2.jpg'
 import Image2 from '../Tools/images/cosef.jpg'
+import { NavLink, Link, useNavigate } from 'react-router-dom';
+
 
 function Body_Social() {
     const articles = [
@@ -72,6 +74,27 @@ function Body_Social() {
             publishDate: "19 - 02- 15",
         },
     ];
+
+      // CLICK ARTICLE
+      const navigate =  useNavigate();
+
+      const redirectToArticle = (article) => {
+          const url = `/article?type=${article.type}&imageUrl=${encodeURIComponent(
+            article.imageUrl
+          )}&title=${encodeURIComponent(article.title)}&description=${encodeURIComponent(
+            article.description
+          )}&publishDate=${article.publishDate}`;
+      
+          navigate(url);
+        };
+
+                     // Créez une URL avec les informations de la vidéo
+    const redirectToVideo = (video) => {
+        const url = `/video?type=${video.type}&title=${video.title}&description=${encodeURIComponent(video.description)}&publishDate=${video.publishDate}&videoUrl=${video.videoUrl}&imageUrl=${video.imageUrl}`;
+
+        // Redirigez vers la nouvelle page
+        navigate(url);
+    };
     return (
         <div>
             <main className='ALaUne'>
@@ -80,14 +103,15 @@ function Body_Social() {
                 <div className='ArticlePhoto'>
                     <p className='text-uppercase fw-semibold fs-4 titleActu'>Actualite&nbsp;Social</p>
                     {articles.map((article, index) => (
-                        <section>
+                        <section  key={index} className={article.type.toLowerCase()}
+                        onClick={() => redirectToArticle(article)}>
                             <article>
                                 <picture>
                                     <img src={article.imageUrl} alt="Antalaha" />
                                 </picture>
                             </article>
                             <article>
-                                <span>{article.type}</span>
+                                <span id='type'>{article.type}</span>
                                 <span>{article.title}</span>
                                 <span>{article.description}</span>
                                 <span>
@@ -103,10 +127,11 @@ function Body_Social() {
                 {/* contenue article SECTION */}
                 {/* section-video */}
                 <div className='ArticleVideo'>
-                    <p className='text-uppercase fw-semibold fs-4 titleVideo opacity-0'>Actualite Video</p>
+                    <p className='text-uppercase fw-semibold fs-4 titleVideo opacity-0'>WEB TV</p>
                     {videos.map((article, index) => (
 
-                        <section>
+                        <section key={index} className={article.type.toLowerCase()}
+                        onClick={() => redirectToVideo(article)}>
                             <article>
                                 <picture>
                                     <video poster={article.imageUrl}></video>
@@ -116,7 +141,7 @@ function Body_Social() {
                                 </picture>
                             </article>
                             <article>
-                                <span>{article.type}</span>
+                                <span id='type'>{article.type}</span>
                                 <span>{article.title}</span>
                                 <span className='d-none'>{article.description}</span>
                                 <span>Publier le {article.publishDate}</span>

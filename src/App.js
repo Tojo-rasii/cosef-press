@@ -9,9 +9,12 @@ import Sport from './Components/Sport';
 import Social from './Components/Social';
 import Culturel from './Components/Culturel';
 import Search from './Components/Search';
-import Body_About from './Pages/Body_About';
 import MotDuQuesteur from './Components/MotDuQuesteur';
 import MiniBiographie from './Components/MiniBiographie';
+import ClickArticle from './Components/ClickArticle';
+import Apropos from './Components/Apropos';
+import ClickVideo from './Components/ClickVideo';
+import LogsActualite from './Components/LogsActualite';
 
 function App() {
   return (
@@ -27,9 +30,12 @@ function App() {
             <Route path="/social" element={<Social />} />
             <Route path="/culturel" element={<Culturel />} />
             <Route path="/search" element={<Search />} />
-            <Route path="/about" element={<Body_About />} />
+            <Route path="/apropos" element={<Apropos />} />
             <Route path="/motDuQuesteur" element={<MotDuQuesteur />} />
             <Route path="/miniBiographie" element={<MiniBiographie />} />
+            <Route path="/article" element={<ClickArticle />} />
+            <Route path="/video" element={<ClickVideo />} />
+            <Route path="/logsActu" element={<LogsActualite />} />
           </Routes>
         </HashRouter>
     </div>

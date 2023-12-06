@@ -1,0 +1,127 @@
+import React, { useState } from 'react';
+
+function Body_Search() {
+  // Liste simulée d'articles
+  const articles = [
+    { title: 'Article 1', content: 'Contenu de l\'article 1' },
+    { title: 'Article 2', content: 'Contenu de l\'article 2' },
+    { title: 'Article 3', content: 'Contenu de l\'article 3' },
+    // Ajoutez d'autres articles au besoin
+  ];
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
+  // Fonction de recherche
+  const handleSearch = () => {
+    const filteredResults = articles.filter((article) =>
+      article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      article.content.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    setSearchResults(filteredResults);
+  };
+
+  return (
+    <div>
+      <main className='Search'>
+        <section>
+          <p className='ms-2'>Rechercher sur le site</p>
+          <article>
+            <span>
+              <input
+                type="text"
+                id="search"
+                placeholder='Recherche un article..'
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </span>
+            <span className='mt-2'>
+              <i className="bi-search" onClick={handleSearch}></i>
+            </span>
+          </article>
+        </section>
+
+        <section>
+          {/* Afficher les résultats de la recherche */}
+          {searchResults.length > 0 ? (
+            <div>
+              <p>Résultats de la recherche :</p>
+              <ul>
+                {searchResults.map((result, index) => (
+                  <li key={index}>
+                    <h3>{result.title}</h3>
+                    <p>{result.content}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <p>Aucun résultat trouvé.</p>
+          )}
+        </section>
+      </main>
+    </div>
+  );
+}
+
+export default Body_Search;
+
+
+
+FILLTER????///
+
+import React, { useState } from 'react';
+
+
+function Body_Search() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedType, setSelectedType] = useState('');
+
+  const handleSearch = () => {
+    // Logique de recherche ici en utilisant les valeurs de searchQuery et selectedType
+    alert('Recherche :', searchQuery, ' Type :', selectedType);
+  };
+
+  return (
+    <div>
+      <main className='Search'>
+        <section>
+          <p className='ms-2'>Rechercher sur le site</p>
+          <article>
+            <span>
+              <input
+                type="text"
+                id="search"
+                placeholder='Recherche un article..'
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </span>
+            <span className='mt-2'>
+              <i className="bi-search" onClick={handleSearch}></i>
+            </span>
+          </article>
+        </section>
+
+        <section>
+          {/* Sélection du type */}
+          <p className='ms-2 mt-3'>Filtrer par type</p>
+          <select
+            id="type"
+            value={selectedType}
+            onChange={(e) => setSelectedType(e.target.value)}
+          >
+            <option value="">Tous les types</option>
+            <option value="Politique">Politique</option>
+            <option value="Social">Social</option>
+            {/* Ajoutez d'autres options de types ici */}
+          </select>
+        </section>
+      </main>
+    </div>
+  );
+}
+
+export default Body_Search;

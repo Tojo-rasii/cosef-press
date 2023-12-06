@@ -11,6 +11,7 @@ function Navbar() {
     const [pop, setPop] = useState(false);
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const [formData, setFormData] = useState({
         username: '',
@@ -35,6 +36,12 @@ function Navbar() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        // if don't add anything
+        if (!formData.username || !formData.email) {
+            alert('Veuillez remplir le champ');
+            return;
+        }
 
         // Check if passwords match
         if (formData.password !== formData.confirmPassword) {
@@ -63,7 +70,8 @@ function Navbar() {
         localStorage.setItem('userData', JSON.stringify([...storedData, formData]));
 
         // Display alert
-        window.alert('Inscription réussie!');
+            window.alert('Inscription réussie!');
+        
 
         // Additional logic for sending data to server can be added here
 
@@ -82,17 +90,23 @@ function Navbar() {
     const handleLogin = (e) => {
         e.preventDefault();
 
+        // Check if username or email and password are provided
+        if (!formData.username || !formData.password) {
+            alert('Veuillez remplir le champ');
+            return;
+        }
+
         // Get stored user data from local storage
         const storedData = JSON.parse(localStorage.getItem('userData')) || [];
 
         // Find the user with the provided username
-        const loggedInUser = storedData.find((user) => user.username === formData.username);
+        const loggedInUser = storedData.find((user) => user.username === formData.username || user.email === formData.username);
 
         // Check if the user exists and the password matches
         if (loggedInUser && loggedInUser.password === formData.password) {
             // Display alert or perform any other actions for successful login
             window.alert('Login successful!');
-            window.location.href = '../Components/Actualite.js';
+            window.location.href = '/LogsActu';
 
             // Save login status in local storage if "Remember me" is checked
             if (rememberMe) {
@@ -209,21 +223,28 @@ function Navbar() {
                         {/* SECTION CONTENUE */}
                         <section>
                             <article>
-                                <NavLink to="/about"><p>Apropos</p></NavLink>
+                                <NavLink to="/apropos" style={navLinkStyle}><p>Apropos</p></NavLink>
                             </article>
                             |
                             <article>
-                                <NavLink to="/motDuQuesteur"><p>Mot du questeur</p></NavLink>
+                                <NavLink to="/motDuQuesteur" style={navLinkStyle}><p>Mot du questeur</p></NavLink>
                             </article>
                             |
                             <article>
-                                <NavLink to="/miniBiographie"><p>Mini biographie</p></NavLink>
+                                <NavLink to="/miniBiographie" style={navLinkStyle}><p>Mini biographie</p></NavLink>
                             </article>
                         </section>
 
                         {/* SECTION CONTACT */}
                         <section>
-                            <button>Contactez-nous</button>
+                            <article>
+                                <span>
+                                    <i className="bi-camera-reels">&nbsp;</i>
+                                </span>
+                                <span>
+                                WEB RADIO
+                                </span>
+                                </article>
                         </section>
                     </nav>
                     {/* Nav2 */}
@@ -250,11 +271,11 @@ function Navbar() {
 
                             </article>
                             <article>
-                                <NavLink to="/sport" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active" : "")}><p>sport</p></NavLink>
+                                <NavLink to="/sport" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active1" : "")}><p>sport</p></NavLink>
 
                             </article>
                             <article>
-                                <NavLink to="/social" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active" : "")}><p>social</p></NavLink>
+                                <NavLink to="/social" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active1" : "")}><p>social</p></NavLink>
 
                             </article>
                             <article>
@@ -266,7 +287,7 @@ function Navbar() {
                         {/* PROFIL */}
                         <section>
                             <article>
-                                <NavLink to="/search"><i className='bi-search text-white fs-5'></i></NavLink>
+                                <NavLink to="/search" className={(nav) => (nav.isActive ? "navSearch-active" : "")}><i className='bi-search text-white fs-5'></i></NavLink>
                             </article>
                             <article>
                                 <i className='bi-person-fill text-white fs-5' onClick={toggLog}></i>
@@ -309,8 +330,8 @@ function Navbar() {
                                     </picture>
                                 </article>
                                 <article>
-                                    <p>Lorem ipsum dolor sit amet consectetur </p>
-                                    <p id="signUp">INSCRIVEZ_VOUS</p>
+                                    <p>Pas encore inscrit ? <br /> Créez un compte dès maintenant !</p>
+                                    <button id="signUp" className="bg-primary border-primary rounded-1 text-white p-2">INSCRIVEZ-VOUS</button>
                                 </article>
                             </section>
                             <section>
@@ -353,7 +374,7 @@ function Navbar() {
                                         </span>
                                         <span>
                                             <input type="text" name="username"
-                                                placeholder="Username"
+                                                placeholder="Nom d'utilisateur ou E-mail"
                                                 value={formData.username}
                                                 onChange={handleChange} />
                                         </span>
@@ -363,10 +384,15 @@ function Navbar() {
                                             <i className="bi-lock"></i>
                                         </span>
                                         <span>
-                                            <input type="password" name="password"
-                                                placeholder="Password"
+                                            <input type={showPassword ? "text" : "password" } name="password"
+                                                placeholder="Mot de passe"
                                                 value={formData.password}
-                                                onChange={handleChange} />
+                                                onChange={handleChange} maxLength={40}/>
+                                            {/* Icon to toggle password visibility */}
+                                            <i className={`bi-eye${showPassword ? "-slash" : ""}`}
+                                                onClick={() => setShowPassword(!showPassword)}
+                                                id="icon-showMdp"
+                                            ></i>
                                         </span>
                                     </article>
 
@@ -413,8 +439,8 @@ function Navbar() {
                                     </picture>
                                 </article>
                                 <article>
-                                    <p>Lorem ipsum dolor sit amet consectetur </p>
-                                    <p id="login">Login</p>
+                                    <p>Deja inscrit, veuillez vous connecter.</p>
+                                    <button id="login" className="bg-primary border-primary rounded-1 text-white p-2">CONNECTEZ-VOUS</button>
                                 </article>
                             </section>
                             <section>
@@ -458,7 +484,7 @@ function Navbar() {
                                         <span>
                                             <input type="text" name="username"
                                                 value={formData.username}
-                                                onChange={handleChange} required/>
+                                                onChange={handleChange} placeholder="Nom d'utilisateur"/>
                                         </span>
                                     </article>
                                     <article>
@@ -469,7 +495,7 @@ function Navbar() {
                                             <input type="email" name="email"
                                                 placeholder="Email"
                                                 value={formData.email}
-                                                onChange={handleChange} required/>
+                                                onChange={handleChange} placeholder="Addresse Email"/>
                                         </span>
                                     </article>
                                     <article>
@@ -479,7 +505,7 @@ function Navbar() {
                                         <span>
                                             <input type="password" name="password"
                                                 value={formData.password}
-                                                onChange={handleChange} required/>
+                                                onChange={handleChange} placeholder="Mot de passe"/>
                                         </span>
                                     </article>
                                     <article>
@@ -490,7 +516,7 @@ function Navbar() {
                                             <input type="password"
                                                 name="confirmPassword"
                                                 value={formData.confirmPassword}
-                                                onChange={handleChange} required/>
+                                                onChange={handleChange} placeholder="Confirmer le mot de passe"/>
                                         </span>
                                     </article>
 
@@ -500,7 +526,7 @@ function Navbar() {
                                             <input type="checkbox" name="acceptConditions"
                                                 id="acceptConditions"
                                                 checked={formData.acceptConditions}
-                                                onChange={handleChange}/>
+                                                onChange={handleChange} />
                                         </span>
                                         <span>
                                             <label for="acceptConditions">Accepte conditions</label>

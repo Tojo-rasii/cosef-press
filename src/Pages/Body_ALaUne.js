@@ -2,8 +2,11 @@ import React from 'react'
 import Image from '../Tools/images/anatalaha2.jpg'
 import Image2 from '../Tools/images/cosef.jpg'
 import ALaUne from '../Tools/images/alaune.jpg'
+import { NavLink, Link, useNavigate } from 'react-router-dom';
+
 
 function Body_ALaUne() {
+    // A LA UNE
     const aLaUne = [
         {
             imageUrl: Image,
@@ -14,6 +17,7 @@ function Body_ALaUne() {
         },
     ];
 
+    // ARTICLE
     const articles = [
         {
             type: "Politique",
@@ -61,6 +65,8 @@ function Body_ALaUne() {
           -----------
  `,
             publishDate: "19 - 02- 15",
+            minuterieVideo : "0:00"
+
         },
         {
             type: "Social",
@@ -71,6 +77,8 @@ function Body_ALaUne() {
           Aéroport Antsirabato Antalaha
 `,
             publishDate: "19 - 02- 15",
+            minuterieVideo : "0:00"
+
         },
         {
             type: "Culturel",
@@ -81,6 +89,8 @@ function Body_ALaUne() {
           Aéroport Antsirabato Antalaha
 `,
             publishDate: "19 - 02- 15",
+            minuterieVideo : "0:00"
+
         },
         {
             type: "Culturel",
@@ -91,6 +101,8 @@ function Body_ALaUne() {
           Aéroport Antsirabato Antalaha
 `,
             publishDate: "19 - 02- 15",
+            minuterieVideo : "0:00"
+
         },
         {
             type: "Culturel",
@@ -101,8 +113,31 @@ function Body_ALaUne() {
           Aéroport Antsirabato Antalaha
 `,
             publishDate: "19 - 02- 15",
+            minuterieVideo : "0:00"
+
         },
     ];
+
+        // CLICK ARTICLE
+        const navigate =  useNavigate();
+
+        const redirectToArticle = (article) => {
+            const url = `/article?type=${article.type}&imageUrl=${encodeURIComponent(
+              article.imageUrl
+            )}&title=${encodeURIComponent(article.title)}&description=${encodeURIComponent(
+              article.description
+            )}&publishDate=${article.publishDate}`;
+        
+            navigate(url);
+          };
+
+              // Créez une URL avec les informations de la vidéo
+    const redirectToVideo = (video) => {
+        const url = `/video?type=${video.type}&title=${video.title}&description=${encodeURIComponent(video.description)}&publishDate=${video.publishDate}&videoUrl=${video.videoUrl}&imageUrl=${video.imageUrl}`;
+
+        // Redirigez vers la nouvelle page
+        navigate(url);
+    };
     return (
         <div>
             <main className='ALaUne'>
@@ -110,12 +145,13 @@ function Body_ALaUne() {
                 {/* section-photo */}
                 <div className='ArticlePhoto'>
                     {aLaUne.map((article, index) => (
-                        <figure className='FigureLaUne'>
+                        <figure id='FigureLaUne' key={index} className={article.type.toLowerCase()}
+                        >
                             <picture>
                               <img src={article.imageUrl} alt="alaune" />
                             </picture>
                             <figcaption>
-                                <span>{article.type}</span>
+                                <span id='type'>{article.type}</span>
                                 <p className='fw-bold fs-2 lh-1 mt-3'>{article.title}</p>
                                <p>{article.description}</p>
                                <p>publier {article.publishDate}</p>
@@ -124,14 +160,15 @@ function Body_ALaUne() {
                     ))}
                     <p className='text-uppercase fw-semibold fs-4 ms-4 titleActu'>A La Une</p>
                     {articles.map((article, index) => (
-                        <section className='ms-4'>
+                        <section key={index} className={article.type.toLowerCase()}
+                        onClick={() => redirectToArticle(article)}>
                             <article>
                                 <picture>
                                     <img src={article.imageUrl} alt="Antalaha" />
                                 </picture>
                             </article>
                             <article>
-                                <span>{article.type}</span>
+                                <span id='type'>{article.type}</span>
                                 <span>{article.title}</span>
                                 <span>{article.description}</span>
                                 <span>
@@ -147,20 +184,21 @@ function Body_ALaUne() {
                 {/* contenue article SECTION */}
                 {/* section-video */}
                 <div className='ArticleVideo'>
-                    <p className='text-uppercase fw-semibold fs-4 titleVideo d-none'>Actualite Video</p>
+                    <p className='text-uppercase fw-semibold fs-4 titleVideo d-none'>WEB TV</p>
                     {videos.map((article, index) => (
 
-                        <section>
+                        <section key={index} className={article.type.toLowerCase()}
+                        onClick={() => redirectToVideo(article)}>
                             <article>
                                 <picture>
                                     <video poster={article.imageUrl}></video>
                                     <span className='position-absolute iconPlay'>
-                                        <i className='bi-play-circle-fill'><span>&nbsp;0:00</span></i>
+                                        <i className='bi-play-circle-fill'><span>&nbsp;{article.minuterieVideo}</span></i>
                                     </span>
                                 </picture>
                             </article>
                             <article>
-                                <span>{article.type}</span>
+                                <span id='type'>{article.type}</span>
                                 <span>{article.title}</span>
                                 <span className='d-none'>{article.description}</span>
                                 <span>Publier le {article.publishDate}</span>
