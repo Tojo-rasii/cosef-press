@@ -3,7 +3,7 @@ import React from 'react'
 function Footer() {
     return (
         <div>
-            <figure class="Publicite">
+            <figure className="Publicite">
                 <marquee direction="left">
                     <div>
                         <p>logo- cosef -FERNAND Eddie Serge MANAMPY, MIARO ARY MANASOA NY VAHOAKAN' I ANTALAHA</p>
@@ -36,12 +36,7 @@ function Footer() {
                     <section>
                         <p>Suivez-nous</p>
                         <article>
-                            <p><ion-icon name="logo-linkedin"></ion-icon></p>
-                            <a href="https://www.facebook.com/profile.php?id=100082365563440" target="_blank">
-                                <p><ion-icon name="logo-facebook"></ion-icon></p>
-                            </a>
-                            <p><ion-icon name="logo-instagram"></ion-icon></p>
-                            <p><ion-icon name="logo-twitter"></ion-icon></p>
+                           
                         </article>
                     </section>
                 </div>

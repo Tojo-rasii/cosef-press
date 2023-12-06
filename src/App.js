@@ -14,7 +14,7 @@ import MiniBiographie from './Components/MiniBiographie';
 import ClickArticle from './Components/ClickArticle';
 import Apropos from './Components/Apropos';
 import ClickVideo from './Components/ClickVideo';
-import LogsActualite from './Components/LogsActualite';
+import LogsActualite from './Logs/LogsActualite';
 
 function App() {
   return (
@@ -35,7 +35,7 @@ function App() {
             <Route path="/miniBiographie" element={<MiniBiographie />} />
             <Route path="/article" element={<ClickArticle />} />
             <Route path="/video" element={<ClickVideo />} />
-            <Route path="/logsActu" element={<LogsActualite />} />
+            <Route path="/logsActu" element={<LogsActualite />}/>
           </Routes>
         </HashRouter>
     </div>

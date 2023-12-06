@@ -3,15 +3,16 @@ import { useState, useEffect } from 'react';
 import Logo from '../Tools/images/logo.jpg'
 import illu from '../Tools/images/login.png'
 import sign from '../Tools/images/signup.png'
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
-function Logs_Navbar() {
+function Navbar_Logs() {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [active, setActive] = useState(false);
     const [pop, setPop] = useState(false);
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+        const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         username: '',
@@ -106,12 +107,15 @@ function Logs_Navbar() {
         if (loggedInUser && loggedInUser.password === formData.password) {
             // Display alert or perform any other actions for successful login
             window.alert('Login successful!');
-            window.location.href = '../Components/Actualite.js';
+            // window.location.href = '../Logs/Politique.js';
 
             // Save login status in local storage if "Remember me" is checked
             if (rememberMe) {
                 localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
             }
+
+               // Use React Router's useNavigate to redirect to another page
+        navigate('/logsActu');
 
             // Additional logic, such as redirecting the user to another page
         } else {
@@ -167,12 +171,6 @@ function Logs_Navbar() {
         setActive(!active)
         setIsDarkMode(prevMode => !prevMode);
     }
-
-    // POPLOG
-    // const toggPop = () => {
-    //     setPop(!pop)
-    //     setActive(!active)
-    // }
 
     // CLOSE
     const close = () => {
@@ -297,11 +295,18 @@ function Logs_Navbar() {
                                 <section>
                                     <article>
                                         <span>
-                                            <i class="bi bi-box-arrow-in-right  fs-3" id="btn-Login"></i>
+                                          
                                         </span>
                                         <span>
-                                            <p>Se connecter</p>
-                                            <p>Se deconnecter</p>
+                                            <p>{}</p>
+                                        </span>
+                                    </article>
+                                    <article>
+                                        <span>
+                                            <i class="bi bi-box-arrow-in-left  fs-3" id="btn-Login"></i>
+                                        </span>
+                                        <span>
+                                            <p>Se deconecter</p>
                                         </span>
                                     </article>
                                 </section>
@@ -310,7 +315,240 @@ function Logs_Navbar() {
                     </nav>
                     <hr className='Hr-ligne' />
                 </header>
+
+                {/* LOGIN POP CONNEX */}
+                <div className='Pop-Login' style={{ display: pop ? "block" : "none" }} >
+
+
+                    {/* Login connex
+                    this is the pop log */}
+                    <div>
+                        <main>
+                            <section>
+                                {/* CLOSE */}
+                                <picture className='closePop' title='Close' onClick={close}>
+                                    <i className='bi-x'></i>
+                                </picture>
+
+                                <article>
+                                    <picture>
+                                        <img src={illu} alt="illustration" className='illu-Login' />
+                                    </picture>
+                                </article>
+                                <article>
+                                    <p>Pas encore inscrit ? <br /> Créez un compte dès maintenant !</p>
+                                    <button id="signUp" className="bg-primary border-primary rounded-1 text-white p-2">INSCRIVEZ-VOUS</button>
+                                </article>
+                            </section>
+                            <section>
+                                <form>
+                                    <article>
+                                        <picture>
+                                            <img src={Logo} alt="Logo" id='Logo' />
+                                        </picture>
+                                    </article>
+                                    <article className='d-flex flex-column TitleLog'>
+                                        <p className='text-uppercase'>CONNEXION</p>
+                                        <p>Connectez-vous avec votre compte</p>
+                                    </article>
+                                    <article>
+                                        <span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 48 48">
+                                                <linearGradient id="Ld6sqrtcxMyckEl6xeDdMa_uLWV5A9vXIPu_gr1" x1="9.993" x2="40.615" y1="9.993" y2="40.615" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#2aa4f4"></stop><stop offset="1" stopColor="#007ad9"></stop></linearGradient><path fill="url(#Ld6sqrtcxMyckEl6xeDdMa_uLWV5A9vXIPu_gr1)" d="M24,4C12.954,4,4,12.954,4,24s8.954,20,20,20s20-8.954,20-20S35.046,4,24,4z"></path><path fill="#fff" d="M26.707,29.301h5.176l0.813-5.258h-5.989v-2.874c0-2.184,0.714-4.121,2.757-4.121h3.283V12.46 c-0.577-0.078-1.797-0.248-4.102-0.248c-4.814,0-7.636,2.542-7.636,8.334v3.498H16.06v5.258h4.948v14.452 C21.988,43.9,22.981,44,24,44c0.921,0,1.82-0.084,2.707-0.204V29.301z"></path>
+                                            </svg>
+                                        </span>
+                                        <span>Facebook</span>
+                                    </article>
+                                    <article>
+                                        <span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 48 48">
+                                                <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path>
+                                            </svg>
+                                        </span>
+                                        <span>Google</span>
+                                    </article>
+                                    <article className='transite-Or d-flex flex-row justify-content-center gap-2 mt-3'>
+                                        <span></span>
+                                        <span>Ou</span>
+                                        <span></span>
+                                    </article>
+                                </form>
+                                <form onSubmit={handleLogin}>
+                                    <article>
+                                        <span>
+                                            <i className="bi-person"></i>
+                                        </span>
+                                        <span>
+                                            <input type="text" name="username"
+                                                placeholder="Nom d'utilisateur ou E-mail"
+                                                value={formData.username}
+                                                onChange={handleChange} />
+                                        </span>
+                                    </article>
+                                    <article>
+                                        <span>
+                                            <i className="bi-lock"></i>
+                                        </span>
+                                        <span>
+                                            <input type={showPassword ? "text" : "password" } name="password"
+                                                placeholder="Mot de passe"
+                                                value={formData.password}
+                                                onChange={handleChange} maxLength={40}/>
+                                            {/* Icon to toggle password visibility */}
+                                            <i className={`bi-eye${showPassword ? "-slash" : ""}`}
+                                                onClick={() => setShowPassword(!showPassword)}
+                                                id="icon-showMdp"
+                                            ></i>
+                                        </span>
+                                    </article>
+
+                                    {/* CHECKBOX ACCEPT */}
+                                    <div className='d-flex flex-row gap-2'>
+                                        <span>
+                                            <input type="checkbox" name="rememberMe"
+                                                id="rememberMe"
+                                                checked={rememberMe}
+                                                onChange={() => setRememberMe(!rememberMe)} />
+                                        </span>
+                                        <span>
+                                            <label for="rememberMe">Remember me</label>
+                                        </span>
+                                    </div>
+                                    <article>
+                                        <input type="submit" value="Se connecter" className='text-white' />
+                                    </article>
+
+                                    {/* FORGOT PASSWORD */}
+                                    <div className='mb-2'>
+                                        <span>
+                                            Mot de pass oublier ?
+                                        </span>
+                                    </div>
+                                </form>
+                            </section>
+                        </main>
+                    </div>
+
+                    {/* Sign up connex
+                    this is the pop Sign */}
+                    <div>
+                        <main>
+                            <section>
+                                {/* CLOSE */}
+                                <picture className='closePop' title='Close' onClick={close}>
+                                    <i className='bi-x'></i>
+                                </picture>
+
+                                <article>
+                                    <picture>
+                                        <img src={sign} alt="illustration" className='illu-Login' />
+                                    </picture>
+                                </article>
+                                <article>
+                                    <p>Deja inscrit, veuillez vous connecter.</p>
+                                    <button id="login" className="bg-primary border-primary rounded-1 text-white p-2">CONNECTEZ-VOUS</button>
+                                </article>
+                            </section>
+                            <section>
+                                <form>
+                                    <article>
+                                        <picture>
+                                            <img src={Logo} alt="Logo" id='Logo' />
+                                        </picture>
+                                    </article>
+                                    <article className='d-flex flex-column TitleLog'>
+                                        <p className='text-uppercase'>INSCRIPTION</p>
+                                        <p>Creer votre propre compte</p>
+                                    </article>
+                                    <article className='d-none'>
+                                        <span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 48 48">
+                                                <linearGradient id="Ld6sqrtcxMyckEl6xeDdMa_uLWV5A9vXIPu_gr1" x1="9.993" x2="40.615" y1="9.993" y2="40.615" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#2aa4f4"></stop><stop offset="1" stopColor="#007ad9"></stop></linearGradient><path fill="url(#Ld6sqrtcxMyckEl6xeDdMa_uLWV5A9vXIPu_gr1)" d="M24,4C12.954,4,4,12.954,4,24s8.954,20,20,20s20-8.954,20-20S35.046,4,24,4z"></path><path fill="#fff" d="M26.707,29.301h5.176l0.813-5.258h-5.989v-2.874c0-2.184,0.714-4.121,2.757-4.121h3.283V12.46 c-0.577-0.078-1.797-0.248-4.102-0.248c-4.814,0-7.636,2.542-7.636,8.334v3.498H16.06v5.258h4.948v14.452 C21.988,43.9,22.981,44,24,44c0.921,0,1.82-0.084,2.707-0.204V29.301z"></path>
+                                            </svg>
+                                        </span>
+                                        <span>Facebook</span>
+                                    </article>
+                                    <article className='d-none'>
+                                        <span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 48 48">
+                                                <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path>
+                                            </svg>
+                                        </span>
+                                        <span>Google</span>
+                                    </article>
+                                    <article className='d-none transite-Or d-flex flex-row justify-content-center gap-2 mt-3'>
+                                        <span></span>
+                                        <span>Ou</span>
+                                        <span></span>
+                                    </article>
+                                </form>
+                                <form onSubmit={handleSubmit}>
+                                    <article>
+                                        <span>
+                                            <i className="bi-person"></i>
+                                        </span>
+                                        <span>
+                                            <input type="text" name="username"
+                                                value={formData.username}
+                                                onChange={handleChange} placeholder="Nom d'utilisateur"/>
+                                        </span>
+                                    </article>
+                                    <article>
+                                        <span>
+                                            <i className="bi-at"></i>
+                                        </span>
+                                        <span>
+                                            <input type="email" name="email"
+                                                placeholder="Addresse E-mail"
+                                                value={formData.email}
+                                                onChange={handleChange}/>
+                                        </span>
+                                    </article>
+                                    <article>
+                                        <span>
+                                            <i className="bi-lock"></i>
+                                        </span>
+                                        <span>
+                                            <input type="password" name="password"
+                                                value={formData.password}
+                                                onChange={handleChange} placeholder="Mot de passe"/>
+                                        </span>
+                                    </article>
+                                    <article>
+                                        <span>
+                                            <i className="bi-lock"></i>
+                                        </span>
+                                        <span>
+                                            <input type="password"
+                                                name="confirmPassword"
+                                                value={formData.confirmPassword}
+                                                onChange={handleChange} placeholder="Confirmer le mot de passe"/>
+                                        </span>
+                                    </article>
+
+                                    {/* CHECKBOX ACCEPT */}
+                                    <div className='d-flex flex-row gap-2'>
+                                        <span>
+                                            <input type="checkbox" name="acceptConditions"
+                                                id="acceptConditions"
+                                                checked={formData.acceptConditions}
+                                                onChange={handleChange} />
+                                        </span>
+                                        <span>
+                                            <label for="acceptConditions">Accepte conditions</label>
+                                        </span>
+                                    </div>
+                                    {/* Display error message */}
+                                    {error && <div style={{ color: 'red' }}>{error}</div>}
+                                    <article>
+                                        <input type="submit" value="S'inscrire" className='text-white' />
+                                    </article>
+                                </form>
+                            </section>
+                        </main>
+                    </div>
                 </div>
+            </div>
 
             {/* MOBILE */}
             <div className='Mobile'>
@@ -414,4 +652,4 @@ function Logs_Navbar() {
     )
 }
 
-export default Logs_Navbar
+export default Navbar_Logs
