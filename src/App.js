@@ -17,6 +17,8 @@ import ClickVideo from './Components/ClickVideo';
 import LogsActualite from './Logs/LogsActualite';
 
 function App() {
+  const body = document.querySelector('body');
+  body.classList.add('bodyFont');
   return (
     <div>
       <HashRouter>

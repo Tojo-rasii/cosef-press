@@ -158,7 +158,7 @@ function Body_ALaUne() {
                             </figcaption>
                         </figure>
                     ))}
-                    <p className='text-uppercase fw-semibold fs-4 ms-4 titleActu'>A La Une</p>
+                    <p className='text-uppercase fw-semibold fs-4 ms-4 titleActu'><span style={{ fontWeight : "800"}}>A la une</span></p>
                     {articles.map((article, index) => (
                         <section key={index} className={article.type.toLowerCase()}
                         onClick={() => redirectToArticle(article)}>

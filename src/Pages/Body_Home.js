@@ -1,9 +1,20 @@
 import React from 'react'
 import Image from '../Tools/images/anatalaha2.jpg'
+import Image1 from '../Tools/images/alaune.jpg'
 import Image2 from '../Tools/images/cosef.jpg'
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 
 function Body_Home() {
+      // A LA UNE
+      const aLaUne = [
+        {
+            imageUrl: Image1,
+            type : "Politique",
+            title: "Fifidianana filoham-pirenena",
+            description: "Izay narahinny kandidà Siteny Randrianasoloniaiko taminny isam-bato 14,40%, ary ny kandidà Marc Ravalomanana no fahatelo taminny isam-bato 12,10 raha ny valim-pifidianana vonjimaika navoakanny CENI androany 25 novambra",
+            publishDate: "19-02-12"
+        },
+    ];
     const articles = [
         {
             type: "Politique",
@@ -72,6 +83,26 @@ function Body_Home() {
 `,
             publishDate: "19 - 02- 15",
         },
+        {
+            type: "Culturel",
+            title: "Title",
+            imageUrl: Image2,
+            description: `Antalaha faha 17 Oktobra 2023
+          -----------
+          Aéroport Antsirabato Antalaha
+`,
+            publishDate: "19 - 02- 15",
+        },
+        {
+            type: "Culturel",
+            title: "Title",
+            imageUrl: Image2,
+            description: `Antalaha faha 17 Oktobra 2023
+          -----------
+          Aéroport Antsirabato Antalaha
+`,
+            publishDate: "19 - 02- 15",
+        },
     ];
 
     // CLICK ARTICLE
@@ -100,8 +131,23 @@ function Body_Home() {
                 {/* contenue article SECTION */}
                 {/* section-photo */}
                 <div className='ArticlePhoto'>
-                    <p className='text-uppercase fw-semibold fs-4 titleActu'>Actualite</p>
+                {aLaUne.map((article, index) => (
+                        <figure id='FigureLaUne' style={{display: 'flex', flexDirection : 'row'}} key={index} className={article.type.toLowerCase()}
+                        >
+                            <picture>
+                              <img src={article.imageUrl} alt="alaune" />
+                            </picture>
+                            <figcaption>
+                                <span id='type'>{article.type}</span>
+                                <p className='fw-bold fs-2 lh-1 mt-3'>{article.title}</p>
+                               <p>{article.description}</p>
+                               <p>publier {article.publishDate}</p>
+                            </figcaption>
+                        </figure>
+                    ))}
+                    <p className='text-uppercase fw-semibold fs-4 titleActu mt-3 mb-5'>Actualite</p>
                     {articles.map((article, index) => (
+                        
                         // <Link to={`/article`} key={index}>
                         <section
                         key={index} className={article.type.toLowerCase()}
@@ -134,7 +180,7 @@ function Body_Home() {
                 {/* contenue article SECTION */}
                 {/* section-video */}
                 <div className='ArticleVideo'>
-                    <p className='text-uppercase fw-semibold fs-4 titleVideo'>WEB TV</p>
+                    {/* <p className='text-uppercase fw-semibold fs-4 titleVideo'>WEB TV</p> */}
                     {videos.map((article, index) => (
 
                         <section key={index} className={article.type.toLowerCase()}
@@ -157,6 +203,7 @@ function Body_Home() {
                     ))}
                 </div>
             </main>
+        
         </div>
     )
 }

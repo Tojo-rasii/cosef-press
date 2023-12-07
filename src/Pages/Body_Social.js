@@ -101,7 +101,7 @@ function Body_Social() {
                 {/* contenue article SECTION */}
                 {/* section-photo */}
                 <div className='ArticlePhoto'>
-                    <p className='text-uppercase fw-semibold fs-4 titleActu'>Actualite&nbsp;Social</p>
+                    <p className='text-uppercase fw-semibold fs-4 titleActu'>Actualite&nbsp;<span style={{ fontWeight : "800"}}>Social</span></p>
                     {articles.map((article, index) => (
                         <section  key={index} className={article.type.toLowerCase()}
                         onClick={() => redirectToArticle(article)}>

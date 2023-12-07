@@ -1,10 +1,12 @@
 import React from 'react'
-import Body_Apropos from '../Pages/Body_Apropos'
+import BodyApropos from '../Pages/Body_Apropos'
+import NavbarInfo from '../Pages/Navbar_Info'
 
 function Apropos() {
   return (
     <div>
-        <Body_Apropos />
+      <NavbarInfo />
+      <BodyApropos />
     </div>
   )
 }

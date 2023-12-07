@@ -72,6 +72,8 @@ const articleClass = articleType ? articleType.toLowerCase() : '';
             <main className='ClickArticle'>
                 {/* CLICK ARTICLE PHOTO */}
                 <div>
+                <p className='text-uppercase fw-semibold fs-4 titleClick'>
+                    <NavLink to="/"><i className='bi-arrow-left-circle'></i></NavLink>&nbsp;&nbsp;ACTUALITE <span style={{ fontWeight : "800"}}>{articleType}</span></p>
                     <section className={articleClass}>
                         <article>
                             <span id='type'>{articleType}</span>
@@ -93,7 +95,7 @@ const articleClass = articleType ? articleType.toLowerCase() : '';
                     </section>
                 </div>
                 {/* CLICK ARTICLE VIDEO */}
-                <div className='ArticleVideo'>
+                <div className='ArticleVideo mt-3'>
                     <p className='text-uppercase fw-semibold fs-4 titleVideo'>WEB TV</p>
                     {videos.map((article, index) => (
 

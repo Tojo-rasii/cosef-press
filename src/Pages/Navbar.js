@@ -12,7 +12,7 @@ function Navbar() {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-        const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         username: '',
@@ -71,8 +71,8 @@ function Navbar() {
         localStorage.setItem('userData', JSON.stringify([...storedData, formData]));
 
         // Display alert
-            window.alert('Inscription réussie!');
-        
+        window.alert('Inscription réussie!');
+
 
         // Additional logic for sending data to server can be added here
 
@@ -114,8 +114,8 @@ function Navbar() {
                 localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
             }
 
-               // Use React Router's useNavigate to redirect to another page
-        navigate('/logsActu');
+            // Use React Router's useNavigate to redirect to another page
+            navigate('/logsActu');
 
             // Additional logic, such as redirecting the user to another page
         } else {
@@ -243,12 +243,12 @@ function Navbar() {
                         <section>
                             <article>
                                 <span>
-                                    <i className="bi-camera-reels">&nbsp;</i>
+                                <i class="bi bi-broadcast-pin"></i>
                                 </span>
                                 <span>
-                                WEB RADIO
+                                    Web Radio
                                 </span>
-                                </article>
+                            </article>
                         </section>
                     </nav>
                     {/* Nav2 */}
@@ -378,7 +378,7 @@ function Navbar() {
                                         </span>
                                         <span>
                                             <input type="text" name="username"
-                                            autoComplete='username'
+                                                autoComplete='username'
                                                 placeholder="Nom d'utilisateur ou E-mail"
                                                 value={formData.username}
                                                 onChange={handleChange} />
@@ -389,11 +389,11 @@ function Navbar() {
                                             <i className="bi-lock"></i>
                                         </span>
                                         <span>
-                                            <input type={showPassword ? "text" : "password" } name="password"
-                                             autoComplete='current-password'
+                                            <input type={showPassword ? "text" : "password"} name="password"
+                                                autoComplete='current-password'
                                                 placeholder="Mot de passe"
                                                 value={formData.password}
-                                                onChange={handleChange} maxLength={40}/>
+                                                onChange={handleChange} maxLength={40} />
                                             {/* Icon to toggle password visibility */}
                                             <i className={`bi-eye${showPassword ? "-slash" : ""}`}
                                                 onClick={() => setShowPassword(!showPassword)}
@@ -489,9 +489,9 @@ function Navbar() {
                                         </span>
                                         <span>
                                             <input type="text" name="username"
-                                            autoComplete='username'
+                                                autoComplete='username'
                                                 value={formData.username}
-                                                onChange={handleChange} placeholder="Nom d'utilisateur"/>
+                                                onChange={handleChange} placeholder="Nom d'utilisateur" />
                                         </span>
                                     </article>
                                     <article>
@@ -500,10 +500,10 @@ function Navbar() {
                                         </span>
                                         <span>
                                             <input type="email" name="email"
-                                            autoComplete='email'
+                                                autoComplete='email'
                                                 placeholder="Addresse Email"
                                                 value={formData.email}
-                                                onChange={handleChange}/>
+                                                onChange={handleChange} />
                                         </span>
                                     </article>
                                     <article>
@@ -512,9 +512,9 @@ function Navbar() {
                                         </span>
                                         <span>
                                             <input type="password" name="password"
-                                            autoComplete='current-password'
+                                                autoComplete='current-password'
                                                 value={formData.password}
-                                                onChange={handleChange} placeholder="Mot de passe"/>
+                                                onChange={handleChange} placeholder="Mot de passe" />
                                         </span>
                                     </article>
                                     <article>
@@ -526,7 +526,7 @@ function Navbar() {
                                                 name="confirmPassword"
                                                 autoComplete='current-password'
                                                 value={formData.confirmPassword}
-                                                onChange={handleChange} placeholder="Confirmer le mot de passe"/>
+                                                onChange={handleChange} placeholder="Confirmer le mot de passe" />
                                         </span>
                                     </article>
 
@@ -573,7 +573,14 @@ function Navbar() {
 
                         {/* SECTION CONTACT */}
                         <section>
-                            <button>Contactez-nous</button>
+                            <article>
+                                <span>
+                                    <i className="bi-camera-reels">&nbsp;</i>
+                                </span>
+                                <span>
+                                    Web Radio
+                                </span>
+                            </article>
                         </section>
                     </nav>
                     {/* Nav2 */}

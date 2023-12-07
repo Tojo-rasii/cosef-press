@@ -1,11 +1,11 @@
 import React from 'react'
-import Navbar from '../Pages/Navbar'
 import Body_MiniBiographie from '../Pages/Body_MiniBiographie'
+import Navbar_Info from '../Pages/Navbar_Info'
 
 function MiniBiographie() {
   return (
     <div>
-        <Navbar />
+        <Navbar_Info />
         <Body_MiniBiographie />
     </div>
   )
