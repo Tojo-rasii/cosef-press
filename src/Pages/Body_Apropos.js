@@ -11,7 +11,7 @@ function Body_Apropos() {
                         <img src={AproposImg} alt="apropos" />
                         <article className='mt-3'>
                             <p>Qui nous sommes</p>
-                            <p>Cosef Press est une plateforme dynamique dédiée à fournir des informations pertinentes et fiables sur des sujets variés. Explorez nos pages pour découvrir des contenus riches et captivants.</p>
+                            <p>Cosef Info est une plateforme dynamique dédiée à fournir des informations pertinentes et fiables sur des sujets variés. Explorez nos pages pour découvrir des contenus riches et captivants.</p>
                             {/* <button>En savoir plus</button> */}
                         </article>
                     </picture>

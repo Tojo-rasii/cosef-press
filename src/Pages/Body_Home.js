@@ -10,47 +10,33 @@ function Body_Home() {
         {
             imageUrl: Image1,
             type : "Politique",
-            title: "Fifidianana filoham-pirenena",
-            description: "Izay narahinny kandidà Siteny Randrianasoloniaiko taminny isam-bato 14,40%, ary ny kandidà Marc Ravalomanana no fahatelo taminny isam-bato 12,10 raha ny valim-pifidianana vonjimaika navoakanny CENI androany 25 novambra",
-            publishDate: "19-02-12"
+            title: "Vokam-pifidianana filoham-pirenena",
+            description: "Namoaka ny vali-pifidianana Filoham-pirenena io maraina io ny CENI, lany tamin'ny salan'isa 58,95% ny kandida Laharana fahatelo Andry Rajoelina.",
+            publishDate: "le 25 Novembre"
         },
     ];
-    const articles = [
-        {
-            type: "Politique",
-            title: "title",
-            imageUrl: Image,
-            description: `Antalaha faha 17 Oktobra 2023
-          -----------
-          Aéroport Antsirabato Antalaha
-          -----------
-          ✅Tonga teny amin'ny #Aéroport Antsirabato Antalaha ny Tale Jeneran'ny ADEMA , Andriamatoa ANDRIANIAINA Jean Germain ny 17 Oktobra 2023 lasa teo nijery  ny fandehanan'ny Asa fanarenana ny tranon-tseranana amin'ity "Aéroport" ity .
-          ✅Niatrika izany ireo tompon'andraiki-panjakana vitsivitsy tao Antalaha ka hita tamin'izany ny Lehiben'ny Distrika ,ny PDS ary ireo ekipan'ny COSEF Collaborateurs du Sénateur Eddie FERNAND,izay nisolotena an'Atoa Senatera rahateo.
-          ✅Misaotra atsika jiaby niara-nisalahy,hirarintsika ho vita soamantsara ity Aéroport ity mba hiverenan'ny lazany indray.
-          Eddie Fernand
-          #COSEF
-          #AéroportAntsirabato
-          #AntalahaTsyMaintsyMandroso`,
-            publishDate: "19 - 02- 15",
-        },
-        {
-            type: "Social",
-            title: "Title",
-            imageUrl: Image2,
-            description: `Antalaha faha 17 Oktobra 2023
-          -----------
-          Aéroport Antsirabato Antalaha
-          -----------
-          ✅Tonga teny amin'ny #Aéroport Antsirabato Antalaha ny Tale Jeneran'ny ADEMA , Andriamatoa ANDRIANIAINA Jean Germain ny 17 Oktobra 2023 lasa teo nijery  ny fandehanan'ny Asa fanarenana ny tranon-tseranana amin'ity "Aéroport" ity .
-          ✅Niatrika izany ireo tompon'andraiki-panjakana vitsivitsy tao Antalaha ka hita tamin'izany ny Lehiben'ny Distrika ,ny PDS ary ireo ekipan'ny COSEF Collaborateurs du Sénateur Eddie FERNAND,izay nisolotena an'Atoa Senatera rahateo.
-          ✅Misaotra atsika jiaby niara-nisalahy,hirarintsika ho vita soamantsara ity Aéroport ity mba hiverenan'ny lazany indray.
-          Eddie Fernand
-          #COSEF
-          #AéroportAntsirabato
-          #AntalahaTsyMaintsyMandroso`,
-            publishDate: "19 - 02- 15",
-        },
-    ];
+    // const articles = [
+    //     {
+    //         type: "Politique",
+    //         title: "Iray ihany ny COSEF sy ny STAFF Éric FERNAND.",
+    //         imageUrl: Image,
+    //         description: `Mr Philbert, nitsidika ny ekipan'ny kabitran'ny Kestiora ny Antenimierandoholona,izay tarihin-dRamatoa  Amalia Bezina  .
+    //         Iray ihany ny COSEF sy ny STAFF Éric FERNAND.
+    //         COM/COSEF/NOVEMBRE 2023`,
+    //         publishDate: "19 - 02- 15",
+    //     },
+    //     {
+    //         type: "Sport",
+    //         title: "Barea vs tchad",
+    //         imageUrl: Image2,
+    //         description: `* MISAOTRA AN'ANDRIAMANITRA LEHIBE ISIKA FA NAHARESY 3 - 0  NY EKIPANTSIKA BAREA OMALY ALINA.
+    //         * MANKASITRAKA BAREA.
+    //         * MANKASITRAKA NY EKIPA REHETRA.
+    //         * MANKASITRAKA IHANY KOA NY EKIPA TEKNIKA REHETRA.
+    //         ALEFA BAREA....`,
+    //         publishDate: "19 - 02- 15",
+    //     },
+    // ];
 
     // VIDEO
     const videos = [
@@ -72,37 +58,7 @@ function Body_Home() {
           Aéroport Antsirabato Antalaha
 `,
             publishDate: "19 - 02- 15",
-        },
-        {
-            type: "Culturel",
-            title: "Title",
-            imageUrl: Image2,
-            description: `Antalaha faha 17 Oktobra 2023
-          -----------
-          Aéroport Antsirabato Antalaha
-`,
-            publishDate: "19 - 02- 15",
-        },
-        {
-            type: "Culturel",
-            title: "Title",
-            imageUrl: Image2,
-            description: `Antalaha faha 17 Oktobra 2023
-          -----------
-          Aéroport Antsirabato Antalaha
-`,
-            publishDate: "19 - 02- 15",
-        },
-        {
-            type: "Culturel",
-            title: "Title",
-            imageUrl: Image2,
-            description: `Antalaha faha 17 Oktobra 2023
-          -----------
-          Aéroport Antsirabato Antalaha
-`,
-            publishDate: "19 - 02- 15",
-        },
+        }
     ];
 
     // CLICK ARTICLE
@@ -135,7 +91,7 @@ function Body_Home() {
                         <figure id='FigureLaUne' style={{display: 'flex', flexDirection : 'row'}} key={index} className={article.type.toLowerCase()}
                         >
                             <picture>
-                              <img src={article.imageUrl} alt="alaune" />
+                              <img src={article.imageUrl} alt="alaune" style={{width: "32vw", height: "auto"}}/>
                             </picture>
                             <figcaption>
                                 <span id='type'>{article.type}</span>
@@ -145,37 +101,37 @@ function Body_Home() {
                             </figcaption>
                         </figure>
                     ))}
-                    <p className='text-uppercase fw-semibold fs-4 titleActu mt-3 mb-5'>Actualite</p>
-                    {articles.map((article, index) => (
+                    {/* <p className='text-uppercase fw-semibold fs-4 titleActu mt-3 mb-5'>Actualite</p>
+                    {articles.map((article, index) => ( */}
                         
-                        // <Link to={`/article`} key={index}>
-                        <section
-                        key={index} className={article.type.toLowerCase()}
-                        onClick={() => redirectToArticle(article)}>
-                            <article>
-                                <picture>
-                                    <img src={article.imageUrl} alt="Antalaha" />
-                                </picture>
-                            </article>
-                            <article className="voir-plus"
-                            data-type={article.type}
-                            data-imageurl={article.imageUrl}
-                            data-title={article.title}
-                            data-description={article.description}
-                            data-publishdate={article.publishDate}>
-                                <span id='type'>{article.type}</span>
-                                <span>{article.title}</span>
-                                <span>{article.description}</span>
-                                <span>
-                                    <i className='bi-dot'></i>
-                                    <i className='bi-dot'></i>
-                                    <i className='bi-dot'></i>
-                                </span>
-                                <span>Publier le {article.publishDate}</span>
-                            </article>
-                        </section>
-                        // </Link>
-                    ))}
+                        {/* // <Link to={`/article`} key={index}> */}
+                        {/* // <section */}
+                        {/* // key={index} className={article.type.toLowerCase()} */}
+                        {/* // onClick={() => redirectToArticle(article)}> */}
+                        {/* //     <article> */}
+                        {/* //         <picture> */}
+                        {/* //             <img src={article.imageUrl} alt="Antalaha" /> */}
+                        {/* //         </picture> */}
+                        {/* //     </article> */}
+                        {/* //     <article className="voir-plus" */}
+                        {/* //     data-type={article.type} */}
+                        {/* //     data-imageurl={article.imageUrl} */}
+                        {/* //     data-title={article.title} */}
+                        {/* //     data-description={article.description} */}
+                        {/* //     data-publishdate={article.publishDate}> */}
+                        {/* //         <span id='type'>{article.type}</span> */}
+                        {/* //         <span>{article.title}</span> */}
+                        {/* //         <span>{article.description}</span> */}
+                        {/* //         <span> */}
+                        {/* //             <i className='bi-dot'></i> */}
+                        {/* //             <i className='bi-dot'></i> */}
+                        {/* //             <i className='bi-dot'></i> */}
+                        {/* //         </span> */}
+                        {/* //         <span>Publier le {article.publishDate}</span> */}
+                        {/* //     </article> */}
+                        {/* // </section> */}
+                        {/* // </Link> */}
+                    {/* // ))} */}
                 </div>
                 {/* contenue article SECTION */}
                 {/* section-video */}

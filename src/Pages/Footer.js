@@ -1,5 +1,6 @@
 import React from 'react'
 import Logo from '../Tools/images/logo.jpg'
+import { NavLink } from "react-router-dom";
 
 
 function Footer() {
@@ -24,29 +25,29 @@ function Footer() {
                     </section>
                     <section>
                         <p>contact</p>
-                        <p>A propos de nous</p>
-                        <p>Nos coordonnees</p>
-                        <p>centre d'aide</p>
+                        <NavLink style={{fontSize: "0.8em",textDecoration:"none", color:"rgb(103, 103, 103)", fontWeight:"light"}} to="/apropos"><p>A propos de nous</p></NavLink>
+                        <NavLink style={{fontSize: "0.8em",textDecoration:"none", color:"rgb(103, 103, 103)", fontWeight:"light"}} ><p>Nos coordonnees</p></NavLink>
+                        <NavLink style={{fontSize: "0.8em",textDecoration:"none", color:"rgb(103, 103, 103)", fontWeight:"light"}}><p>centre d'aide</p></NavLink>
                     </section>
                     <section>
                         <p>Contenu</p>
-                        <p>Web TV</p>
-                        <p>Mot du questeur</p>
-                        <p>Mini-Biographie</p>
+                        <NavLink style={{fontSize: "0.8em",textDecoration:"none", color:"rgb(103, 103, 103)", fontWeight:"light"}}><p>Web TV</p></NavLink>
+                        <NavLink style={{fontSize: "0.8em",textDecoration:"none", color:"rgb(103, 103, 103)", fontWeight:"light"}} to="/motDuQuesteur"><p>Mot du questeur</p></NavLink>
+                        <NavLink style={{fontSize: "0.8em",textDecoration:"none", color:"rgb(103, 103, 103)", fontWeight:"light"}} to="/miniBiographie"><p>Mini-Biographie</p></NavLink>
                     </section>
                     <section>
                         <p>Archive</p>
-                        <p>Recherche</p>
+                        <NavLink style={{fontSize: "0.8em",textDecoration:"none", color:"rgb(103, 103, 103)", fontWeight:"light"}} to="/search"><p>Recherche</p></NavLink>
                         <p></p>
                         <p></p>
                     </section>
                     <section>
                         <p>Suivez-nous</p>
                         <article>
-                           <i className="bi-facebook"></i>
-                           <i className="bi-linkedin"></i>
-                           <i className="bi-whatsapp"></i>
-                           <i className="bi-google"></i>
+                        <a href="https://www.facebook.com/profile.php?id=100082365563440" target='_blank'><i className="bi-facebook"></i></a>
+                        <a target='_blank'><i className="bi-whatsapp"></i></a>
+                        <a target='_blank'><i className="bi-linkedin"></i></a>
+                        <a target='_blank'><i className="bi-google"></i></a>
                         </article>
                     </section>
                 </div>

@@ -201,6 +201,11 @@ function Navbar_Logs() {
 
     }, []);
 
+    const logOut =()=>{
+        alert("Vous etes deconnecter");
+        window.location.href="/";
+    }
+
     return (
         <>
             <div className='Laptop'>
@@ -293,15 +298,16 @@ function Navbar_Logs() {
                             {/* POP LOGIN */}
                             <div className='Contenu-Login' style={{ display: active ? "block" : "none" }} >
                                 <section>
+                                    <p className='text-white ms-2 fs-6'>Vous etes connecte(e)<i className='bi-dot fs-3 text-success'></i></p>
                                     <article>
                                         <span>
-                                          
+                                          <i class="bi-person-fill fs-3" id="btn-Login"></i>
                                         </span>
                                         <span>
-                                            <p>{}</p>
+                                            <p>Mon Profile</p>
                                         </span>
                                     </article>
-                                    <article>
+                                    <article onClick={logOut}>
                                         <span>
                                             <i class="bi bi-box-arrow-in-left  fs-3" id="btn-Login"></i>
                                         </span>

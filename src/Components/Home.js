@@ -6,6 +6,7 @@ import Actu_Sport from '../Home/Actu_Sport'
 import Actu_Culturel from '../Home/Actu_Culturel'
 import Actu_Politique from '../Home/Actu_Politique'
 import Actu_Social from '../Home/Actu_Social'
+import Footer from '../Pages/Footer'
 
 function Home() {
   return (
@@ -17,6 +18,7 @@ function Home() {
       <Actu_Politique />
       <Actu_Social />
       <Actu_Video />
+      <Footer />
     </div>
   )
 }

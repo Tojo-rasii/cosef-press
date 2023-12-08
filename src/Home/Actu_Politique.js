@@ -61,15 +61,15 @@ function Actu_Politique() {
                 {/* section-photo */}
                 <div className='ArticlePhoto'>
                 <NavLink to="/sport" style={{textDecoration : "none"}}><p className='text-uppercase fw-semibold fs-4'><span style={{ fontWeight : "800"}}>Politique</span></p></NavLink>
-                <div className='d-flex flex-row flex-wrap w-100 pe-4'>
+                <div className='d-flex flex-row gap-4 flex-wrap w-100 pe-4'>
                     {articles.map((article, index) => (
                         // <Link to={`/article`} key={index}>
                         <section
                             key={index} className={article.type.toLowerCase()}
-                            onClick={() => redirectToArticle(article)}>
+                            onClick={() => redirectToArticle(article)} style={{width: "36em"}}>
                             <article>
                                 <picture>
-                                    <img src={article.imageUrl} alt="Antalaha" />
+                                    <img src={article.imageUrl} alt="Antalaha" style={{width: "10vw"}}/>
                                 </picture>
                             </article>
                             <article className="voir-plus"

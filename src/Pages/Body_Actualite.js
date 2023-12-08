@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from '../Tools/images/anatalaha2.jpg'
-import Image2 from '../Tools/images/cosef.jpg'
+import Images from '../Tools/images/staffCosef.jpg'
+import Image2 from '../Tools/images/Fiaonana1.jpg'
 // VIDEO
 import Video from '../Tools/video/video1.mp4'
 import Video2 from '../Tools/video/video2.mp4'
@@ -12,36 +13,22 @@ function Body_Actualite() {
     const articles = [
         {
             type: "Politique",
-            title: "Title",
-            imageUrl: Image,
-            description: `Antalaha faha 17 Oktobra 2023
-          -----------
-          Aéroport Antsirabato Antalaha
-          -----------
-          ✅Tonga teny amin'ny #Aéroport Antsirabato Antalaha ny Tale Jeneran'ny ADEMA , Andriamatoa ANDRIANIAINA Jean Germain ny 17 Oktobra 2023 lasa teo nijery  ny fandehanan'ny Asa fanarenana ny tranon-tseranana amin'ity "Aéroport" ity .
-          ✅Niatrika izany ireo tompon'andraiki-panjakana vitsivitsy tao Antalaha ka hita tamin'izany ny Lehiben'ny Distrika ,ny PDS ary ireo ekipan'ny COSEF Collaborateurs du Sénateur Eddie FERNAND,izay nisolotena an'Atoa Senatera rahateo.
-          ✅Misaotra atsika jiaby niara-nisalahy,hirarintsika ho vita soamantsara ity Aéroport ity mba hiverenan'ny lazany indray.
-          Eddie Fernand
-          #COSEF
-          #AéroportAntsirabato
-          #AntalahaTsyMaintsyMandroso`,
+            title: "COSEF sy ny STAFF Éric FERNAND",
+            imageUrl: Images,
+            description: `Iray ihany ny COSEF sy ny STAFF Éric FERNAND. Mr Philbert, nitsidika ny ekipan'ny kabitran'ny Kestiora ny Antenimierandoholona,izay tarihin-dRamatoa  Amalia Bezina  .
+            Iray ihany ny COSEF sy ny STAFF Éric FERNAND.
+            COM/COSEF/NOVEMBRE 2023`,
             publishDate: "19 - 02- 15",
         },
         {
             type: "Social",
-            title: "Title",
+            title: "Fiaonana teo amin'ny Fikambanana Aeutna Antalaha",
             imageUrl: Image2,
-            description: `Antalaha faha 17 Oktobra 2023
-          -----------
-          Aéroport Antsirabato Antalaha
-          -----------
-          ✅Tonga teny amin'ny #Aéroport Antsirabato Antalaha ny Tale Jeneran'ny ADEMA , Andriamatoa ANDRIANIAINA Jean Germain ny 17 Oktobra 2023 lasa teo nijery  ny fandehanan'ny Asa fanarenana ny tranon-tseranana amin'ity "Aéroport" ity .
-          ✅Niatrika izany ireo tompon'andraiki-panjakana vitsivitsy tao Antalaha ka hita tamin'izany ny Lehiben'ny Distrika ,ny PDS ary ireo ekipan'ny COSEF Collaborateurs du Sénateur Eddie FERNAND,izay nisolotena an'Atoa Senatera rahateo.
-          ✅Misaotra atsika jiaby niara-nisalahy,hirarintsika ho vita soamantsara ity Aéroport ity mba hiverenan'ny lazany indray.
-          Eddie Fernand
-          #COSEF
-          #AéroportAntsirabato
-          #AntalahaTsyMaintsyMandroso`,
+            description: `SÉNATEUR Eddie FERNAND sy ny Fikambanana Aeutna Antalaha Tana
+            <br /> Nangataka fihaonana tamin'Andriamatoa Kestiora ny Antenimierandoholona ny Fikambanana mpianatra zanaka Antalaha mandranto fianarana eny amin'ny Oniversiteon'ny Antananarivo(Ankatso).
+            Tsy nijijy tambana ny Kestiora,fa nandray izy ireo avy hatrany satria tsy misy hanavahana ny zanaka Antalaha hoy izy.
+            Nisy ny tafatafa nifanaovana mikasika ny fampandrosoana ny Fikambanana sy ny tanàna fiaviana (Antalaha).
+                     COM/COSEF/NOVEMBRE 2023`,
             publishDate: "19 - 02- 15",
         },
     ];

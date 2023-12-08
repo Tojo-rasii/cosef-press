@@ -55,6 +55,12 @@
     width: 29vw;
     height: auto;
   }
+
+  /* FOOTER */
+  footer div{
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 /**
@@ -247,5 +253,14 @@
   .ClickArticle div section:nth-child(2) article{
     width: 86%;
     word-break:keep-all;
+  }
+
+  /* FOOTER */
+  footer {
+    width: 100%;
+  }
+  footer div{
+    display: flex;
+    flex-direction: row;
   }
 }

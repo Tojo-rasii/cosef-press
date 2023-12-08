@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../Pages/Navbar'
 import Body_Search from '../Pages/Body_Search'
 import CodeSearch from '../Draft/CodeSearch'
+import Footer from '../Pages/Footer'
 
 function Search() {
     // const data = [
@@ -16,6 +17,7 @@ function Search() {
     <div>
       <Navbar />
       <Body_Search />
+      <Footer />
       {/* <CodeSearch data={data} /> */}
     </div>
   )

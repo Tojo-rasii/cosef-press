@@ -772,11 +772,12 @@
 
 /* TITLE */
 .ArticlePhoto section article:nth-child(2) span:nth-child(2) {
-  font-weight: bold;
+  font-weight: 600;
   font-size: 1.7em;
   width: 95%;
   height: min-content;
-  word-break: break-all;
+  word-break: keep-all;
+  font-family: "nunito-sans",sans-serif;
 }
 
 /* DESC */
@@ -1188,8 +1189,10 @@
 #titleStyle{
   margin-top: 0.3em;
   margin-bottom: 0.5em;
-  word-break: break-all;
-  width: 86%;
+  word-break: keep-all;
+  width: 90%;
+  font-family: "nunito-sans",sans-serif;
+  font-weight: 600;
 }
 /* MAIN _ IMAGE */
 .ClickArticle div section article picture img{
@@ -1261,13 +1264,11 @@ footer div section {
 }
 
 footer div section p:nth-child(1) {
-  font-weight: bold;
   text-transform: capitalize;
   font-size: 1.2em;
 }
 footer div section p:nth-child(2),footer div section p:nth-child(3),footer div section p:nth-child(4) {
   text-transform: capitalize;
-  font-size: 0.9em;
   cursor: pointer;
 }
 footer div section p:is(:nth-child(2):hover,:nth-child(3):hover,:nth-child(4):hover){

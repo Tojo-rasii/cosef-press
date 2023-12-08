@@ -243,7 +243,7 @@ function Navbar() {
                         <section>
                             <article>
                                 <span>
-                                <i class="bi bi-broadcast-pin"></i>
+                                    <i class="bi bi-broadcast-pin"></i>
                                 </span>
                                 <span>
                                     Web Radio
@@ -611,6 +611,7 @@ function Navbar() {
                             {/* CONTENUE */}
                             <div className='position-absolute mt-5 Contenu_Mobile' style={{ display: active ? "block" : "none" }} >
                                 <section>
+                                <NavLink to="/actu" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active" : "")}>
                                     <article>
                                         <span>
                                             <svg xmlns="http://www.w3.org/2000/svg" id='icon-Mobile' x="0px" y="0px" width="30" height="30" viewBox="0 0 48 48">
@@ -618,6 +619,8 @@ function Navbar() {
                                             </svg></span>
                                         <span><p>actualite</p></span>
                                     </article>
+                                    </NavLink>
+                                    <NavLink to="/alaune" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active" : "")}>
                                     <article>
                                         <span><svg xmlns="http://www.w3.org/2000/svg" id='icon-Mobile' width="30" height="30" fill="currentColor" className="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
                                             <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z" />
@@ -625,6 +628,9 @@ function Navbar() {
                                         </svg></span>
                                         <span><p>a la une</p></span>
                                     </article>
+                                    </NavLink>
+
+                                    <NavLink to="/politique" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active" : "")}>
                                     <article>
                                         <span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="30" id='icon-Mobile' height="30" fill="currentColor" className="bi bi-bank2" viewBox="0 0 16 16">
@@ -632,6 +638,8 @@ function Navbar() {
                                             </svg></span>
                                         <span><p>politique</p></span>
                                     </article>
+                                    </NavLink>
+                                    <NavLink to="/sport" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active" : "")}>
                                     <article>
                                         <span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="30" id='icon-Mobile' height="30" fill="currentColor" className="bi bi-trophy-fill" viewBox="0 0 16 16">
@@ -639,19 +647,26 @@ function Navbar() {
                                             </svg></span>
                                         <span><p>sport</p></span>
                                     </article>
-                                    <article>
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" id='icon-Mobile' className="bi bi-people-fill" viewBox="0 0 16 16">
-                                                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
+                                    </NavLink>
+
+
+                                    <NavLink to="/social" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active" : "")}>
+                                        <article>
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" id='icon-Mobile' className="bi bi-people-fill" viewBox="0 0 16 16">
+                                                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
+                                                </svg></span>
+                                            <span><p>social</p></span>
+                                        </article>
+                                    </NavLink>
+
+                                    <NavLink to="/culturel" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active" : "")}>
+                                        <article>
+                                            <span><svg xmlns="http://www.w3.org/2000/svg" id='icon-Mobile' width="30" height="30" fill="currentColor" className="bi bi-book-fill" viewBox="0 0 16 16">
+                                                <path d="M8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
                                             </svg></span>
-                                        <span><p>social</p></span>
-                                    </article>
-                                    <article>
-                                        <span><svg xmlns="http://www.w3.org/2000/svg" id='icon-Mobile' width="30" height="30" fill="currentColor" className="bi bi-book-fill" viewBox="0 0 16 16">
-                                            <path d="M8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
-                                        </svg></span>
-                                        <span><p>culturel</p></span>
-                                    </article>
+                                            <span><p>culturel</p></span>
+                                        </article></NavLink>
                                 </section>
                             </div>
                         </section>
