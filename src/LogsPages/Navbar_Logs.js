@@ -201,6 +201,16 @@ function Navbar_Logs() {
 
     }, []);
 
+    const [loggedInUsername, setLoggedInUsername] = useState('');
+
+    // useEffect pour récupérer les informations de l'utilisateur connecté lors du rendu initial
+    useEffect(() => {
+        const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+        if (loggedInUser) {
+            setLoggedInUsername(loggedInUser.username);
+        }
+    }, []);
+
     const logOut =()=>{
         alert("Vous etes deconnecter");
         window.location.href="/";
@@ -254,7 +264,7 @@ function Navbar_Logs() {
                     <nav className='Nav2'>
                         {/* LOGO */}
                         <section>
-                            <NavLink to="/" style={navLinkStyle}><picture>
+                            <NavLink to="/logsHome" style={navLinkStyle}><picture>
                                 <img src={Logo} alt="logo" />
                                 <p className='Logo'>COSEF</p>
                             </picture>
@@ -264,7 +274,7 @@ function Navbar_Logs() {
                         {/* CONTENUE */}
                         <section>
                             <article>
-                                <NavLink to="/actu" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active" : "")}><p>Actualite</p></NavLink>
+                                <NavLink to="/logsActu" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active" : "")}><p>Actualite</p></NavLink>
                             </article>
                             <article>
                                 <NavLink to="/aLaUne" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active" : "")}><p>A la une</p></NavLink>
@@ -298,15 +308,18 @@ function Navbar_Logs() {
                             {/* POP LOGIN */}
                             <div className='Contenu-Login' style={{ display: active ? "block" : "none" }} >
                                 <section>
-                                    <p className='text-white ms-2 fs-6'>Vous etes connecte(e)<i className='bi-dot fs-3 text-success'></i></p>
-                                    <article>
+                                    
+                                    <p className='text-white ms-2 fs-6'><span className='text-capitalize'>{loggedInUsername}</span><br/>Vous etes connecte(e)<i className='bi-dot fs-3 text-success'></i></p>
+                                    <NavLink to="/logsProfile" style={{textDecoration : "none"}}>
+                                    <article style={{ marginTop : "-1em" }}>
                                         <span>
                                           <i class="bi-person-fill fs-3" id="btn-Login"></i>
                                         </span>
+                                        
                                         <span>
-                                            <p>Mon Profile</p>
+                                            <p>Profile</p>
                                         </span>
-                                    </article>
+                                    </article> </NavLink>
                                     <article onClick={logOut}>
                                         <span>
                                             <i class="bi bi-box-arrow-in-left  fs-3" id="btn-Login"></i>

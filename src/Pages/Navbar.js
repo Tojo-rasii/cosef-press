@@ -58,6 +58,7 @@ function Navbar() {
 
         // Check if username or email already exists in local storage
         const storedData = JSON.parse(localStorage.getItem('userData')) || [];
+
         const existingUser = storedData.find(
             (user) => user.username === formData.username || user.email === formData.email
         );
@@ -72,6 +73,13 @@ function Navbar() {
 
         // Display alert
         window.alert('Inscription réussie!');
+
+          const LoginToggle = document.querySelector('.Pop-Login div:nth-child(1)');
+          const SignToggle = document.querySelector('.Pop-Login div:nth-child(2)');
+          
+          LoginToggle.classList.remove("LoginMain");
+          SignToggle.style.display = "none";
+        
 
 
         // Additional logic for sending data to server can be added here
@@ -111,6 +119,9 @@ function Navbar() {
 
             // Save login status in local storage if "Remember me" is checked
             if (rememberMe) {
+                localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+            }
+            else{
                 localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
             }
 

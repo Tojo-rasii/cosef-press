@@ -187,15 +187,18 @@
   display: block;
   position: absolute;
   margin-top: 3.3em;
-  left: 84.8%;
+  left: 83.8%;
 }
 
 .Contenu-Login section {
   background: #2b2b2b;
-  padding: 0.3em;
+  padding: 0.5em;
   width: 100%;
   outline: 1px solid #2b2b2b;
   border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
 }
 
 .Contenu-Login section::after {

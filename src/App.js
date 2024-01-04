@@ -15,6 +15,10 @@ import ClickArticle from './Components/ClickArticle';
 import Apropos from './Components/Apropos';
 import ClickVideo from './Components/ClickVideo';
 import LogsActualite from './Logs/LogsActualite';
+import LogsProfile from './Logs/LogsProfile';
+import LogsHome from './Logs/LogsHome';
+import LogsClickArticle from './Logs/LogsClickArticle';
+import LogsClickVideo from './Logs/LogsClickVideo';
 
 function App() {
   const body = document.querySelector('body');
@@ -37,7 +41,13 @@ function App() {
             <Route path="/miniBiographie" element={<MiniBiographie />} />
             <Route path="/article" element={<ClickArticle />} />
             <Route path="/video" element={<ClickVideo />} />
+
+            {/* CONNECTER */}
             <Route path="/logsActu" element={<LogsActualite />}/>
+            <Route path="/logsProfile" element={<LogsProfile />}/>
+            <Route path="/logsHome" element={<LogsHome />}/>
+            <Route path="/logsArticle" element={<LogsClickArticle />}/>
+            <Route path="/logsVideo" element={<LogsClickVideo />}/>
           </Routes>
         </HashRouter>
     </div>
