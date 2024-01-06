@@ -12,7 +12,8 @@ function Navbar_Logs() {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-        const navigate = useNavigate();
+    const [showPopup, setShowPopup] = useState(false);
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         username: '',
@@ -71,8 +72,8 @@ function Navbar_Logs() {
         localStorage.setItem('userData', JSON.stringify([...storedData, formData]));
 
         // Display alert
-            window.alert('Inscription réussie!');
-        
+        window.alert('Inscription réussie!');
+
 
         // Additional logic for sending data to server can be added here
 
@@ -114,8 +115,8 @@ function Navbar_Logs() {
                 localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
             }
 
-               // Use React Router's useNavigate to redirect to another page
-        navigate('/logsActu');
+            // Use React Router's useNavigate to redirect to another page
+            navigate('/logsActu');
 
             // Additional logic, such as redirecting the user to another page
         } else {
@@ -211,10 +212,15 @@ function Navbar_Logs() {
         }
     }, []);
 
-    const logOut =()=>{
-        alert("Vous etes deconnecter");
-        window.location.href="/";
+    const logOut = () => {
+        // alert("Vous etes deconnecter");
+        window.location.href = "/";
+        setShowPopup(false);
     }
+
+    const togglePopup = () => {
+        setShowPopup(!showPopup);
+      };
 
     return (
         <>
@@ -236,15 +242,15 @@ function Navbar_Logs() {
                         {/* SECTION CONTENUE */}
                         <section>
                             <article>
-                                <NavLink to="/apropos" style={navLinkStyle}><p>Apropos</p></NavLink>
+                                <NavLink to="/logsApropos" style={navLinkStyle}><p>Apropos</p></NavLink>
                             </article>
                             |
                             <article>
-                                <NavLink to="/motDuQuesteur" style={navLinkStyle}><p>Mot du questeur</p></NavLink>
+                                <NavLink to="/logsMotDuQuesteur" style={navLinkStyle}><p>Mot du questeur</p></NavLink>
                             </article>
                             |
                             <article>
-                                <NavLink to="/miniBiographie" style={navLinkStyle}><p>Mini biographie</p></NavLink>
+                                <NavLink to="/logsMiniBiographie" style={navLinkStyle}><p>Mini biographie</p></NavLink>
                             </article>
                         </section>
 
@@ -255,9 +261,9 @@ function Navbar_Logs() {
                                     <i className="bi-camera-reels">&nbsp;</i>
                                 </span>
                                 <span>
-                                WEB RADIO
+                                    WEB RADIO
                                 </span>
-                                </article>
+                            </article>
                         </section>
                     </nav>
                     {/* Nav2 */}
@@ -277,22 +283,22 @@ function Navbar_Logs() {
                                 <NavLink to="/logsActu" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active" : "")}><p>Actualite</p></NavLink>
                             </article>
                             <article>
-                                <NavLink to="/aLaUne" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active" : "")}><p>A la une</p></NavLink>
+                                <NavLink to="/logsAlaune" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active" : "")}><p>A la une</p></NavLink>
                             </article>
                             <article>
-                                <NavLink to="/politique" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active" : "")}><p>politique</p></NavLink>
+                                <NavLink to="/logsPolitique" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active" : "")}><p>politique</p></NavLink>
 
                             </article>
                             <article>
-                                <NavLink to="/sport" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active1" : "")}><p>sport</p></NavLink>
+                                <NavLink to="/logsSport" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active1" : "")}><p>sport</p></NavLink>
 
                             </article>
                             <article>
-                                <NavLink to="/social" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active1" : "")}><p>social</p></NavLink>
+                                <NavLink to="/logsSocial" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active1" : "")}><p>social</p></NavLink>
 
                             </article>
                             <article>
-                                <NavLink to="/culturel" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active" : "")}><p>culturel</p></NavLink>
+                                <NavLink to="/logsCulturel" style={navLinkStyle} className={(nav) => (nav.isActive ? "nav-active" : "")}><p>culturel</p></NavLink>
 
                             </article>
                         </section>
@@ -300,7 +306,7 @@ function Navbar_Logs() {
                         {/* PROFIL */}
                         <section>
                             <article>
-                                <NavLink to="/search" className={(nav) => (nav.isActive ? "navSearch-active" : "")}><i className='bi-search text-white fs-5'></i></NavLink>
+                                <NavLink to="/logsSearch" className={(nav) => (nav.isActive ? "navSearch-active" : "")}><i className='bi-search text-white fs-5'></i></NavLink>
                             </article>
                             <article>
                                 <i className='bi-person-fill text-white fs-5' onClick={toggLog}></i>
@@ -308,19 +314,19 @@ function Navbar_Logs() {
                             {/* POP LOGIN */}
                             <div className='Contenu-Login' style={{ display: active ? "block" : "none" }} >
                                 <section>
-                                    
-                                    <p className='text-white ms-2 fs-6'><span className='text-capitalize'>{loggedInUsername}</span><br/>Vous etes connecte(e)<i className='bi-dot fs-3 text-success'></i></p>
-                                    <NavLink to="/logsProfile" style={{textDecoration : "none"}}>
-                                    <article style={{ marginTop : "-1em" }}>
-                                        <span>
-                                          <i class="bi-person-fill fs-3" id="btn-Login"></i>
-                                        </span>
-                                        
-                                        <span>
-                                            <p>Profile</p>
-                                        </span>
-                                    </article> </NavLink>
-                                    <article onClick={logOut}>
+
+                                    <p className='text-white ms-2 fs-6'><span className='text-capitalize'>{loggedInUsername}</span><br />Vous etes connecte(e)<i className='bi-dot fs-3 text-success'></i></p>
+                                    <NavLink to="/logsProfile" style={{ textDecoration: "none" }}>
+                                        <article style={{ marginTop: "-1em" }}>
+                                            <span>
+                                                <i class="bi-person-fill fs-3" id="btn-Login"></i>
+                                            </span>
+
+                                            <span>
+                                                <p>Profile</p>
+                                            </span>
+                                        </article> </NavLink>
+                                    <article onClick={togglePopup}>
                                         <span>
                                             <i class="bi bi-box-arrow-in-left  fs-3" id="btn-Login"></i>
                                         </span>
@@ -328,6 +334,18 @@ function Navbar_Logs() {
                                             <p>Se deconecter</p>
                                         </span>
                                     </article>
+                                    {showPopup && (
+                                        <div className="popup-container">
+                                            <div className="popup">
+                                                <p className='h5 fw-semibold'>Deconnexion</p>
+                                                <p>Voulez-vous vraiment vous déconnecter ?</p>
+                                                <span>
+                                                <button onClick={logOut} className='shadow-sm'>Oui</button>
+                                                <button onClick={togglePopup} className='shadow-sm'>Annuler</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    )}
                                 </section>
                             </div>
                         </section>
@@ -409,10 +427,10 @@ function Navbar_Logs() {
                                             <i className="bi-lock"></i>
                                         </span>
                                         <span>
-                                            <input type={showPassword ? "text" : "password" } name="password"
+                                            <input type={showPassword ? "text" : "password"} name="password"
                                                 placeholder="Mot de passe"
                                                 value={formData.password}
-                                                onChange={handleChange} maxLength={40}/>
+                                                onChange={handleChange} maxLength={40} />
                                             {/* Icon to toggle password visibility */}
                                             <i className={`bi-eye${showPassword ? "-slash" : ""}`}
                                                 onClick={() => setShowPassword(!showPassword)}
@@ -509,7 +527,7 @@ function Navbar_Logs() {
                                         <span>
                                             <input type="text" name="username"
                                                 value={formData.username}
-                                                onChange={handleChange} placeholder="Nom d'utilisateur"/>
+                                                onChange={handleChange} placeholder="Nom d'utilisateur" />
                                         </span>
                                     </article>
                                     <article>
@@ -520,7 +538,7 @@ function Navbar_Logs() {
                                             <input type="email" name="email"
                                                 placeholder="Addresse E-mail"
                                                 value={formData.email}
-                                                onChange={handleChange}/>
+                                                onChange={handleChange} />
                                         </span>
                                     </article>
                                     <article>
@@ -530,7 +548,7 @@ function Navbar_Logs() {
                                         <span>
                                             <input type="password" name="password"
                                                 value={formData.password}
-                                                onChange={handleChange} placeholder="Mot de passe"/>
+                                                onChange={handleChange} placeholder="Mot de passe" />
                                         </span>
                                     </article>
                                     <article>
@@ -541,7 +559,7 @@ function Navbar_Logs() {
                                             <input type="password"
                                                 name="confirmPassword"
                                                 value={formData.confirmPassword}
-                                                onChange={handleChange} placeholder="Confirmer le mot de passe"/>
+                                                onChange={handleChange} placeholder="Confirmer le mot de passe" />
                                         </span>
                                     </article>
 

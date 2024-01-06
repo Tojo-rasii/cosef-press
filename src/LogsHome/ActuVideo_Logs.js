@@ -7,9 +7,8 @@ import Video from '../Tools/video/video1.mp4'
 import Video2 from '../Tools/video/video2.mp4'
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 
-function Actu_Video() {
+function ActuVideo_Logs() {
         // VIDEO
-        // NB : AJOUTER 6 ARTICLE VIDEO AU MAX - 3 MINIMUM POUR LE DESIGN
         const videos = [
             {
                 type: "Politique",
@@ -51,7 +50,7 @@ function Actu_Video() {
     const navigate = useNavigate();
         // Créez une URL avec les informations de la vidéo
         const redirectToVideo = (video) => {
-            const url = `/video?type=${video.type}&title=${video.title}&description=${encodeURIComponent(video.description)}&publishDate=${video.publishDate}&videoUrl=${video.videoUrl}&imageUrl=${video.imageUrl}`;
+            const url = `/logsVideo?type=${video.type}&title=${video.title}&description=${encodeURIComponent(video.description)}&publishDate=${video.publishDate}&videoUrl=${video.videoUrl}&imageUrl=${video.imageUrl}`;
     
             // Redirigez vers la nouvelle page
             navigate(url);
@@ -61,7 +60,7 @@ function Actu_Video() {
            {/* contenue article SECTION */}
                 {/* section-video */}
                 <div className='ArticleVideo'>
-                <NavLink to="/sport" style={{textDecoration : "none"}}><p className='text-uppercase fw-semibold fs-4'><span style={{ fontWeight : "800"}}>WEB TV</span></p></NavLink>
+                <NavLink to="/logsHome" style={{textDecoration : "none"}}><p className='text-uppercase fw-semibold fs-4'><span style={{ fontWeight : "800"}}>WEB TV</span></p></NavLink>
                     <div className='d-flex flex-row flex-wrap justify-content-between'>
                     {videos.map((article, index) => (
 
@@ -92,4 +91,4 @@ function Actu_Video() {
   )
 }
 
-export default Actu_Video
+export default ActuVideo_Logs

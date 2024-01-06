@@ -5,8 +5,7 @@ import Image2 from '../Tools/images/cosef.jpg'
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 
 
-function Actu_Culturel() {
-    // NB : AJOUTER 4 ARTICLE AU MAX - 2 MINIMUM POUR LE DESIGN
+function ActuSocial_Logs() {
     const articles = [
         {
             type: "Politique",
@@ -47,7 +46,7 @@ function Actu_Culturel() {
         const navigate = useNavigate();
 
         const redirectToArticle = (article) => {
-            const url = `/article?type=${article.type}&imageUrl=${encodeURIComponent(
+            const url = `/logsArticle?type=${article.type}&imageUrl=${encodeURIComponent(
                 article.imageUrl
             )}&title=${encodeURIComponent(article.title)}&description=${encodeURIComponent(
                 article.description
@@ -61,7 +60,7 @@ function Actu_Culturel() {
           {/* contenue article SECTION */}
                 {/* section-photo */}
                 <div className='ArticlePhoto'>
-                <NavLink to="/sport" style={{textDecoration : "none"}}><p className='text-uppercase fw-semibold fs-4'><span style={{ fontWeight : "800"}}>Culturel</span></p></NavLink>
+                <NavLink to="/logsSocial" style={{textDecoration : "none"}}><p className='text-uppercase fw-semibold fs-4'><span style={{ fontWeight : "800"}}>Social</span></p></NavLink>
                 <div className='d-flex flex-row gap-4 flex-wrap w-100 pe-4'>
                     {articles.map((article, index) => (
                         // <Link to={`/article`} key={index}>
@@ -98,4 +97,4 @@ function Actu_Culturel() {
   )
 }
 
-export default Actu_Culturel
+export default ActuSocial_Logs

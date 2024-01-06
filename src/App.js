@@ -19,6 +19,15 @@ import LogsProfile from './Logs/LogsProfile';
 import LogsHome from './Logs/LogsHome';
 import LogsClickArticle from './Logs/LogsClickArticle';
 import LogsClickVideo from './Logs/LogsClickVideo';
+import LogsALaUne from './Logs/LogsALaUne';
+import LogsPolitique from './Logs/LogsPolitique';
+import LogsSport from './Logs/LogsSport';
+import LogsSocial from './Logs/LogsSocial';
+import LogsCulturel from './Logs/LogsCulturel';
+import LogsSearch from './Logs/LogsSearch';
+import LogsApropos from './Logs/LogsApropos';
+import LogsMotQuesteur from './Logs/LogsMotQuesteur';
+import LogsMiniBiographie from './Logs/LogsMiniBiographie';
 
 function App() {
   const body = document.querySelector('body');
@@ -39,6 +48,8 @@ function App() {
             <Route path="/apropos" element={<Apropos />} />
             <Route path="/motDuQuesteur" element={<MotDuQuesteur />} />
             <Route path="/miniBiographie" element={<MiniBiographie />} />
+
+            {/* CLICK ARCTICLE & VIDEO */}
             <Route path="/article" element={<ClickArticle />} />
             <Route path="/video" element={<ClickVideo />} />
 
@@ -46,6 +57,17 @@ function App() {
             <Route path="/logsActu" element={<LogsActualite />}/>
             <Route path="/logsProfile" element={<LogsProfile />}/>
             <Route path="/logsHome" element={<LogsHome />}/>
+            <Route path="/logsAlaune" element={<LogsALaUne />}/>
+            <Route path="/logsPolitique" element={<LogsPolitique />}/>
+            <Route path="/logsSport" element={<LogsSport />}/>
+            <Route path="/logsSocial" element={<LogsSocial />}/>
+            <Route path="/logsCulturel" element={<LogsCulturel />}/>
+            <Route path="/logsSearch" element={<LogsSearch />}/>
+            <Route path="/logsApropos" element={<LogsApropos />}/>
+            <Route path="/logsMotDuQuesteur" element={<LogsMotQuesteur />}/>
+            <Route path="/logsMiniBiographie" element={<LogsMiniBiographie />}/>
+
+            {/* CLICK ARTICLE & VIDEO CONNECTER*/}
             <Route path="/logsArticle" element={<LogsClickArticle />}/>
             <Route path="/logsVideo" element={<LogsClickVideo />}/>
           </Routes>

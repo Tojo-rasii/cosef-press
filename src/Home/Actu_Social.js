@@ -6,6 +6,7 @@ import { NavLink, Link, useNavigate } from 'react-router-dom';
 
 
 function Actu_Social() {
+    // NB : AJOUTER 4 ARTICLE AU MAX - 2 MINIMUM POUR LE DESIGN
     const articles = [
         {
             type: "Politique",

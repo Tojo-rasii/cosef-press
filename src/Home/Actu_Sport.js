@@ -1,33 +1,39 @@
 
 import React from 'react'
-import Image from '../Tools/images/anatalaha2.jpg'
-import Image2 from '../Tools/images/cosef.jpg'
-import barea from '../Tools/images/Barea.jpg'
+// import Image from '../Tools/images/anatalaha2.jpg'
+// import Image2 from '../Tools/images/cosef.jpg'
+// import barea from '../Tools/images/Barea.jpg'
 import { NavLink, Link, useNavigate } from 'react-router-dom';
+import articles from "../Contexts/Articles/Actu_sport.json";
 
 
 function Actu_Sport() {
-    const articles = [
-        {
-            type: "Politique",
-            title: "FIFIDIANANA FILOHAM-PIRENENA 2023",
-            imageUrl: Image,
-            description: `
-            Lany ho Filohan’ny Repoblika tamin’ny fihodinana voalohany i Andry Rajoelina ( 58,96%) ka mandray ny toerany avy hatrany aorian’ ny fihanany hoy ny Filohan’ny HCC Florent Rakotoarisoa.`,
-            publishDate: "19 - 02- 15",
-        },
-        {
-            type: "Sport",
-            title: "Barea vs Thad",
-            imageUrl: barea,
-            description: `* MISAOTRA AN'ANDRIAMANITRA LEHIBE ISIKA FA NAHARESY 3 - 0  NY EKIPANTSIKA BAREA OMALY ALINA.
-                  * MANKASITRAKA BAREA.
-                  * MANKASITRAKA NY EKIPA REHETRA.
-                    * MANKASITRAKA IHANY KOA NY EKIPA TEKNIKA REHETRA.
-                   ALEFA BAREA....`,
-            publishDate: "21 Novembre",
-        },
-    ];
+    // NB : AJOUTER 4 ARTICLE AU MAX - 2 MINIMUM POUR LE DESIGN
+    // const articles = [
+    //     {
+    //         type: "Sport",
+    //         title: "Barea vs Thad",
+    //         imageUrl: barea,
+    //         description: `* MISAOTRA AN'ANDRIAMANITRA LEHIBE ISIKA FA NAHARESY 3 - 0  NY EKIPANTSIKA BAREA OMALY ALINA.
+    //               * MANKASITRAKA BAREA.
+    //               * MANKASITRAKA NY EKIPA REHETRA.
+    //                 * MANKASITRAKA IHANY KOA NY EKIPA TEKNIKA REHETRA.
+    //                ALEFA BAREA....`,
+    //         publishDate: "21 Novembre",
+    //     },
+    //     {
+    //         type: "Sport",
+    //         title: "Barea vs Thad",
+    //         imageUrl: barea,
+    //         description: `* MISAOTRA AN'ANDRIAMANITRA LEHIBE ISIKA FA NAHARESY 3 - 0  NY EKIPANTSIKA BAREA OMALY ALINA.
+    //               * MANKASITRAKA BAREA.
+    //               * MANKASITRAKA NY EKIPA REHETRA.
+    //                 * MANKASITRAKA IHANY KOA NY EKIPA TEKNIKA REHETRA.
+    //                ALEFA BAREA....`,
+    //         publishDate: "21 Novembre",
+    //     },
+         
+    // ];
         // CLICK ARTICLE
         const navigate = useNavigate();
 
@@ -55,7 +61,7 @@ function Actu_Sport() {
                             onClick={() => redirectToArticle(article)} style={{width: "36em"}}>
                             <article>
                                 <picture>
-                                    <img src={article.imageUrl} alt="Antalaha" style={{width: "10vw"}}/>
+                                    <img src={require(`../${article.imageUrl}`)} alt="Antalaha" style={{width: "10vw"}}/>
                                 </picture>
                             </article>
                             <article className="voir-plus"

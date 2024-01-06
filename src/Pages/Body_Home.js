@@ -6,6 +6,7 @@ import { NavLink, Link, useNavigate } from 'react-router-dom';
 
 function Body_Home() {
       // A LA UNE
+      // NB : AJOUTER 1 SEUL ARTICLE
       const aLaUne = [
         {
             imageUrl: Image1,
@@ -15,30 +16,9 @@ function Body_Home() {
             publishDate: "le 25 Novembre"
         },
     ];
-    // const articles = [
-    //     {
-    //         type: "Politique",
-    //         title: "Iray ihany ny COSEF sy ny STAFF Éric FERNAND.",
-    //         imageUrl: Image,
-    //         description: `Mr Philbert, nitsidika ny ekipan'ny kabitran'ny Kestiora ny Antenimierandoholona,izay tarihin-dRamatoa  Amalia Bezina  .
-    //         Iray ihany ny COSEF sy ny STAFF Éric FERNAND.
-    //         COM/COSEF/NOVEMBRE 2023`,
-    //         publishDate: "19 - 02- 15",
-    //     },
-    //     {
-    //         type: "Sport",
-    //         title: "Barea vs tchad",
-    //         imageUrl: Image2,
-    //         description: `* MISAOTRA AN'ANDRIAMANITRA LEHIBE ISIKA FA NAHARESY 3 - 0  NY EKIPANTSIKA BAREA OMALY ALINA.
-    //         * MANKASITRAKA BAREA.
-    //         * MANKASITRAKA NY EKIPA REHETRA.
-    //         * MANKASITRAKA IHANY KOA NY EKIPA TEKNIKA REHETRA.
-    //         ALEFA BAREA....`,
-    //         publishDate: "19 - 02- 15",
-    //     },
-    // ];
 
     // VIDEO
+    // NB : AJOUTER 2 ARTICLE VIDEO JUSTE POUR LE DESIGN
     const videos = [
         {
             type: "Politique",
@@ -64,15 +44,15 @@ function Body_Home() {
     // CLICK ARTICLE
     const navigate =  useNavigate();
 
-    const redirectToArticle = (article) => {
-        const url = `/article?type=${article.type}&imageUrl=${encodeURIComponent(
-          article.imageUrl
-        )}&title=${encodeURIComponent(article.title)}&description=${encodeURIComponent(
-          article.description
-        )}&publishDate=${article.publishDate}`;
+    // const redirectToArticle = (article) => {
+    //     const url = `/article?type=${article.type}&imageUrl=${encodeURIComponent(
+    //       article.imageUrl
+    //     )}&title=${encodeURIComponent(article.title)}&description=${encodeURIComponent(
+    //       article.description
+    //     )}&publishDate=${article.publishDate}`;
     
-        navigate(url);
-      };
+    //     navigate(url);
+    //   };
 
                    // Créez une URL avec les informations de la vidéo
     const redirectToVideo = (video) => {
