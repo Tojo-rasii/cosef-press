@@ -101,6 +101,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   background: var(--bg-color1);
   height: 11.6vh;
   padding: 0;
@@ -142,8 +143,8 @@
 .Navbar nav:nth-child(2) section:nth-child(2) {
   display: flex;
   flex-direction: row;
+  margin-top: 1em;
   gap: 2.6em;
-  margin-top: 1.4em;
 }
 .Navbar nav:nth-child(2) section:nth-child(2) article p{
   text-transform: uppercase;
@@ -160,8 +161,8 @@
 .Navbar nav:nth-child(2) section:nth-child(3) {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 0.8em;
-  margin-top: 1.3em;
   margin-right: 1em;
 }
 
@@ -182,11 +183,19 @@
   outline: 2px solid #fff;
 }
 
+.Navbar nav:nth-child(2) section:nth-child(3) article img{
+  cursor: pointer;
+}
+
 /* CONNEXION */
 .Contenu-Login {
   display: block;
   position: absolute;
-  margin-top: 3.3em;
+  margin-top: 9.3em;
+  left: 84.4%;
+}
+#Contenu-Login{
+  margin-top: 19.3em;
   left: 83.8%;
 }
 
@@ -1310,4 +1319,36 @@ footer div:nth-child(2) article p{
 footer div:nth-child(2) article:nth-child(2) p:hover{
   color: var(--color1);
   cursor: pointer;
+}
+/* NAV CONNECTED PROFILE */
+.profileNav{
+  width: 3em;
+  height: 3em;
+  object-fit: cover;
+  outline: 2px solid #fff;
+  border-radius: 50%;
+}
+/* CONNECTED PROFILE */
+.profileLogs-image i{
+   position: absolute;
+   margin-left: -0.6em;
+   margin-top: -0.2em;
+   cursor: pointer;
+}
+.profileLogs-image img{
+  object-fit:cover;
+  width: 12vw;
+  height: 25vh;
+  background: #fff;
+  border-radius: 50%;
+  outline: 3px solid #cfcfcf;
+  overflow: hidden;
+  text-align: center;
+}
+/* ADMIN DASHBOARD */
+.AsideAdmin section article span{
+  cursor: pointer;
+}
+.AsideAdmin section article span:hover{
+    background: silver;
 }

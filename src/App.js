@@ -28,6 +28,8 @@ import LogsSearch from './Logs/LogsSearch';
 import LogsApropos from './Logs/LogsApropos';
 import LogsMotQuesteur from './Logs/LogsMotQuesteur';
 import LogsMiniBiographie from './Logs/LogsMiniBiographie';
+import AdminHome from './Admin/AdminHome';
+import ForgotPassword from './Pages/ForgotPassword';
 
 function App() {
   const body = document.querySelector('body');
@@ -48,6 +50,7 @@ function App() {
             <Route path="/apropos" element={<Apropos />} />
             <Route path="/motDuQuesteur" element={<MotDuQuesteur />} />
             <Route path="/miniBiographie" element={<MiniBiographie />} />
+            <Route path="/forgot" element={<ForgotPassword />} />
 
             {/* CLICK ARCTICLE & VIDEO */}
             <Route path="/article" element={<ClickArticle />} />
@@ -70,6 +73,9 @@ function App() {
             {/* CLICK ARTICLE & VIDEO CONNECTER*/}
             <Route path="/logsArticle" element={<LogsClickArticle />}/>
             <Route path="/logsVideo" element={<LogsClickVideo />}/>
+
+            {/* ADMIN DASHBOARD */}
+            <Route path='/adminHome' element={<AdminHome />}/>
           </Routes>
         </HashRouter>
     </div>

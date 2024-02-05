@@ -4,10 +4,16 @@ import Logo from '../Tools/images/logo.jpg'
 import illu from '../Tools/images/login.png'
 import sign from '../Tools/images/signup.png'
 import { NavLink, useNavigate } from "react-router-dom";
+// import firebase from 'firebase/app';
+import { auth, database } from '../firebase/FirebaseConfig';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { getFirestore, collection, doc, setDoc, addDoc, query, where, getDocs } from 'firebase/firestore';
+
+
 // import axios from 'axios';
 // import FacebookLogin from 'react-facebook-login';
 
-
+// const db = firebase.firestore();
 function Navbar() {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [active, setActive] = useState(false);
@@ -38,8 +44,16 @@ function Navbar() {
         setFormData((prevData) => ({ ...prevData, [name]: inputValue }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        console.log('Form Data:', formData);
+
+        console.log('Starting handleSubmit');
+        // ... le reste du code ...
+
+
+
 
         // if don't add anything
         if (!formData.username || !formData.email) {
@@ -53,6 +67,10 @@ function Navbar() {
             return;
         }
 
+        if(formData.password.length < 6){
+            alert("add 6 charachter")
+        }
+
         // Check if user accepted conditions
         if (!formData.acceptConditions) {
             alert('Please accept the conditions to sign up!');
@@ -60,32 +78,54 @@ function Navbar() {
         }
 
         // Check if username or email already exists in local storage
-        const storedData = JSON.parse(localStorage.getItem('userData')) || [];
+        // const storedData = JSON.parse(localStorage.getItem('userData')) || [];
 
-        const existingUser = storedData.find(
-            (user) => user.username === formData.username || user.email === formData.email
-        );
+        try {
+            // Vérification si l'utilisateur existe déjà dans Firestore
+            const querySnapshot = await getDocs(query(collection(database, 'userData'), where('username', '==', formData.username)));
 
-        if (existingUser) {
-            setError('Username or email already exists!');
-            return;
+            if (!querySnapshot.empty) {
+                setError('Username already exists!');
+                return;
+            }
+
+            // Save data to local storage
+            // localStorage.setItem('userData', JSON.stringify([...storedData, formData]));
+
+            // Vérification si l'utilisateur existe déjà dans Firestore
+
+            const response = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+            console.log('Firebase Response:', response);
+
+
+            // Création d'une référence à la collection "userData"
+            const userDataCollection = collection(database, 'userData');
+
+            // Envoi des données à Firestore en utilisant la référence de collection
+            await setDoc(doc(userDataCollection, response.user.uid), {
+                username: formData.username,
+                email: formData.email,
+                password: formData.password,
+            });
+
+            // Display alert
+            window.alert('Inscription réussie!');
+
+
+            const LoginToggle = document.querySelector('.Pop-Login div:nth-child(1)');
+            const SignToggle = document.querySelector('.Pop-Login div:nth-child(2)');
+
+            LoginToggle.classList.remove("LoginMain");
+            SignToggle.style.display = "none";
         }
 
-        // Save data to local storage
-        localStorage.setItem('userData', JSON.stringify([...storedData, formData]));
-
-        // Display alert
-        window.alert('Inscription réussie!');
-
-        const LoginToggle = document.querySelector('.Pop-Login div:nth-child(1)');
-        const SignToggle = document.querySelector('.Pop-Login div:nth-child(2)');
-
-        LoginToggle.classList.remove("LoginMain");
-        SignToggle.style.display = "none";
+        catch (error) {
+            // Affichez le message d'erreur de Firebase
+            console.error('Firebase Error:', error.message);
+            setError('Erreur lors de l\'inscription. Veuillez réessayer.');
+        }
 
 
-
-        // Additional logic for sending data to server can be added here
 
         // Clear form data
         setFormData({
@@ -99,7 +139,7 @@ function Navbar() {
     };
 
     // LOGIN FORM SIGN IN
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
 
         // Check if username or email and password are provided
@@ -108,35 +148,48 @@ function Navbar() {
             return;
         }
 
-        // Get stored user data from local storage
-        const storedData = JSON.parse(localStorage.getItem('userData')) || [];
+        try {
+            // Attempt to sign in with the provided username or email and password
+            const response = await signInWithEmailAndPassword(auth, formData.username, formData.password);
+            console.log('Firebase Response:', response);
 
-        // Find the user with the provided username
-        const loggedInUser = storedData.find((user) => user.username === formData.username || user.email === formData.username);
 
-        // Check if the user exists and the password matches
-        if (loggedInUser && loggedInUser.password === formData.password) {
+            // Get stored user data from local storage
+            // const storedData = JSON.parse(localStorage.getItem('userData')) || [];
+
+            // Find the user with the provided username
+            // const loggedInUser = storedData.find((user) => user.username === formData.username || user.email === formData.username);
+
+            // Check if the user exists and the password matches
+
             // Display alert or perform any other actions for successful login
             window.alert('Login successful!');
             // window.location.href = '../Logs/Politique.js';
 
             // Save login status in local storage if "Remember me" is checked
             if (rememberMe) {
-                localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+                localStorage.setItem('loggedInUser', JSON.stringify(response.user));
             }
             else {
-                localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+                localStorage.removeItem('loggedInUser');
             }
-
+            console.log('User data after login:', response.user);
             // Use React Router's useNavigate to redirect to another page
             navigate('/logsActu');
 
             // Additional logic, such as redirecting the user to another page
-        } else {
+        } catch (error) {
             // Display an error message for unsuccessful login
-            alert('Invalid username or password');
+            console.error('Firebase Error:', error.message);
+            // Ajoutez cette ligne pour afficher l'erreur dans la console
+            alert('Erreur de connexion. Veuillez réessayer.');
+            // navigate('/adminHome');
         }
+
+
     };
+
+
 
     // DATE A JOUR
     useEffect(() => {
@@ -444,9 +497,9 @@ function Navbar() {
 
                                     {/* FORGOT PASSWORD */}
                                     <div className='mb-2'>
-                                        <span>
+                                        <NavLink to="/forgot"><span>
                                             Mot de pass oublier ?
-                                        </span>
+                                        </span></NavLink>
                                     </div>
                                 </form>
                             </section>
@@ -455,7 +508,7 @@ function Navbar() {
 
                     {/* MOT DE PASS OUBLIER */}
                     {/* MOT DE PASS OUBLIER */}
-                     
+
 
                     {/* Sign up connex
                     this is the pop Sign */}
@@ -516,10 +569,14 @@ function Navbar() {
                                             <i className="bi-person"></i>
                                         </span>
                                         <span>
-                                            <input type="text" name="username"
+                                            <input
+                                                type="text"
+                                                name="username"
                                                 autoComplete='username'
                                                 value={formData.username}
-                                                onChange={handleChange} placeholder="Nom d'utilisateur" />
+                                                onChange={handleChange}
+                                                placeholder="Nom d'utilisateur"
+                                            />
                                         </span>
                                     </article>
                                     <article>
@@ -527,11 +584,14 @@ function Navbar() {
                                             <i className="bi-at"></i>
                                         </span>
                                         <span>
-                                            <input type="email" name="email"
+                                            <input
+                                                type="email"
+                                                name="email"
                                                 autoComplete='email'
                                                 placeholder="Addresse Email"
                                                 value={formData.email}
-                                                onChange={handleChange} />
+                                                onChange={handleChange}
+                                            />
                                         </span>
                                     </article>
                                     <article>
@@ -539,10 +599,14 @@ function Navbar() {
                                             <i className="bi-lock"></i>
                                         </span>
                                         <span>
-                                            <input type="password" name="password"
+                                            <input
+                                                type="password"
+                                                name="password"
                                                 autoComplete='current-password'
                                                 value={formData.password}
-                                                onChange={handleChange} placeholder="Mot de passe" />
+                                                onChange={handleChange}
+                                                placeholder="Mot de passe"
+                                            />
                                         </span>
                                     </article>
                                     <article>
@@ -550,21 +614,27 @@ function Navbar() {
                                             <i className="bi-lock"></i>
                                         </span>
                                         <span>
-                                            <input type="password"
+                                            <input
+                                                type="password"
                                                 name="confirmPassword"
                                                 autoComplete='current-password'
                                                 value={formData.confirmPassword}
-                                                onChange={handleChange} placeholder="Confirmer le mot de passe" />
+                                                onChange={handleChange}
+                                                placeholder="Confirmer le mot de passe"
+                                            />
                                         </span>
                                     </article>
 
                                     {/* CHECKBOX ACCEPT */}
                                     <div className='d-flex flex-row gap-2'>
                                         <span>
-                                            <input type="checkbox" name="acceptConditions"
+                                            <input
+                                                type="checkbox"
+                                                name="acceptConditions"
                                                 id="acceptConditions"
                                                 checked={formData.acceptConditions}
-                                                onChange={handleChange} />
+                                                onChange={handleChange}
+                                            />
                                         </span>
                                         <span>
                                             <label htmlFor="acceptConditions">Accepte conditions</label>
