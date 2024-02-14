@@ -1,38 +1,68 @@
 import React, { useState, useEffect } from 'react';
 import profile from '../Tools/images/profile.png';
+import { auth, database, storage } from '../firebase/FirebaseConfig'; // Assuming you have initialized Firebase in a separate file
 
 function Profile_Logs() {
-    const [loggedInUserData, setLoggedInUserData] = useState({});
+    const [loggedInUserEmail, setLoggedInUserEmail] = useState('');
     const [selectedImage, setSelectedImage] = useState(null);
 
     useEffect(() => {
-        const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-        if (loggedInUser) {
-            setLoggedInUserData(loggedInUser);
-        }
+        // Set up Firebase auth state observer
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (user) {
+                // User is signed in, set the email to the state
+                setLoggedInUserEmail(user.email);
+            } else {
+                // No user is signed in, clear the state
+                setLoggedInUserEmail('');
+            }
+        });
 
-        const storedImage = localStorage.getItem('selectedImage');
-        if (storedImage) {
-            setSelectedImage(storedImage);
-        }
+        // Clean up the observer
+        return () => unsubscribe();
     }, []);
 
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
+    // useEffect(() => {
+    //     // Fetch user's image from Firebase Storage
+    //     if (loggedInUserEmail) {
+    //         const imageRef = storage.ref(`images/${loggedInUserEmail}`);
+    //         imageRef.getDownloadURL().then(url => {
+    //             setSelectedImage(url);
+    //         }).catch(error => {
+    //             // Handle error
+    //             console.error('Error fetching image from Firebase Storage:', error);
+    //         });
+    //     }
+    // }, [loggedInUserEmail]);
 
-        if (file) {
-            // Convertir le Blob en une chaîne de caractères base64
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const base64String = reader.result;
-                setSelectedImage(base64String);
-
-                // Sauvegarder la chaîne de caractères base64 dans le localStorage
-                localStorage.setItem('selectedImage', base64String);
-            };
-            reader.readAsDataURL(file);
-        }
-    };
+    // const handleImageChange = (event) => {
+    //     const file = event.target.files[0];
+    
+    //     if (file) {
+    //         // Upload the image to Firebase Storage
+    //         const imageRef = storage.ref(`images/${loggedInUserEmail}`);
+    //         imageRef.put(file).then(snapshot => {
+    //             // Image uploaded successfully, get the download URL
+    //             imageRef.getDownloadURL().then(url => {
+    //                 setSelectedImage(url);
+    
+    //                 // Store the image URL in localStorage
+    //                 localStorage.setItem('selectedImage', url);
+    
+    //                 // Store the image URL in Firebase Firestore or Realtime Database along with user data
+    //                 const userRef = database.collection('userData').doc(loggedInUserEmail);
+    //                 userRef.set({ email: loggedInUserEmail, imageUrl: url }, { merge: true });
+    //             }).catch(error => {
+    //                 // Handle error
+    //                 console.error('Error fetching image URL:', error);
+    //             });
+    //         }).catch(error => {
+    //             // Handle error
+    //             console.error('Error uploading image to Firebase Storage:', error);
+    //         });
+    //     }
+    // };
+    
 
     return (
         <div>
@@ -48,14 +78,14 @@ function Profile_Logs() {
                             </i>
                         </article>
                         <article className="mt-2">
-                            <p className='p-2 bg-body-secondary text-capitalize'><span className='fw-bold'>Nom :</span> {loggedInUserData.username}</p>
-                            <p className='p-2 bg-body-secondary'><span className='fw-bold'>Email :</span> {loggedInUserData.email}</p>
+                            <p className='p-2 bg-body-secondary text-capitalize'><span className='fw-bold'>Nom :</span> {loggedInUserEmail}</p>
+                            <p className='p-2 bg-body-secondary'><span className='fw-bold'>Email :</span> {loggedInUserEmail}</p>
                         </article>
                         <input
                             type="file"
                             id="imageInput"
                             style={{ display: "none" }}
-                            onChange={handleImageChange}
+                            
                         />
                     </section>
                 </div>

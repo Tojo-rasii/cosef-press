@@ -1,74 +1,48 @@
 import React, { useState } from 'react';
-import { auth, sendPasswordResetEmail } from '../firebase/FirebaseConfig';
+import { auth, database } from '../firebase/FirebaseConfig'; // Importez votre objet d'authentification Firebase
+import { sendPasswordResetEmail } from 'firebase/auth'; // Importez votre objet d'authentification Firebase
+import { collection, query, where, getDocs } from 'firebase/firestore'; // Importez les fonctions de requête Firestore
 
+function ForgotPassword() {
+    const [email, setEmail] = useState('');
+    const [error, setError] = useState(null);
+    const [message, setMessage] = useState(null);
 
-const ForgotPassword = () => {
-  const [email, setEmail] = useState('');
-  const [isCodeSent, setIsCodeSent] = useState(false);
-  const [confirmationCode, setConfirmationCode] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [error, setError] = useState(null);
+    const handleResetPassword = async () => {
+        try {
+            // Vérifiez si l'e-mail existe dans la base de données userData
+            const userDataRef = collection(database, 'userData');
+            const querySnapshot = await getDocs(query(userDataRef, where('email', '==', email)));
 
-  const handleSendCode = async () => {
-// Example usage of sendPasswordResetEmail
+            if (querySnapshot.empty) {
+                setError("L'e-mail fourni n'est pas associé à un compte.");
+                return;
+            }
 
-// const response = await sendPasswordResetEmail(auth, email);
-// console.log('Firebase Response:', response);
+            // L'e-mail existe dans la base de données, envoyez l'e-mail de réinitialisation
+            await sendPasswordResetEmail(auth, email);
+            setMessage('Un e-mail de réinitialisation de mot de passe a été envoyé à votre adresse e-mail.');
+            setError(null);
+        } catch (error) {
+            console.error(error);
+            setMessage(null);
+        }
+    };
 
-    auth.sendPasswordResetEmail(email)
-      .then(() => {
-        // Gérer la réussite de l'envoi du courrier de réinitialisation
-        setIsCodeSent(true);
-        setError(null);
-      })
-      .catch((error) => {
-        // Gérer les erreurs
-        console.error('Error sending password reset email:', error);
-        setError(error.message);
-      });
-  };
-
-  const handleResetPassword = async () => {
-    try {
-      // La réinitialisation du mot de passe se fait en suivant le lien de réinitialisation envoyé par e-mail,
-      // il n'y a pas besoin de cette étape côté client.
-      // La réinitialisation sera effectuée après que l'utilisateur ait suivi le lien.
-
-      setError(null);
-    } catch (error) {
-      setError(error.message);
-    }
-  };
-
-  return (
-    <div>
-      <h2>Mot de passe oublié</h2>
-      {isCodeSent ? (
-        <>
-          <p>Un code de confirmation a été envoyé à votre adresse e-mail. Veuillez le saisir ci-dessous :</p>
-          <label>
-            Code de confirmation :
-            <input type="email" value={confirmationCode} onChange={(e) => setConfirmationCode(e.target.value)} autoComplete='on' />
-          </label>
-          <label>
-            Nouveau mot de passe :
-            <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
-          </label>
-          <button onClick={handleResetPassword}>Réinitialiser le mot de passe</button>
-        </>
-      ) : (
-        <>
-          <p>Entrez votre adresse e-mail pour recevoir un code de confirmation :</p>
-          <label>
-            Adresse e-mail :
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          </label>
-          <button onClick={handleSendCode}>Envoyer le code</button>
-        </>
-      )}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-    </div>
-  );
-};
+    return (
+        <div>
+            <h2>Mot de passe oublié</h2>
+            {error && <div className="error">{error}</div>}
+            {message && <div className="message">{message}</div>}
+            <input
+                type="email"
+                placeholder="Adresse e-mail"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+            />
+            <button onClick={handleResetPassword}>Réinitialiser le mot de passe</button>
+        </div>
+    );
+}
 
 export default ForgotPassword;

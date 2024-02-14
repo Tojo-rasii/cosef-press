@@ -89,10 +89,12 @@
   outline: 2px solid var(--color1);
   /* color: var(--color1); */
 }
-.Navbar nav:nth-child(1) section:nth-child(3) article span i{
+
+.Navbar nav:nth-child(1) section:nth-child(3) article span i {
   font-size: 1.5em;
 }
-.Navbar nav:nth-child(1) section:nth-child(3) article span:nth-child(2){
+
+.Navbar nav:nth-child(1) section:nth-child(3) article span:nth-child(2) {
   margin-top: 0.4em;
 }
 
@@ -106,7 +108,8 @@
   height: 11.6vh;
   padding: 0;
 }
-.Navbar nav:nth-child(2) section article p{
+
+.Navbar nav:nth-child(2) section article p {
   color: #fff;
 }
 
@@ -146,7 +149,8 @@
   margin-top: 1em;
   gap: 2.6em;
 }
-.Navbar nav:nth-child(2) section:nth-child(2) article p{
+
+.Navbar nav:nth-child(2) section:nth-child(2) article p {
   text-transform: uppercase;
   font-size: 1em;
   font-weight: 600;
@@ -183,7 +187,7 @@
   outline: 2px solid #fff;
 }
 
-.Navbar nav:nth-child(2) section:nth-child(3) article img{
+.Navbar nav:nth-child(2) section:nth-child(3) article img {
   cursor: pointer;
 }
 
@@ -194,7 +198,8 @@
   margin-top: 9.3em;
   left: 84.4%;
 }
-#Contenu-Login{
+
+#Contenu-Login {
   margin-top: 19.3em;
   left: 83.8%;
 }
@@ -275,13 +280,14 @@
 
 /* POP LOgIN */
 /* ClosePOP */
-.closePop{
+.closePop {
   position: absolute;
   margin-top: -0.3em;
   margin-left: -3.6em;
   z-index: 999;
 }
-.closePop i{
+
+.closePop i {
   background: var(--bg-color1);
   color: #fff;
   border-radius: 50%;
@@ -289,13 +295,16 @@
   font-size: 1.7em;
   cursor: pointer;
 }
-.closePop i:hover{
-  background: rgb(243, 105, 0); 
+
+.closePop i:hover {
+  background: rgb(243, 105, 0);
   outline: 1px solid rgb(220, 220, 220);
 }
-.closePop i:active{
+
+.closePop i:active {
   outline: 2px solid var(--color2);
 }
+
 .Pop-Login {
   position: fixed;
   top: 0.8%;
@@ -310,25 +319,29 @@
   overflow: hidden;
   animation: animate 0.5s normal forwards;
 }
+
 @keyframes animate {
-  0%{
-     transform: scale(0);
+  0% {
+    transform: scale(0);
   }
-  100%{
+
+  100% {
     transform: scale(1);
   }
 }
 
 
-.Pop-Login main{
+.Pop-Login main {
   display: flex;
   flex-direction: row;
   gap: 0.8em;
 }
+
 /* TOGGLE VISIBILITY POP */
-.LoginMain{
+.LoginMain {
   display: none;
 }
+
 /* /////// */
 
 .Pop-Login main section {
@@ -348,18 +361,22 @@
   flex-direction: column;
   align-items: center;
 }
+
 /* TITRE DESCRIPTION */
-.TitleLog p:nth-child(1){
+.TitleLog p:nth-child(1) {
   font-weight: 600;
   margin-top: 0.5em;
 }
-.TitleLog p:nth-child(2){
-   font-size: 0.9em;
-   margin-top: -0.6em;
-   margin-bottom: 0.4em;
+
+.TitleLog p:nth-child(2) {
+  font-size: 0.9em;
+  margin-top: -0.6em;
+  margin-bottom: 0.4em;
 }
+
 /* POP FORM1 */
-.Pop-Login main section:nth-child(2) form:nth-child(1) article:nth-child(3),.Pop-Login main section:nth-child(2) form:nth-child(1) article:nth-child(4){
+.Pop-Login main section:nth-child(2) form:nth-child(1) article:nth-child(3),
+.Pop-Login main section:nth-child(2) form:nth-child(1) article:nth-child(4) {
   padding: 0.9em;
   width: 19em;
   background: transparent;
@@ -373,7 +390,8 @@
 
 /* TRANSITION OR */
 /* (OU) */
-.transite-Or span:nth-child(1),.transite-Or span:nth-child(3){
+.transite-Or span:nth-child(1),
+.transite-Or span:nth-child(3) {
   border: 1.5px solid rgb(158, 158, 158);
   border-radius: 35em;
   height: 0;
@@ -382,14 +400,15 @@
 }
 
 /* POP FORM2 */
-.Pop-Login main section:nth-child(2) form:nth-child(2){
+.Pop-Login main section:nth-child(2) form:nth-child(2) {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1em;
   margin-top: 1.2em;
 }
-.Pop-Login main section:nth-child(2) form:nth-child(2) article{
+
+.Pop-Login main section:nth-child(2) form:nth-child(2) article {
   padding: 0.5em;
   width: min-content;
   background: transparent;
@@ -398,42 +417,48 @@
   display: flex;
   flex-direction: row;
 }
-.Pop-Login main section:nth-child(2) form:nth-child(2) article:last-of-type{
+
+.Pop-Login main section:nth-child(2) form:nth-child(2) article:last-of-type {
   background: var(--bg-color1);
 }
-.Pop-Login main section:nth-child(2) form:nth-child(2) article span i{
+
+.Pop-Login main section:nth-child(2) form:nth-child(2) article span i {
   font-size: 1.3em;
   color: var(--color1);
   margin-left: 0.2em;
 }
-.Pop-Login main section:nth-child(2) form:nth-child(2) article span input{
+
+.Pop-Login main section:nth-child(2) form:nth-child(2) article span input {
   padding: 0.5em;
-    width: 19em;
-    background: transparent;
-    border: none;
-    outline: none;
-    border-radius: 2em;
-    margin-top: -0.2em;
-    margin-left: 0.5em;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    font-size: 0.9em;
-    border-left: 1px solid rgb(227, 227, 227);
+  width: 19em;
+  background: transparent;
+  border: none;
+  outline: none;
+  border-radius: 2em;
+  margin-top: -0.2em;
+  margin-left: 0.5em;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  font-size: 0.9em;
+  border-left: 1px solid rgb(227, 227, 227);
 }
-.Pop-Login main section:nth-child(2) form:nth-child(2) article:last-of-type input{
+
+.Pop-Login main section:nth-child(2) form:nth-child(2) article:last-of-type input {
   padding: 0.5em;
-    width: 19em;
-    background: transparent;
-    border: none;
-    outline: none;
-    border-radius: 2em;
-    margin-top: -0.2em;
-    font-size: 0.9em;
+  width: 19em;
+  background: transparent;
+  border: none;
+  outline: none;
+  border-radius: 2em;
+  margin-top: -0.2em;
+  font-size: 0.9em;
 }
-#icon-showMdp{
+
+#icon-showMdp {
   position: absolute;
   margin-left: -1.3em;
 }
+
 #Logo {
   width: 4em;
   height: auto;
@@ -744,7 +769,7 @@
   transition: 0.1s;
 }
 
-.ArticlePhoto section:hover{
+.ArticlePhoto section:hover {
   filter: brightness(96%);
 }
 
@@ -789,7 +814,7 @@
   width: 95%;
   height: min-content;
   word-break: keep-all;
-  font-family: "nunito-sans",sans-serif;
+  font-family: "nunito-sans", sans-serif;
 }
 
 /* DESC */
@@ -861,7 +886,8 @@
   margin-bottom: 2em;
   cursor: pointer;
 }
-.ArticleVideo section:hover{
+
+.ArticleVideo section:hover {
   filter: brightness(96%);
 }
 
@@ -1056,40 +1082,46 @@
 
 /* APROPOS DU SITE ET DU COSEF */
 /* ABOUT */
-.Apropos{
+.Apropos {
   padding-top: 6em;
 }
-.Apropos div header{
-  
-}
-.Apropos div header picture{
+
+.Apropos div header {}
+
+.Apropos div header picture {
   padding: 1em;
 }
-.Apropos div header picture img{
+
+.Apropos div header picture img {
   width: 98%;
   height: auto;
   object-fit: cover;
   filter: brightness(60%);
   border-radius: 10px;
 }
-.Apropos div header picture article{
+
+.Apropos div header picture article {
   position: absolute;
   top: 22.7%;
   left: 14.8%;
   text-align: center;
   width: 70%;
 }
-.Apropos div header picture article p{
+
+.Apropos div header picture article p {
   color: #fff;
 }
-.Apropos div header picture article p:nth-child(1){
+
+.Apropos div header picture article p:nth-child(1) {
   font-size: 1.4em;
 }
-.Apropos div header picture article p:nth-child(2){
+
+.Apropos div header picture article p:nth-child(2) {
   font-size: 1.9em;
   font-weight: bold;
 }
-.Apropos div header picture article button{
+
+.Apropos div header picture article button {
   padding: 0.8em;
   padding-inline: 2em;
   color: #fff;
@@ -1099,20 +1131,23 @@
   border-radius: 3em;
   margin-top: 1.3em;
 }
-.Apropos div header picture article button:hover{
+
+.Apropos div header picture article button:hover {
   color: silver;
   outline: 2px solid var(--color1);
 }
-.Apropos div header picture article button:focus{
+
+.Apropos div header picture article button:focus {
   outline: 2px solid var(--color1);
 }
-.Apropos div header picture article button:active{
+
+.Apropos div header picture article button:active {
   transform: scale(0.9);
   outline: 2px solid var(--color1);
 }
 
 /* ABOUT MAIN */
-.Apropos div main{
+.Apropos div main {
   display: flex;
   flex-direction: row;
   gap: 3em;
@@ -1122,45 +1157,48 @@
   padding-left: 10em;
   margin-bottom: 3em;
 }
-.Apropos div main section{
+
+.Apropos div main section {
   width: 35vw;
   padding: 1em;
   border-radius: 8px;
   cursor: default;
   background: rgb(247, 247, 247);
 }
-.Apropos div main section:hover{
+
+.Apropos div main section:hover {
   background: rgb(236, 236, 236);
 }
-.Apropos div main section:hover p:nth-child(1){
- color: orangered;
+
+.Apropos div main section:hover p:nth-child(1) {
+  color: orangered;
 }
 
 /* MOT DU QUESTEUR BODY MAIN*/
 /* Main questort */
-.MotDuQuesteur{
-   padding-top: 6em;
-   text-align: center;
+.MotDuQuesteur {
+  padding-top: 6em;
+  text-align: center;
 }
-.MotDuQuesteur div main{
 
-}
-.MotDuQuesteur div main img{
-   width: 45%;
-   height: auto;
-   object-fit: cover;
+.MotDuQuesteur div main {}
+
+.MotDuQuesteur div main img {
+  width: 45%;
+  height: auto;
+  object-fit: cover;
 }
 
 /* BIOGRAPHIE BODY MAIN*/
 /* Main minibio */
-.MiniBiographie{
+.MiniBiographie {
   padding-top: 6em;
   text-align: center;
 }
-.MiniBiographie div main{
 
-}
-.MiniBiographie div main img{
+.MiniBiographie div main {}
+
+.MiniBiographie div main img {
   width: 45%;
   height: auto;
   object-fit: cover;
@@ -1169,27 +1207,30 @@
 
 /* BODY ARTICLE*/
 /* Main publication */
-.ClickArticle{
+.ClickArticle {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   gap: 2em;
-   padding-top: 9em;
-   padding-inline: 2em;
+  padding-top: 9em;
+  padding-inline: 2em;
 }
-.ClickArticle div:nth-child(1){
+
+.ClickArticle div:nth-child(1) {
   padding: 1em;
   padding-left: 5em;
   border-radius: 4px;
 }
+
 .titleClick {
   color: var(--color4);
   border-bottom: 1px solid #eaeaea;
   padding-bottom: 0.8em;
 }
+
 /* HEADER */
 /* CLICK ARTICLE */
-#typeStyle{
+#typeStyle {
   background: var(--bg-color1);
   color: #fff;
   width: max-content;
@@ -1198,29 +1239,33 @@
   padding-inline: 0.4em;
   font-size: 0.9em;
 }
-#titleStyle{
+
+#titleStyle {
   margin-top: 0.3em;
   margin-bottom: 0.5em;
   word-break: keep-all;
   width: 90%;
-  font-family: "nunito-sans",sans-serif;
+  font-family: "nunito-sans", sans-serif;
   font-weight: 600;
 }
+
 /* MAIN _ IMAGE */
-.ClickArticle div section article picture img{
+.ClickArticle div section article picture img {
   width: 30em;
   height: auto;
   padding: 0.2em;
   background: #fff;
   border-radius: 6px;
 }
-#publishDAte{
+
+#publishDAte {
   font-size: 0.9em;
 }
+
 /* FOOT DESC */
-.ClickArticle div section:nth-child(2) article{
+.ClickArticle div section:nth-child(2) article {
   width: 86%;
-  word-break:keep-all;
+  word-break: keep-all;
 }
 
 /* FOOTER BODY */
@@ -1234,23 +1279,24 @@
 }
 
 .Publicite {
-    background: orangered;
-    color: #fff;
-    overflow: hidden;
-    padding: 0;
-    padding-inline: 2em;
+  background: orangered;
+  color: #fff;
+  overflow: hidden;
+  padding: 0;
+  padding-inline: 2em;
 }
 
 .Publicite div {
-    display: flex;
-    flex-direction: row;
-    margin-top: 0.4em;
-    padding: 0;
+  display: flex;
+  flex-direction: row;
+  margin-top: 0.4em;
+  padding: 0;
 }
 
-.Publicite div p{
+.Publicite div p {
   margin-top: 1.1em;
 }
+
 /* FOOTER */
 footer {
   margin-top: -1em;
@@ -1280,11 +1326,15 @@ footer div section p:nth-child(1) {
   text-transform: capitalize;
   font-size: 1.2em;
 }
-footer div section p:nth-child(2),footer div section p:nth-child(3),footer div section p:nth-child(4) {
+
+footer div section p:nth-child(2),
+footer div section p:nth-child(3),
+footer div section p:nth-child(4) {
   text-transform: capitalize;
   cursor: pointer;
 }
-footer div section p:is(:nth-child(2):hover,:nth-child(3):hover,:nth-child(4):hover){
+
+footer div section p:is(:nth-child(2):hover, :nth-child(3):hover, :nth-child(4):hover) {
   color: var(--color1);
 }
 
@@ -1298,9 +1348,11 @@ footer div section:nth-child(5) article i {
   cursor: pointer;
   color: rgb(103, 103, 103);
 }
-footer div section:nth-child(5) article i:hover{
+
+footer div section:nth-child(5) article i:hover {
   color: var(--color1);
 }
+
 footer div:nth-child(2) {
   border-top: 1px solid silver;
   padding-top: 1.2em;
@@ -1313,30 +1365,36 @@ footer div:nth-child(2) article {
   flex-direction: row;
   gap: 2em;
 }
-footer div:nth-child(2) article p{
+
+footer div:nth-child(2) article p {
   cursor: default;
 }
-footer div:nth-child(2) article:nth-child(2) p:hover{
+
+footer div:nth-child(2) article:nth-child(2) p:hover {
   color: var(--color1);
   cursor: pointer;
 }
+
 /* NAV CONNECTED PROFILE */
-.profileNav{
-  width: 3em;
-  height: 3em;
+.profileNav {
+  width: 2.7em;
+  height: 2.7em;
   object-fit: cover;
   outline: 2px solid #fff;
   border-radius: 50%;
+  background: #fff;
 }
+
 /* CONNECTED PROFILE */
-.profileLogs-image i{
-   position: absolute;
-   margin-left: -0.6em;
-   margin-top: -0.2em;
-   cursor: pointer;
+.profileLogs-image i {
+  position: absolute;
+  margin-left: -0.6em;
+  margin-top: -0.2em;
+  cursor: pointer;
 }
-.profileLogs-image img{
-  object-fit:cover;
+
+.profileLogs-image img {
+  object-fit: cover;
   width: 12vw;
   height: 25vh;
   background: #fff;
@@ -1345,13 +1403,16 @@ footer div:nth-child(2) article:nth-child(2) p:hover{
   overflow: hidden;
   text-align: center;
 }
+
 /* ADMIN DASHBOARD */
-.AsideAdmin section article span{
+.AsideAdmin section article span {
   cursor: pointer;
 }
-.AsideAdmin section article span:hover{
-    background: silver;
+
+.AsideAdmin section article span:hover {
+  background: silver;
 }
+
 /* ADMIN */
 @keyframes equalizerAnimation {
   0% {

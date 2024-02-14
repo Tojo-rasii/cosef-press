@@ -5,8 +5,8 @@ import illu from '../Tools/images/login.png'
 import sign from '../Tools/images/signup.png'
 import { NavLink, useNavigate } from "react-router-dom";
 // import firebase from 'firebase/app';
-import { auth, database } from '../firebase/FirebaseConfig';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { auth, database, googleAuthProvider } from '../firebase/FirebaseConfig';
+import { getAuth,sendEmailVerification, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup  } from 'firebase/auth';
 import { getFirestore, collection, doc, setDoc, addDoc, query, where, getDocs } from 'firebase/firestore';
 
 
@@ -51,7 +51,12 @@ function Navbar() {
 
         console.log('Starting handleSubmit');
         // ... le reste du code ...
-
+  // Validation de l'e-mail avec une expression régulière
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(formData.email)) {
+      alert('Veuillez entrer une adresse e-mail valide.');
+      return;
+  }
 
 
 
@@ -97,6 +102,9 @@ function Navbar() {
             const response = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
             console.log('Firebase Response:', response);
 
+                // Envoyer un e-mail de vérification
+    await sendEmailVerification(auth.currentUser);
+
 
             // Création d'une référence à la collection "userData"
             const userDataCollection = collection(database, 'userData');
@@ -105,12 +113,12 @@ function Navbar() {
             await setDoc(doc(userDataCollection, response.user.uid), {
                 username: formData.username,
                 email: formData.email,
-                password: formData.password,
             });
 
             // Display alert
-            window.alert('Inscription réussie!');
-
+     
+    // Display alert
+    window.alert('Inscription réussie! Veuillez vérifier votre e-mail pour activer votre compte.');
 
             const LoginToggle = document.querySelector('.Pop-Login div:nth-child(1)');
             const SignToggle = document.querySelector('.Pop-Login div:nth-child(2)');
@@ -138,7 +146,7 @@ function Navbar() {
         setError('');
     };
 
-    // LOGIN FORM SIGN IN
+  // LOGIN FORM SIGN IN
     const handleLogin = async (e) => {
         e.preventDefault();
 
@@ -161,7 +169,8 @@ function Navbar() {
             // const loggedInUser = storedData.find((user) => user.username === formData.username || user.email === formData.username);
 
             // Check if the user exists and the password matches
-
+    // Check if the signed-in user is an admin
+     // Check if the signed-in user's email ends with "@admin.com"
             // Display alert or perform any other actions for successful login
             window.alert('Login successful!');
             // window.location.href = '../Logs/Politique.js';
@@ -183,7 +192,6 @@ function Navbar() {
             console.error('Firebase Error:', error.message);
             // Ajoutez cette ligne pour afficher l'erreur dans la console
             alert('Erreur de connexion. Veuillez réessayer.', error.message);
-            navigate('/adminHome');
         }
 
 
@@ -283,6 +291,21 @@ function Navbar() {
         }
 
     }, []);
+
+    // LOGIN WITH GOOGLE
+    const handleSignInWithGoogle = async () => {
+        try {
+            // Authentification avec Google
+            await signInWithPopup(auth, googleAuthProvider);
+            console.log('success');
+
+            navigate('/logsHome');
+        } catch (error) {
+            console.error('Error signing in with Google:', error);
+            console.log(error, "fuck");
+        }
+        
+    };
 
     return (
         <>
@@ -434,7 +457,7 @@ function Navbar() {
                                         </span>
                                         <span>Facebook</span>
                                     </article>
-                                    <article>
+                                    <article style={{cursor:"pointer"}} onClick={handleSignInWithGoogle}>
                                         <span>
                                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 48 48">
                                                 <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path>
