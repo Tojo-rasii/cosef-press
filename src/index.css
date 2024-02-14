@@ -178,23 +178,26 @@ body {
   margin-left: -40em;
   z-index: 999;
 }
+
 @keyframes scale {
-  0%{
+  0% {
     scale: 0;
   }
-  100%{
+
+  100% {
     scale: 1;
 
   }
 }
-.popup-container::after{
+
+.popup-container::after {
   content: "";
   width: 100vw;
   height: 100vh;
   margin-top: -9.2em;
   margin-left: -29em;
   position: absolute;
-  transform: translate(-50px,-50px);
+  transform: translate(-50px, -50px);
   background: #000;
   opacity: 0.2;
   z-index: -20;
@@ -226,3 +229,4 @@ body {
 .popup-container div button:nth-child(2) {
   background: rgb(158, 158, 158);
 }
+

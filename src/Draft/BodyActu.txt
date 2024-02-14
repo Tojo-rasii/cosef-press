@@ -79,11 +79,11 @@ function Body_Actualite() {
     ];
 
     
- 
     useEffect(() => {
+        // Fonction asynchrone pour récupérer les articles depuis Firestore
         const fetchArticles = async () => {
             try {
-                const querySnapshot = await getDocs(collection(database, 'articlePublished'));
+                const querySnapshot = await getDocs(collection(database, 'userData'));
                 const fetchedArticles = [];
                 querySnapshot.forEach((doc) => {
                     fetchedArticles.push(doc.data());
@@ -94,6 +94,7 @@ function Body_Actualite() {
             }
         };
 
+        // Appel de la fonction pour récupérer les articles lors du montage du composant
         fetchArticles();
     }, []); 
 
@@ -129,26 +130,33 @@ function Body_Actualite() {
         <div>
             <main className='ALaUne'>
                 {/* contenue article SECTION */}
-                {/* Contenu article SECTION */}
+                {/* section-photo */}
                 <div className='ArticlePhoto'>
-                    <p className='text-uppercase fw-semibold fs-4 titleActu'>Actualité</p>
+                    <p className='text-uppercase fw-semibold fs-4 titleActu'>Actualite</p>
                     {articles.map((article, index) => (
-                        <section key={index} className={article && article.type ? article.type.toLowerCase() : ''}  onClick={() => redirectToArticle(article)}>
+                        <section
+                            key={index} className={article.type.toLowerCase()}
+                            onClick={() => redirectToArticle(article)}>
                             <article>
                                 <picture>
-                                    <img src={article && article.imageUrl ? article.imageUrl : ''} alt="Antalaha" />
+                                    <img src={article.imageUrl} alt="Antalaha" />
                                 </picture>
                             </article>
-                            <article className="voir-plus">
-                                <span id='type'>{article && article.type ? article.type : ''}</span>
-                                <span>{article && article.title ? article.title : ''}</span>
-                                <span>{article && article.description ? article.description : ''}</span>
+                            <article className="voir-plus"
+                                data-type={article.type}
+                                data-imageurl={article.imageUrl}
+                                data-title={article.title}
+                                data-description={article.description}
+                                data-publishdate={article.publishDate}>
+                                <span id='type'>{article.type}</span>
+                                <span>{article.title}</span>
+                                <span>{article.description}</span>
                                 <span>
                                     <i className='bi-dot'></i>
                                     <i className='bi-dot'></i>
                                     <i className='bi-dot'></i>
                                 </span>
-                                <span>Publié le {article && article.publishDate ? article.publishDate : ''}</span>
+                                <span>Publier le {article.publishDate}</span>
                             </article>
                         </section>
                     ))}

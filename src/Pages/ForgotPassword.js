@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { auth } from '../firebase/FirebaseConfig';
+import { auth, sendPasswordResetEmail } from '../firebase/FirebaseConfig';
 
 
 const ForgotPassword = () => {
@@ -10,14 +10,22 @@ const ForgotPassword = () => {
   const [error, setError] = useState(null);
 
   const handleSendCode = async () => {
-    try {
-      await auth.sendPasswordResetEmail(email);
-      setIsCodeSent(true);
-      setError(null);
-    } catch (error) {
-      console.error('Error sending password reset email:', error);
-      setError(error.message);
-    }
+// Example usage of sendPasswordResetEmail
+
+// const response = await sendPasswordResetEmail(auth, email);
+// console.log('Firebase Response:', response);
+
+    auth.sendPasswordResetEmail(email)
+      .then(() => {
+        // Gérer la réussite de l'envoi du courrier de réinitialisation
+        setIsCodeSent(true);
+        setError(null);
+      })
+      .catch((error) => {
+        // Gérer les erreurs
+        console.error('Error sending password reset email:', error);
+        setError(error.message);
+      });
   };
 
   const handleResetPassword = async () => {
@@ -40,7 +48,7 @@ const ForgotPassword = () => {
           <p>Un code de confirmation a été envoyé à votre adresse e-mail. Veuillez le saisir ci-dessous :</p>
           <label>
             Code de confirmation :
-            <input type="email" value={confirmationCode} onChange={(e) => setConfirmationCode(e.target.value)} autoComplete='on'/>
+            <input type="email" value={confirmationCode} onChange={(e) => setConfirmationCode(e.target.value)} autoComplete='on' />
           </label>
           <label>
             Nouveau mot de passe :

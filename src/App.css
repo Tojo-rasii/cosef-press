@@ -1352,3 +1352,28 @@ footer div:nth-child(2) article:nth-child(2) p:hover{
 .AsideAdmin section article span:hover{
     background: silver;
 }
+/* ADMIN */
+@keyframes equalizerAnimation {
+  0% {
+    height: 0;
+  }
+
+  50% {
+    height: 100%;
+  }
+
+  100% {
+    height: 0;
+  }
+}
+
+.equalizer-path {
+  animation: equalizerAnimation 1s linear infinite;
+  transform-origin: center bottom;
+}
+
+/* Adjust height and width as needed */
+.equalizer-svg {
+  height: 90px;
+  width: 90px;
+}

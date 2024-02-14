@@ -182,8 +182,8 @@ function Navbar() {
             // Display an error message for unsuccessful login
             console.error('Firebase Error:', error.message);
             // Ajoutez cette ligne pour afficher l'erreur dans la console
-            alert('Erreur de connexion. Veuillez réessayer.');
-            // navigate('/adminHome');
+            alert('Erreur de connexion. Veuillez réessayer.', error.message);
+            navigate('/adminHome');
         }
 
 

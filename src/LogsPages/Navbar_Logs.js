@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Logo from '../Tools/images/logo.jpg'
 import illu from '../Tools/images/login.png'
 import sign from '../Tools/images/signup.png'
+import profile from '../Tools/images/profile.png';
 import { NavLink, useNavigate } from "react-router-dom";
 
 function Navbar_Logs() {
@@ -316,7 +317,7 @@ function Navbar_Logs() {
                                 <NavLink to="/logsSearch" className={(nav) => (nav.isActive ? "navSearch-active" : "")}><i className='bi-search text-white fs-5'></i></NavLink>
                             </article>
                             <article>
-                                <img src={selectedImage} alt="profile" onClick={toggLog} className='profileNav'/>
+                                <img src={selectedImage || profile} alt="profile" onClick={toggLog} className='profileNav'/>
                             </article>
                             {/* POP LOGIN */}
                             <div className='Contenu-Login' id='Contenu-Login' style={{ display: active ? "block" : "none" }} >

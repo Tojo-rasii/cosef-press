@@ -30,6 +30,7 @@ import LogsMotQuesteur from './Logs/LogsMotQuesteur';
 import LogsMiniBiographie from './Logs/LogsMiniBiographie';
 import AdminHome from './Admin/AdminHome';
 import ForgotPassword from './Pages/ForgotPassword';
+import Body_Actualite from './Pages/Body_Actualite';
 
 function App() {
   const body = document.querySelector('body');
@@ -55,6 +56,8 @@ function App() {
             {/* CLICK ARCTICLE & VIDEO */}
             <Route path="/article" element={<ClickArticle />} />
             <Route path="/video" element={<ClickVideo />} />
+            <Route path="/actu/:id" component={<Body_Actualite />} />
+
 
             {/* CONNECTER */}
             <Route path="/logsActu" element={<LogsActualite />}/>
