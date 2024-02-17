@@ -230,3 +230,13 @@ body {
   background: rgb(158, 158, 158);
 }
 
+.log-google{
+  transition: 0.1s !important;
+}
+.log-google:active {
+  outline: 2px solid #ff6200 !important;
+}
+
+.log-google:hover {
+  background: #f4f4f4 !important;
+}

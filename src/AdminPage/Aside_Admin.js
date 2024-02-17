@@ -1,22 +1,35 @@
-import React from 'react'
-import Logo from '../Tools/images/logo.jpg'
+import React, { useEffect } from 'react';
+import Logo from '../Tools/images/logo.jpg';
 import { NavLink, useNavigate } from "react-router-dom";
-
 
 function Aside_Admin() {
     const navigate = useNavigate();
 
-    const logOut = () =>{
-         navigate("/")
-    }
-  return (
-    <div>
+    // useEffect(() => {
+    //     const handleBackButton = (event) => {
+    //         event.preventDefault();
+    //         navigate("/adminHome");
+    //     };
+
+    //     window.history.pushState(null, "", window.location.pathname);
+    //     window.addEventListener("popstate", handleBackButton);
+
+    //     return () => {
+    //         window.removeEventListener("popstate", handleBackButton);
+    //     };
+    // }, []);
+
+    const logOut = () => {
+        navigate("/");
+    };
+
+    return (
         <div>
-            <aside className='AsideAdmin bg-white shadow-sm p-3 pe-4 rounded-2 d-flex flex-column gap-3 position-fixed' style={{width: "max-content"}}>
+            <aside className='AsideAdmin bg-white shadow-sm p-3 pe-4 rounded-2 d-flex flex-column gap-3 position-fixed' style={{ width: "max-content" }}>
                 <section>
                     <article className='d-flex flex-row gap-2 align-items-center rounded-1'>
                         <span>
-                            <img src={Logo} alt="logo" style={{width:"2.5em", height:"auto", outline: "2px solid #fff"}} />
+                            <img src={Logo} alt="logo" style={{ width: "2.5em", height: "auto", outline: "2px solid #fff" }} />
                         </span>
                         <span className='fw-bold'>
                             COSEF - ADMIN
@@ -43,7 +56,7 @@ function Aside_Admin() {
                     </article>
                 </section>
                 <section>
-                <article>
+                    <article>
                         <p className='text-uppercase fw-bold'>Live on</p>
                     </article>
                     <article className='text-capitalize'>
@@ -63,7 +76,7 @@ function Aside_Admin() {
                 </section>
                 <section>
                     <article>
-                    <p className='text-uppercase fw-bold'>Connection</p>
+                        <p className='text-uppercase fw-bold'>Connection</p>
                     </article>
                     <article>
                         <span className='d-flex flex-row gap-2'>
@@ -86,8 +99,7 @@ function Aside_Admin() {
                 </section>
             </aside>
         </div>
-    </div>
-  )
+    );
 }
 
-export default Aside_Admin
+export default Aside_Admin;

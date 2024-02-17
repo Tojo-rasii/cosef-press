@@ -14,8 +14,8 @@ import { database } from '../firebase/FirebaseConfig';
 function Body_Actualite() {
 
     const [articles, setArticles] = useState([]);
-
-
+    const [videos, setVideos] = useState([]);
+    const navigate = useNavigate();
     // const articles = [
     //     {
     //         type: "Politique",
@@ -40,46 +40,43 @@ function Body_Actualite() {
     // ];
 
     // VIDEO
-    const videos = [
-        {
-            type: "Politique",
-            title: "Fampielezan-kevitra N:03",
-            imageUrl: Image,
-            videoUrl: Video,
-            description: `Famintinana ny fampielezan-kevitra ny kandida N:3 notanterahin'ny ekipan'ny cosef sy staff Eric FERNAND
- `,
-            publishDate: "19 - 02- 15",
-            minuterieVideo: "0:00"
-        },
-        {
-            type: "Social",
-            title: "Title",
-            imageUrl: Image2,
-            videoUrl: Video2,
-            description: `Antalaha faha 17 Oktobra 2023
-          -----------
-          Aéroport Antsirabato Antalaha
-`,
-            publishDate: "19 - 02- 15",
-            minuterieVideo: "0:00"
+//     const videos = [
+//         {
+//             type: "Politique",
+//             title: "Fampielezan-kevitra N:03",
+//             imageUrl: Image,
+//             videoUrl: Video,
+//             description: `Famintinana ny fampielezan-kevitra ny kandida N:3 notanterahin'ny ekipan'ny cosef sy staff Eric FERNAND
+//  `,
+//             publishDate: "19 - 02- 15",
+//             minuterieVideo: "0:00"
+//         },
+//         {
+//             type: "Social",
+//             title: "Title",
+//             imageUrl: Image2,
+//             videoUrl: Video2,
+//             description: `Antalaha faha 17 Oktobra 2023
+//           -----------
+//           Aéroport Antsirabato Antalaha
+// `,
+//             publishDate: "19 - 02- 15",
+//             minuterieVideo: "0:00"
 
-        },
-        {
-            type: "Culturel",
-            title: "Title",
-            imageUrl: Image2,
-            description: `Antalaha faha 17 Oktobra 2023
-          -----------
-          Aéroport Antsirabato Antalaha
-`,
-            publishDate: "19 - 02- 15",
-            minuterieVideo: "0:00"
+//         },
+//         {
+//             type: "Culturel",
+//             title: "Title",
+//             imageUrl: Image2,
+//             description: `Antalaha faha 17 Oktobra 2023
+//           -----------
+//           Aéroport Antsirabato Antalaha
+// `,
+//             publishDate: "19 - 02- 15",
+//             minuterieVideo: "0:00"
 
-        },
-    ];
-
-    
- 
+//         },
+//     ];
     useEffect(() => {
         const fetchArticles = async () => {
             try {
@@ -98,8 +95,6 @@ function Body_Actualite() {
     }, []); 
 
     // CLICK ARTICLE
-    const navigate = useNavigate();
-
     // Fonction pour rediriger vers la page de l'article détaillé
     const redirectToArticle = (article) => {
         const url = `/article?type=${article.type}&imageUrl=${encodeURIComponent(
@@ -111,6 +106,26 @@ function Body_Actualite() {
         navigate(url);
     };
 
+
+    // VIDEO
+    useEffect(() => {
+        const fetchVideos = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(database, 'videoPublished'));
+                const fetchedVideos = [];
+                querySnapshot.forEach((doc) => {
+                    fetchedVideos.push(doc.data());
+                });
+                setVideos(fetchedVideos);
+            } catch (error) {
+                console.error('Erreur lors de la récupération des articles :', error);
+            }
+        };
+
+        fetchVideos();
+    }, []); 
+
+    // CLICK VIDEO 
     // Créez une URL avec les informations de la vidéo
     const redirectToVideo = (video) => {
         const url = `/video?type=${video.type}&title=${video.title}&description=${encodeURIComponent(video.description)}&publishDate=${video.publishDate}&videoUrl=${video.videoUrl}&imageUrl=${video.imageUrl}`;
@@ -159,24 +174,24 @@ function Body_Actualite() {
                     <p className='text-uppercase fw-semibold fs-4 titleVideo'>WEB TV</p>
                     {videos.map((article, index) => (
 
-                        <section key={index} className={article.type.toLowerCase()}
+                        <section key={index} className={article && article.type ? article.type.toLowerCase() : ''}
                             onClick={() => redirectToVideo(article)}>
                             <article>
                                 <picture>
-                                    <video poster={article.imageUrl}>
-                                        <source src={article.videoUrl} type="video/mp4" />
+                                    <video poster={article && article.imageUrl ? article.imageUrl : ''}>
+                                        <source src={article && article.videoUrl ? article.videoUrl : ''} type="video/mp4" />
                                         Your browser does not support the video tag.
                                     </video>
                                 </picture>
                                 <span className='position-absolute iconPlay'>
-                                    <i className='bi-play-circle-fill'><span>&nbsp;{article.minuterieVideo}</span></i>
+                                    <i className='bi-play-circle-fill'><span>&nbsp;{article && article.minuterieVideo ? article.minuterieVideo : ''}</span></i>
                                 </span>
                             </article>
                             <article>
-                                <span id='type'>{article.type}</span>
-                                <span>{article.title}</span>
-                                <span className='d-none'>{article.description}</span>
-                                <span>Publier le {article.publishDate}</span>
+                                <span id='type'>{article && article.type ? article.type : ''}</span>
+                                <span>{article && article.title ? article.title : ''}</span>
+                                <span className='d-none'>{article && article.description ? article.description : ''}</span>
+                                <span>Publier le {article && article.publishDate ? article.publishDate : ''}</span>
                             </article>
                         </section>
                     ))}

@@ -8,7 +8,9 @@ function AddArticle() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState(null);
+    // article
     const [articleId, setArticleId] = useState(null);
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -22,7 +24,7 @@ function AddArticle() {
         };
 
         if (type === "social" || type === "culturel" || type === "sport") {
-            alert("you are publish with success");
+            // alert("you are publish with success");
         }
         else {
             alert("please add social or culturel or sport ");
@@ -62,17 +64,13 @@ function AddArticle() {
 
     return (
         <div>
-            <main className="m-2 bg-white p-2 w-75">
-                <section>
-                    <article>
-                        <p className='fw-semibold'>Add Article</p>
-                    </article>
-                </section>
-                <section className="d-flex flex-row flex-wrap gap-3">
+            <p className='text-uppercase m-3 fw-bold'>body_Actualite</p>
+            <main className="m-2 bg-white p-2 w-75 d-flex flex-row gap-5">
+                <section className="d-flex flex-column flex-wrap gap-3">
                     <article className='p-3 bg-body-secondary'>
-                        ARTICLE ACTUALITE
+                        <p className='fw-semibold'>ARTICLE ACTUALITE</p>
 
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit} class="d-flex flex-column gap-2">
                             <input type="text" value={type} onChange={(e) => setType(e.target.value)} placeholder="Type de l'article" required />
                             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Titre de l'article" required />
                             <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description de l'article" required></textarea>
