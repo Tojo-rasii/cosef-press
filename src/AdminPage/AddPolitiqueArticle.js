@@ -1,18 +1,27 @@
-import React, { useState } from 'react';
-import { addDoc, collection } from 'firebase/firestore';
+import React, { useState, useEffect } from 'react';
+import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { database } from '../firebase/FirebaseConfig';
 import { Link } from 'react-router-dom';
 import noImage from '../Tools/images/no-picture-available-icon-9.jpg'
-function AddArticle() {
+import { useSpring, animated } from 'react-spring';
+
+function AddPolitiqueArticle() {
     const [type, setType] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState(null);
-    // article
     const [articleId, setArticleId] = useState(null);
-    //select image
     const [selectedImage, setSelectedImage] = useState(null);
+    const [articleNumber, setArticleNumber] = useState(0);
 
+    useEffect(() => {
+        async function fetchArticleCount() {
+            const querySnapshot = await getDocs(collection(database, 'articlePolitiquePublished'));
+            setArticleNumber(querySnapshot.size);
+        }
+
+        fetchArticleCount();
+    }, [articleId]); // Re-run the effect when articleId changes
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -25,8 +34,8 @@ function AddArticle() {
             publishDate: new Date().toLocaleDateString()
         };
 
-        if (type === "social" || type === "culturel" || type === "sport" || type === "politique") {
-            // alert("you are publish with success");
+        if (type === "politique") {
+            alert("you are publish with success");
         }
         else {
             alert("please add social or culturel or sport ");
@@ -34,7 +43,7 @@ function AddArticle() {
         }
 
         try {
-            const docRef = await addDoc(collection(database, 'articlePublished'), article);
+            const docRef = await addDoc(collection(database, 'articlePolitiquePublished'), article);
             console.log('Document ajouté avec l\'ID :', docRef.id);
             setArticleId(docRef.id);
 
@@ -42,6 +51,10 @@ function AddArticle() {
             setTitle('');
             setDescription('');
             setImage(null);
+
+            if (articleNumber >= 6) {
+                alert('Vous avez atteint le nombre maximum d\'articles.');
+            }
         } catch (error) {
             console.error('Erreur lors de l\'ajout de l\'article :', error);
         }
@@ -56,45 +69,44 @@ function AddArticle() {
             setSelectedImage(reader.result);
         };
 
-        // Check if a file is selected and if it is an image
         if (file && file.type.startsWith('image/')) {
             reader.readAsDataURL(file);
         } else {
-            // Handle the case where the selected file is not an image
             alert('Invalid file format. Please select an image.');
         }
     };
 
+     // Animation du trait SVG en fonction du nombre d'articles
+     const strokeAnimation = useSpring({
+        from: { strokeDashoffset: 0 },
+        to: { strokeDashoffset: 440 - (440 * articleNumber) / 6 },
+        config: { duration: 2000 },
+    });
+
     return (
         <div className='d-flex flex-row justify-content-between gap-2'>
-            {/* <p className='text-uppercase m-3 fw-bold'>body_Actualite</p> */}
             <main className="m-2 bg-white p-4 d-flex flex-row gap-5" style={{ outline: "1px solid silver", width: "200%" }}>
                 <section className="d-flex flex-column flex-wrap gap-3">
                     <article className='p-3 bg-light' style={{ outline: "1px solid silver" }}>
-                        <p className='fw-semibold'>ARTICLE ACTUALITE</p>
+                        <p className='fw-semibold'>ARTICLE POLITIQUE</p>
 
                         <form onSubmit={handleSubmit} class="d-flex flex-column gap-3">
                             <select value={type} onChange={(e) => setType(e.target.value)} required>
                                 <option value="">Sélectionnez le type d'article</option>
-                                <option value="social">social</option>
-                                <option value="culturel">culturel</option>
-                                <option value="sport">sport</option>
+                                <option value="politique">politique</option>
                             </select>
-                            {/* <input type="text" value={type} onChange={(e) => setType(e.target.value)} placeholder="Type de l'article" required /> */}
                             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Titre de l'article" required />
                             <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description de l'article" required></textarea>
                             <input type="file" onChange={handleImageChange} required />
                             <button type="submit">Publier</button>
                         </form>
 
-                        {/* Lien vers Body_Actualite avec les données de l'article */}
                         {articleId && (
                             <Link to={`/article/${articleId}`}>Voir l'article</Link>
                         )}
                     </article>
                 </section>
                 <section>
-                    {/* Affiche l'image sélectionnée */}
                     {selectedImage && (
                         <img src={selectedImage} alt="Selected Image" style={{ maxWidth: '100%', maxHeight: '100%', outline: "1px solid silver" }} />
                     )}
@@ -114,8 +126,21 @@ function AddArticle() {
                 <section className='d-flex flex-column gap-1 pb-4 bg-white p-2 shadow-sm' style={{ outline: "1px solid silver" }}>
                     <article className='text-uppercase fw-semibold'>Article Number</article>
                     <article className='bg-light NumberCircle'>
-                        <span className='fs-1'>9</span>
-                        <sub className='mt-2'>/ 03 max</sub>
+                    <svg width="150" height="150">
+                        <circle cx="75" cy="75" r="70" fill="none" stroke="silver" strokeWidth="10" />
+                        <animated.circle
+                            cx="75"
+                            cy="75"
+                            r="70"
+                            fill="none"
+                            stroke="blue"
+                            strokeWidth="10"
+                            strokeDasharray="440"
+                            strokeDashoffset={strokeAnimation.strokeDashoffset}
+                        />
+                        <text x="50%" y="50%" textAnchor="middle" stroke="#000" strokeWidth="1px" dy=".3em">{articleNumber} / 6 max</text>
+                    </svg>
+                       
                     </article>
                 </section>
             </main>
@@ -123,4 +148,4 @@ function AddArticle() {
     );
 }
 
-export default AddArticle;
+export default AddPolitiqueArticle;

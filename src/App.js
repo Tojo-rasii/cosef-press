@@ -31,6 +31,10 @@ import LogsMiniBiographie from './Logs/LogsMiniBiographie';
 import AdminHome from './Admin/AdminHome';
 import ForgotPassword from './Pages/ForgotPassword';
 import Body_Actualite from './Pages/Body_Actualite';
+import AdminSport from './Admin/AdminSport';
+import AdminPolitique from './Admin/AdminPolitique';
+import AdminSocial from './Admin/AdminSocial';
+import AdminCulturel from './Admin/AdminCulturel';
 
 function App() {
   const body = document.querySelector('body');
@@ -79,6 +83,10 @@ function App() {
 
             {/* ADMIN DASHBOARD */}
             <Route path='/adminHome' element={<AdminHome />}/>
+            <Route path='/adminSport' element={<AdminSport />}/>
+            <Route path='/adminPolitique' element={<AdminPolitique />}/>
+            <Route path='/adminSocial' element={<AdminSocial />}/>
+            <Route path='/adminCulturel' element={<AdminCulturel />}/>
           </Routes>
         </HashRouter>
     </div>

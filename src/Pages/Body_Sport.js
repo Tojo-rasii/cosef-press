@@ -1,96 +1,69 @@
-import React from 'react'
+import { React, useState, useEffect } from 'react'
 import Image from '../Tools/images/anatalaha2.jpg'
 import Image2 from '../Tools/images/cosef.jpg'
 import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { collection, getDocs } from 'firebase/firestore';
+import { database } from '../firebase/FirebaseConfig';
 
 
 function Body_Sport() {
-    const articles = [
-        {
-            type: "Sport",
-            title: "Title",
-            imageUrl: Image,
-            description: `Antalaha faha 17 Oktobra 2023
-          -----------
-          Aéroport Antsirabato Antalaha
-          -----------
-          ✅Tonga teny amin'ny #Aéroport Antsirabato Antalaha ny Tale Jeneran'ny ADEMA , Andriamatoa ANDRIANIAINA Jean Germain ny 17 Oktobra 2023 lasa teo nijery  ny fandehanan'ny Asa fanarenana ny tranon-tseranana amin'ity "Aéroport" ity .
-          ✅Niatrika izany ireo tompon'andraiki-panjakana vitsivitsy tao Antalaha ka hita tamin'izany ny Lehiben'ny Distrika ,ny PDS ary ireo ekipan'ny COSEF Collaborateurs du Sénateur Eddie FERNAND,izay nisolotena an'Atoa Senatera rahateo.
-          ✅Misaotra atsika jiaby niara-nisalahy,hirarintsika ho vita soamantsara ity Aéroport ity mba hiverenan'ny lazany indray.
-          Eddie Fernand
-          #COSEF
-          #AéroportAntsirabato
-          #AntalahaTsyMaintsyMandroso`,
-            publishDate: "19 - 02- 15",
-        },
-        {
-            type: "Sport",
-            title: "Title",
-            imageUrl: Image2,
-            description: `Antalaha faha 17 Oktobra 2023
-          -----------
-          Aéroport Antsirabato Antalaha
-          -----------
-          ✅Tonga teny amin'ny #Aéroport Antsirabato Antalaha ny Tale Jeneran'ny ADEMA , Andriamatoa ANDRIANIAINA Jean Germain ny 17 Oktobra 2023 lasa teo nijery  ny fandehanan'ny Asa fanarenana ny tranon-tseranana amin'ity "Aéroport" ity .
-          ✅Niatrika izany ireo tompon'andraiki-panjakana vitsivitsy tao Antalaha ka hita tamin'izany ny Lehiben'ny Distrika ,ny PDS ary ireo ekipan'ny COSEF Collaborateurs du Sénateur Eddie FERNAND,izay nisolotena an'Atoa Senatera rahateo.
-          ✅Misaotra atsika jiaby niara-nisalahy,hirarintsika ho vita soamantsara ity Aéroport ity mba hiverenan'ny lazany indray.
-          Eddie Fernand
-          #COSEF
-          #AéroportAntsirabato
-          #AntalahaTsyMaintsyMandroso`,
-            publishDate: "19 - 02- 15",
-        },
-    ];
+    const [articles, setArticles] = useState([]);
+    const [videos, setVideos] = useState([]);
+    const navigate = useNavigate();
 
-    // VIDEO
-    const videos = [
-        {
-            type: "Sport",
-            title: "Title",
-            imageUrl: Image,
-            description: `Antalaha faha 17 Oktobra 2023
-          -----------
- `,
-            publishDate: "19 - 02- 15",
-        },
-        {
-            type: "Sport",
-            title: "Title",
-            imageUrl: Image2,
-            description: `Antalaha faha 17 Oktobra 2023
-          -----------
-          Aéroport Antsirabato Antalaha
-`,
-            publishDate: "19 - 02- 15",
-        },
-        {
-            type: "Culturel",
-            title: "Title",
-            imageUrl: Image2,
-            description: `Antalaha faha 17 Oktobra 2023
-          -----------
-          Aéroport Antsirabato Antalaha
-`,
-            publishDate: "19 - 02- 15",
-        },
-    ];
-
-      // CLICK ARTICLE
-      const navigate =  useNavigate();
-
-      const redirectToArticle = (article) => {
-          const url = `/article?type=${article.type}&imageUrl=${encodeURIComponent(
-            article.imageUrl
-          )}&title=${encodeURIComponent(article.title)}&description=${encodeURIComponent(
-            article.description
-          )}&publishDate=${article.publishDate}`;
-      
-          navigate(url);
+    useEffect(() => {
+        const fetchArticles = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(database, 'articleSportPublished'));
+                const fetchedArticles = [];
+                querySnapshot.forEach((doc) => {
+                    fetchedArticles.push(doc.data());
+                });
+                setArticles(fetchedArticles);
+            } catch (error) {
+                console.error('Erreur lors de la récupération des articles :', error);
+            }
         };
 
-                     // Créez une URL avec les informations de la vidéo
+        fetchArticles();
+    }, []);
+
+    // CLICK ARTICLE
+    const redirectToArticle = (article) => {
+        const url = `/article?type=${article.type}&imageUrl=${encodeURIComponent(
+            article.imageUrl
+        )}&title=${encodeURIComponent(article.title)}&description=${encodeURIComponent(
+            article.description
+        )}&publishDate=${article.publishDate}`;
+
+        navigate(url);
+    };
+
+    // VIDEO
+    useEffect(() => {
+        const fetchVideos = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(database, 'videoSportPublished'));
+                const fetchedVideos = [];
+                querySnapshot.forEach((doc) => {
+                    fetchedVideos.push(doc.data());
+                });
+                console.log('Videos fetched:', fetchedVideos); 
+                setVideos(fetchedVideos);
+            } catch (error) {
+                console.error('Erreur lors de la récupération des articles :', error);
+            }
+        };
+
+        fetchVideos();
+    }, []);
+
+
+    // Créez une URL avec les informations de la vidéo
     const redirectToVideo = (video) => {
         const url = `/video?type=${video.type}&title=${video.title}&description=${encodeURIComponent(video.description)}&publishDate=${video.publishDate}&videoUrl=${video.videoUrl}&imageUrl=${video.imageUrl}`;
+
+        console.log('Redirecting to video:', url);
 
         // Redirigez vers la nouvelle page
         navigate(url);
@@ -101,25 +74,19 @@ function Body_Sport() {
                 {/* contenue article SECTION */}
                 {/* section-photo */}
                 <div className='ArticlePhoto'>
-                    <p className='text-uppercase fw-semibold fs-4 titleActu'>Actualite&nbsp;<span style={{ fontWeight : "800"}}>Sport</span></p>
+                    <p className='text-uppercase fw-semibold fs-4 titleActu'>Actualité</p>
                     {articles.map((article, index) => (
-                        <section key={index} className={article.type.toLowerCase()}
-                        onClick={() => redirectToArticle(article)}>
+                        <section key={index} className={article && article.type ? article.type.toLowerCase() : ''} onClick={() => redirectToArticle(article)}>
                             <article>
                                 <picture>
-                                    <img src={article.imageUrl} alt="Antalaha" />
+                                    <img src={article && article.imageUrl ? article.imageUrl : ''} alt="Antalaha" />
                                 </picture>
                             </article>
-                            <article>
-                                <span id='type'>{article.type}</span>
-                                <span>{article.title}</span>
-                                <span>{article.description}</span>
-                                <span>
-                                    <i className='bi-dot'></i>
-                                    <i className='bi-dot'></i>
-                                    <i className='bi-dot'></i>
-                                </span>
-                                <span>Publier le {article.publishDate}</span>
+                            <article className="voir-plus">
+                                <span id='type'>{article && article.type ? article.type : ''}</span>
+                                <span id="titleOverflow">{article && article.title ? article.title : ''}</span>
+                                <span>{article && article.description ? article.description : ''}</span>
+                                <span>Publié le {article && article.publishDate ? article.publishDate : ''}</span>
                             </article>
                         </section>
                     ))}
@@ -127,27 +94,29 @@ function Body_Sport() {
                 {/* contenue article SECTION */}
                 {/* section-video */}
                 <div className='ArticleVideo'>
-                    <p className='text-uppercase fw-semibold fs-4 titleVideo opacity-0'>WEB TV</p>
-                    {videos.map((article, index) => (
-
-                        <section key={index} className={article.type.toLowerCase()}
-                        onClick={() => redirectToVideo(article)}>
+                    <p className='text-uppercase fw-semibold fs-4 titleVideo'>WEB TV</p>
+                    {videos.map((video, index) => (
+                        <section key={index} className={video && video.type ? video.type.toLowerCase() : ''} onClick={() => redirectToVideo(video)}>
                             <article>
                                 <picture>
-                                    <video poster={article.imageUrl}></video>
-                                    <span className='position-absolute iconPlay'>
-                                        <i className='bi-play-circle-fill'><span>&nbsp;0:00</span></i>
-                                    </span>
+                                    <video poster={video && video.imageUrl ? video.imageUrl : ''} controls>
+                                        <source src={video && video.videoUrl} type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
                                 </picture>
+                                <span className='position-absolute iconPlay'>
+                                    <i className='bi-play-circle-fill text-black'><span>&nbsp;{video && video.duration ? video.duration : ''}</span></i>
+                                </span>
                             </article>
                             <article>
-                                <span id='type'>{article.type}</span>
-                                <span>{article.title}</span>
-                                <span className='d-none'>{article.description}</span>
-                                <span>Publier le {article.publishDate}</span>
+                                <span id='type'>{video && video.type ? video.type : ''}</span>
+                                <span id="titleOverflow">{video && video.title ? video.title : ''}</span>
+                                <span className='d-none'>{video && video.description ? video.description : ''}</span>
+                                <span>Publié le {video && video.publishDate ? video.publishDate : ''}</span>
                             </article>
                         </section>
                     ))}
+
                 </div>
             </main>
         </div>

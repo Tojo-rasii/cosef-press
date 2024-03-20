@@ -21,14 +21,14 @@ function Body_ClickArticle() {
     const publishDate = searchParams.get('publishDate');
 
     // Votre logique pour afficher les données
-// Ajoutez une classe CSS basée sur le type d'article
-const articleClass = articleType ? articleType.toLowerCase() : '';
+    // Ajoutez une classe CSS basée sur le type d'article
+    const articleClass = articleType ? articleType.toLowerCase() : '';
 
     // VIDEO
     const videos = [
         {
             type: "Politique",
-            title: "Title",
+            title: "loremnnnnnnnnnnnnnnn",
             imageUrl: Image,
             description: `Antalaha faha 17 Oktobra 2023
               -----------
@@ -72,8 +72,8 @@ const articleClass = articleType ? articleType.toLowerCase() : '';
             <main className='ClickArticle'>
                 {/* CLICK ARTICLE PHOTO */}
                 <div>
-                <p className='text-uppercase fw-semibold fs-4 titleClick'>
-                    <NavLink to="/"><i className='bi-arrow-left-circle'></i></NavLink>&nbsp;&nbsp;ACTUALITE <span style={{ fontWeight : "800"}}>{articleType}</span></p>
+                    <p className='text-uppercase fw-semibold fs-4 titleClick'>
+                        <NavLink to="/"><i className='bi-arrow-left-circle'></i></NavLink>&nbsp;&nbsp;ACTUALITE - <span style={{ fontWeight: "800" }}>{articleType}</span></p>
                     <section className={articleClass}>
                         <article>
                             <span id='type'>{articleType}</span>
@@ -82,8 +82,7 @@ const articleClass = articleType ? articleType.toLowerCase() : '';
                         <article>
                             <picture>
                                 <img src={imageUrl} alt={title} />
-                                <p id='publishDate'>Publié le {publishDate}</p>
-
+                                <p id='publishDate' className='bi-check mt-2'>&nbsp;Publié le {publishDate}</p>
                             </picture>
                         </article>
                     </section>

@@ -3,7 +3,9 @@ import { addDoc, collection } from 'firebase/firestore';
 import { database } from '../firebase/FirebaseConfig';
 import { Link } from 'react-router-dom';
 import noImage from '../Tools/images/no-picture-available-icon-9.jpg'
-function AddArticle() {
+
+
+function AddCulturelArticle() {
     const [type, setType] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -25,8 +27,8 @@ function AddArticle() {
             publishDate: new Date().toLocaleDateString()
         };
 
-        if (type === "social" || type === "culturel" || type === "sport" || type === "politique") {
-            // alert("you are publish with success");
+        if (type === "culturel") {
+            alert("you are publish with success");
         }
         else {
             alert("please add social or culturel or sport ");
@@ -34,7 +36,7 @@ function AddArticle() {
         }
 
         try {
-            const docRef = await addDoc(collection(database, 'articlePublished'), article);
+            const docRef = await addDoc(collection(database, 'articleCulturelPublished'), article);
             console.log('Document ajouté avec l\'ID :', docRef.id);
             setArticleId(docRef.id);
 
@@ -71,14 +73,12 @@ function AddArticle() {
             <main className="m-2 bg-white p-4 d-flex flex-row gap-5" style={{ outline: "1px solid silver", width: "200%" }}>
                 <section className="d-flex flex-column flex-wrap gap-3">
                     <article className='p-3 bg-light' style={{ outline: "1px solid silver" }}>
-                        <p className='fw-semibold'>ARTICLE ACTUALITE</p>
+                        <p className='fw-semibold'>ARTICLE CULTUREL</p>
 
                         <form onSubmit={handleSubmit} class="d-flex flex-column gap-3">
                             <select value={type} onChange={(e) => setType(e.target.value)} required>
                                 <option value="">Sélectionnez le type d'article</option>
-                                <option value="social">social</option>
                                 <option value="culturel">culturel</option>
-                                <option value="sport">sport</option>
                             </select>
                             {/* <input type="text" value={type} onChange={(e) => setType(e.target.value)} placeholder="Type de l'article" required /> */}
                             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Titre de l'article" required />
@@ -123,4 +123,4 @@ function AddArticle() {
     );
 }
 
-export default AddArticle;
+export default AddCulturelArticle;

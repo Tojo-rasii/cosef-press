@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import Aside_Admin from '../AdminPage/Aside_Admin'
 import Body_Admin from '../AdminPage/Body_Admin'
 import Live_Admin from '../AdminPage/Live_Admin'
-import AddArticle from '../AdminPage/AddArticle'
-import AddVideo from '../AdminPage/AddVideo';
 import CounterData from '../AdminPage/CounterData';
 import NavList from '../AdminPage/NavList';
+import AddSportArticle from '../AdminPage/AddSportArticle';
+import AddSportVideo from '../AdminPage/AddSportVideo';
+import AddSocialArticle from '../AdminPage/AddSocialArticle';
+import AddSocialVideo from '../AdminPage/AddSocialVideo';
 
-function AdminHome() {
+function AdminSocial() {
 
   return (
     <div>
@@ -17,8 +19,8 @@ function AdminHome() {
         <div  className='d-flex flex-column gap-2'>
           <Body_Admin />
           <NavList />
-          <AddArticle/>
-          <AddVideo />
+          <AddSocialArticle />
+          <AddSocialVideo />
         </div>
         <div>
           {/* <CounterData /> */}
@@ -29,4 +31,4 @@ function AdminHome() {
   )
 }
 
-export default AdminHome
+export default AdminSocial

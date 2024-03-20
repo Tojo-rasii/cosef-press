@@ -82,11 +82,6 @@ function Actu_Culturel() {
                                 <span id='type'>{article.type}</span>
                                 <span>{article.title}</span>
                                 <span>{article.description}</span>
-                                <span>
-                                    <i className='bi-dot'></i>
-                                    <i className='bi-dot'></i>
-                                    <i className='bi-dot'></i>
-                                </span>
                                 <span style={{marginLeft: "0.2em"}}>Publier le {article.publishDate}</span>
                             </article>
                         </section>

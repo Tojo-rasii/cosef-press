@@ -171,11 +171,6 @@ function Body_ALaUne() {
                                 <span id='type'>{article.type}</span>
                                 <span>{article.title}</span>
                                 <span>{article.description}</span>
-                                <span>
-                                    <i className='bi-dot'></i>
-                                    <i className='bi-dot'></i>
-                                    <i className='bi-dot'></i>
-                                </span>
                                 <span>Publier le {article.publishDate}</span>
                             </article>
                         </section>
@@ -199,7 +194,7 @@ function Body_ALaUne() {
                             </article>
                             <article>
                                 <span id='type'>{article.type}</span>
-                                <span>{article.title}</span>
+                                <span id="titleOverflow">{article.title}</span>
                                 <span className='d-none'>{article.description}</span>
                                 <span>Publier le {article.publishDate}</span>
                             </article>

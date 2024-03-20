@@ -76,7 +76,7 @@ const articleClass = articleType ? articleType.toLowerCase() : '';
             <main className='ClickArticle'>
                 {/* CLICK ARTICLE PHOTO */}
                 <div>
-                <p className='text-uppercase fw-semibold fs-4 titleClick'><NavLink to="/"><i className='bi-arrow-left-circle'></i></NavLink>&nbsp;&nbsp;Video <span style={{ fontWeight : "800"}}>{articleType}</span></p>
+                <p className='text-uppercase fw-semibold fs-4 titleClick'><NavLink to="/"><i className='bi-arrow-left-circle'></i></NavLink>&nbsp;&nbsp;Video - <span style={{ fontWeight : "800"}}>{articleType}</span></p>
                     <section className={articleClass}>
                         <article>
                             <span id='type'>{articleType}</span>
@@ -88,7 +88,7 @@ const articleClass = articleType ? articleType.toLowerCase() : '';
                                     <source src={videoUrl} type="video/mp4" />
                                     Your browser does not support the video tag.
                                 </video>
-                                <p id='publishDate'>Publié le {publishDate}</p>
+                                <p id='publishDate' className='bi-check mt-2'>&nbsp;Publié le {publishDate}</p>
                             </picture>
                         </article>
                     </section>

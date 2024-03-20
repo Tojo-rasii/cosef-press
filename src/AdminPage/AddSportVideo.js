@@ -6,7 +6,7 @@ import { database } from '../firebase/FirebaseConfig';
 import { Link } from 'react-router-dom';
 
 
-function AddVideo() {
+function AddSportVideo() {
     const [type, setType] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -28,25 +28,26 @@ function AddVideo() {
             alert('Please select a video file.');
             return;
         }
-
         const storage = getStorage();
-        const storageRef = ref(storage, `videos/${video.name + v4()} `);
+        const fileName = `videoSport/${video.name}`;
+        const storageRef = ref(storage, fileName);
 
         try {
-            await uploadBytes(storageRef, video).then(() => {
-                alert("publier sur firebase")
-            });
+            await uploadBytes(storageRef, video);
+            alert("Published on Firebase successfully");
             console.log('Video uploaded successfully');
+            const videoBaseUrl = 'https://storage.googleapis.com/cosef-server.appspot.com/videoSport/';
 
             const videos = {
                 type: type,
                 title: title,
                 imageUrl: image,
-                videoUrl: `videos/${video.name}`, // Update with the appropriate URL
+                videoUrl: `${videoBaseUrl}${video.name}`,
                 description: description,
                 publishDate: new Date().toLocaleDateString(),
                 duration: calculateDuration(video.duration)
             };
+
 
             function calculateDuration(durationInSeconds) {
                 // Convertir la durée de la vidéo en heures, minutes et secondes
@@ -68,7 +69,7 @@ function AddVideo() {
                 return;
             }
 
-            const docRef = await addDoc(collection(database, 'videoPublished'), videos);
+            const docRef = await addDoc(collection(database, 'videoSportPublished'), videos);
             console.log('Document ajouté avec l\'ID :', docRef.id);
             // setVideoId(docRef.id);
 
@@ -98,33 +99,43 @@ function AddVideo() {
         }
     };
 
-    const handleVideoChange = (event) => {
-        const file = event.target.files[0];
-        console.log('Selected file:', file);
-        console.log('Event:', event);
-        console.log('Selected files:', event.target.files)
+    // const handleVideoChange = (event) => {
+    //     const file = event.target.files[0];
+    //     console.log('Selected file:', file);
+    //     console.log('Event:', event);
+    //     console.log('Selected files:', event.target.files)
 
-        // Check if a file is selected
-        if (file) {
-            console.log('File MIME type:', file.type);
+    //     // Check if a file is selected
+    //     if (file) {
+    //         console.log('File MIME type:', file.type);
+    //         console.log('File name:', file.name); // Vérifiez le nom du fichier
 
-            // Check if the MIME type starts with 'video/'
-            if (file.type && file.type.startsWith('video/')) {
-                // Create a URL object for the selected video
-                const videoURL = URL.createObjectURL(file);
+    //         // Check if the MIME type starts with 'video/'
+    //         if (file.type && file.type.startsWith('video/')) {
+    //             const reader = new FileReader();
 
-                // Update the state with the video URL
-                setVideo(videoURL);
-                setSelectedVideo(videoURL);
-            } else {
-                // Handle the case where the selected file is not a video
-                alert('Invalid file format. Please select a video.');
-            }
-        } else {
-            // Handle the case where no file is selected
-            alert('Please select a file.');
-        }
-    };
+    //             // Définir la fonction de rappel pour la fin de la lecture du fichier
+    //             reader.onloadend = () => {
+    //                 // Mise à jour de l'état avec le fichier vidéo sélectionné
+    //                 setVideo(file);
+    //                 // Mise à jour de l'état avec l'URL de données du fichier vidéo pour affichage
+    //                 setSelectedVideo(reader.result);
+    //             };
+
+    //             // Lire le contenu du fichier en tant qu'URL de données (Data URL)
+    //             reader.readAsDataURL(file);
+    //         } else {
+    //             // Gérer le cas où le fichier sélectionné n'est pas une vidéo
+    //             alert('Invalid file format. Please select a video.');
+    //         }
+    //     } else {
+    //         // Gérer le cas où aucun fichier n'est sélectionné
+    //         alert('Please select a file.');
+    //     }
+    // };
+
+
+
 
 
 
@@ -150,19 +161,19 @@ function AddVideo() {
     // };
 
 
-    // const handleVideoChange = (event) => {
-    //     const file = event.target.files[0];
+    const handleVideoChange = (event) => {
+        const file = event.target.files[0];
 
-    //     // Check if a file is selected and if it is a video
-    //     if (file && file.type.startsWith('video/')) {
-    //         setVideo(URL.createObjectURL(file));
-    //         console.log('Selected video file:', file); // Ajout du console log
-
-    //     } else {
-    //         // Handle the case where the selected file is not a video
-    //         alert('Invalid file format. Please select a video.');
-    //     }
-    // };
+        // Vérifier si un fichier est sélectionné et s'il s'agit d'une vidéo
+        if (file && file.type.startsWith('video/')) {
+            setVideo(file);
+            console.log('Selected video file:', file);
+        } else {
+            // Gérer le cas où le fichier sélectionné n'est pas une vidéo
+            alert('Invalid file format. Please select a video.');
+        }           
+    };
+    
 
     return (
         <div className='d-flex flex-row justify-content-between gap-2'>
@@ -175,8 +186,6 @@ function AddVideo() {
                         <form onSubmit={handleVideoSubmit} class="d-flex flex-column gap-3">
                             <select value={type} onChange={(e) => setType(e.target.value)} required>
                                 <option value="">Sélectionnez le type d'article</option>
-                                <option value="social">social</option>
-                                <option value="culturel">culturel</option>
                                 <option value="sport">sport</option>
                             </select>
                             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Titre de l'article" required />
@@ -185,7 +194,7 @@ function AddVideo() {
                             <input type="file" onChange={handleVideoChange} required />
                             <label htmlFor="">Poster Image</label>
                             <input type="file" onChange={handleImageChange} required />
-                            <button type="submit">Publier</button>
+                        <button type="submit">Publier</button>
                         </form>
 
                         {/* Lien vers Body_Actualite avec les données de l'article */}
@@ -204,7 +213,7 @@ function AddVideo() {
                         </video>
                     )}
                 </section>
-            </main>
+        </main>
             <main className='d-flex flex-column gap-3 text-center mt-2'>
                 <section className='d-flex flex-column gap-2 pb-4 bg-white p-2 shadow-sm' style={{ outline: "1px solid silver" }}>
                     <article>
@@ -225,4 +234,5 @@ function AddVideo() {
     );
 }
 
-export default AddVideo;
+export default AddSportVideo;
+         

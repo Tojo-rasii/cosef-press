@@ -3,6 +3,7 @@ import profile from '../Tools/images/profile.png';
 import { auth, database, storage } from '../firebase/FirebaseConfig'; // Assuming you have initialized Firebase in a separate file
 
 function Profile_Logs() {
+    const [loggedInUserName, setLoggedInUserName] = useState('');
     const [loggedInUserEmail, setLoggedInUserEmail] = useState('');
     const [selectedImage, setSelectedImage] = useState(null);
 
@@ -11,9 +12,11 @@ function Profile_Logs() {
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
                 // User is signed in, set the email to the state
+                setLoggedInUserName(user.displayName);
                 setLoggedInUserEmail(user.email);
             } else {
                 // No user is signed in, clear the state
+                setLoggedInUserName('');
                 setLoggedInUserEmail('');
             }
         });
@@ -78,7 +81,7 @@ function Profile_Logs() {
                             </i>
                         </article>
                         <article className="mt-2">
-                            <p className='p-2 bg-body-secondary text-capitalize'><span className='fw-bold'>Nom :</span> {loggedInUserEmail}</p>
+                            <p className='p-2 bg-body-secondary text-capitalize'><span className='fw-bold'>Nom :</span> {loggedInUserName}</p>
                             <p className='p-2 bg-body-secondary'><span className='fw-bold'>Email :</span> {loggedInUserEmail}</p>
                         </article>
                         <input
